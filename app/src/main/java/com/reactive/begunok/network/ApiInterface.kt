@@ -6,7 +6,7 @@ import retrofit2.http.POST
 
 interface ApiInterface {
 
-    @POST("auth/login")
+    @POST("auth/screen_login")
     fun login(@Body body: LoginRequest): Single<Token>
 
     @POST("auth/register")

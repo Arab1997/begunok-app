@@ -4,8 +4,10 @@
 
     <color name="black">#212121</color>
     <color name="white">#FFFFFF</color>
-    <color name="yellow">#FFC84C</color>
+    <color name="yellow">#FFB306</color>
     <color name="red">#F32A1F</color>
     <color name="hint">#899196</color>
+
+<color name="back_grey">#6D6A6B</color>
 
 </resources>
