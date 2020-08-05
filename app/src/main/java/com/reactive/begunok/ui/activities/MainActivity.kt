@@ -7,6 +7,7 @@ import com.reactive.begunok.base.BaseActivity
 import com.reactive.begunok.base.BaseViewModel
 import com.reactive.begunok.base.initialFragment
 import com.reactive.begunok.ui.screens.BottomNavScreen
+import com.reactive.begunok.ui.screens.main.sign.SignFragment
 import com.reactive.begunok.utils.extensions.showGone
 import com.reactive.begunok.utils.preferences.SharedManager
 import kotlinx.android.synthetic.main.activity_main.*
@@ -30,7 +31,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 //        startFragment()
     }
 
-    private fun debug() = initialFragment(BottomNavScreen())
+    private fun debug() = initialFragment(SignFragment())
 
     private fun startFragment() {
         initialFragment(
