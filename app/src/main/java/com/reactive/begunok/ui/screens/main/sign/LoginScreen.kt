@@ -1,6 +1,5 @@
 package com.reactive.begunok.ui.screens.main.sign
 
-import android.text.InputType
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
 

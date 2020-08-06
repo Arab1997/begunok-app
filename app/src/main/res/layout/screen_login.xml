@@ -4,6 +4,7 @@
     style="@style/screenStyle"
     android:background="@drawable/back_black"
     android:paddingLeft="30dp"
+    android:paddingTop="?actionBarSize"
     android:paddingRight="30dp">
 
     <ImageView
