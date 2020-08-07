@@ -8,7 +8,6 @@ import com.reactive.begunok.base.initialFragment
 import com.reactive.begunok.ui.screens.BottomNavScreen
 import com.reactive.begunok.ui.screens.auth.AuthScreen
 import com.reactive.begunok.ui.screens.splash.SplashScreen
-import com.reactive.begunok.ui.screens.main.sign.SignFragment
 import com.reactive.begunok.utils.extensions.showGone
 import com.reactive.begunok.utils.preferences.SharedManager
 import kotlinx.android.synthetic.main.activity_main.*

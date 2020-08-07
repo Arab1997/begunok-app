@@ -3,8 +3,8 @@ package com.reactive.begunok.ui.adapters
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.reactive.begunok.base.BaseFragment
-import com.reactive.begunok.ui.screens.main.sign.LoginScreen
-import com.reactive.begunok.ui.screens.main.sign.RegistrationScreen
+import com.reactive.begunok.ui.screens.auth.LoginScreen
+import com.reactive.begunok.ui.screens.auth.RegistrationScreen
 
 class SignPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getItem(position: Int): BaseFragment {

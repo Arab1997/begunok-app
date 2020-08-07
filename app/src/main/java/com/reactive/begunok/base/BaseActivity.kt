@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import com.reactive.begunok.BuildConfig
 
 abstract class BaseActivity(@LayoutRes private val layoutId: Int) : AppCompatActivity() {
 
@@ -20,7 +19,7 @@ abstract class BaseActivity(@LayoutRes private val layoutId: Int) : AppCompatAct
 
     private fun initUpdateManager() {
         updateManager = UpdateManager(this).apply {
-            if (!BuildConfig.DEBUG) checkUpdate()
+            checkUpdate()
         }
     }
 
