@@ -5,6 +5,8 @@
     <string name="slow_internet">Скорость интернета низкая. пожалуйста, подождите</string>
     <string name="smth_wrong">Что-то пошло не так. Пожалуйста, попробуйте еще раз</string>
 
+    <string name="field_is_empty">Поле не может быть пустым</string>
+    <string name="phone_is_not_valid">Номер телефона недействителен</string>
     <string name="the_verified_password_is_not_valid">Подтвержденный пароль недействителен</string>
     <string name="minimum_password_length_6">Минимальная длина пароля 6</string>
     <string name="maximum_password_length_120">Максимальная длина пароля 120</string>

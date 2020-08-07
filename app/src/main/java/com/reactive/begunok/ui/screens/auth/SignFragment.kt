@@ -10,7 +10,6 @@ class SignFragment : BaseFragment(R.layout.fragment_sign) {
     override fun initialize() {
         pager.adapter = SignPagerAdapter(childFragmentManager)
         tabLayout.setupWithViewPager(pager)
-
     }
 
 }

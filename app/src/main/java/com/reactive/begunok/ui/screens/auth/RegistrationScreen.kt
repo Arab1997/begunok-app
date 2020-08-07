@@ -1,70 +1,86 @@
 package com.reactive.begunok.ui.screens.auth
 
-import android.util.Patterns
-import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
-import com.reactive.begunok.utils.common.TextObservable
+import com.reactive.begunok.utils.common.TextWatcherInterface
 import com.reactive.begunok.utils.extensions.blockClickable
+import com.reactive.begunok.utils.extensions.disable
+import com.reactive.begunok.utils.extensions.enable
+import com.reactive.begunok.utils.validators.TextValidator
 import kotlinx.android.synthetic.main.screen_registration.*
 
 
 class RegistrationScreen : BaseFragment(R.layout.screen_registration) {
 
-    private val countries = arrayListOf<String>("US", "RU", "UZ")
-
     override fun initialize() {
+        initViews()
+    }
 
-        email.addTextChangedListener(TextObservable(next) {})
-        passw.addTextChangedListener(TextObservable(next) {})
-        resPass.addTextChangedListener(TextObservable(next) {})
+    private fun initViews() {
+        next.disable()
 
         next.setOnClickListener {
-
-            if (passw.text.toString().length < 6) {
-                passw.error = getString(R.string.minimum_password_length_6)
-                return@setOnClickListener
-            }
-            if (passw.text.toString().length > 120) {
-                passw.error = getString(R.string.maximum_password_length_120)
-                return@setOnClickListener
-            }
-            if (passw.text.toString() != resPass.text.toString()) {
-                resPass.error = getString(R.string.the_verified_password_is_not_valid)
-                return@setOnClickListener
-            }
-            var emailAdress: String? = null
-            emailAdress = email.text.toString()
-            if ((emailAdress.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailAdress).matches())) {
-                email.error = getString(R.string.the_verified_password_is_not_valid)
-                return@setOnClickListener
-            }
-
-            val adapter =
-                ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, countries)
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            countryCode.adapter = adapter
-
-            countryCode.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                }
-
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                }
-
-            }
-
             it.blockClickable()
         }
 
+        name.addTextChangedListener(object : TextWatcherInterface {
+            override fun textChanged(s: String) {
+                check()
+            }
+        })
+        email.addTextChangedListener(object : TextWatcherInterface {
+            override fun textChanged(s: String) {
+                check()
+            }
+        })
+        phone.addTextChangedListener(object : TextWatcherInterface {
+            override fun textChanged(s: String) {
+                check()
+            }
+        })
+        passw.addTextChangedListener(object : TextWatcherInterface {
+            override fun textChanged(s: String) {
+                check()
+            }
+        })
+        resPass.addTextChangedListener(object : TextWatcherInterface {
+            override fun textChanged(s: String) {
+                check()
+            }
+        })
+
+
     }
 
+    private fun check() {
+        next.disable()
+
+        if (name.text.toString().length < 6) {
+            name.error = getString(R.string.field_is_empty)
+            return
+        }
+        val emailAddress = email.text.toString()
+        if (emailAddress.isEmpty() || !TextValidator.isEmail(emailAddress)) {
+            email.error = getString(R.string.the_verified_password_is_not_valid)
+            return
+        }
+        if (phone.rawText.length < 10) {
+            phone.error = getString(R.string.phone_is_not_valid)
+            return
+        }
+        if (passw.text.toString().length < 6) {
+            passw.error = getString(R.string.minimum_password_length_6)
+            return
+        }
+        if (resPass.text.toString().length < 6) {
+            resPass.error = getString(R.string.minimum_password_length_6)
+            return
+        }
+        if (passw.text.toString() != resPass.text.toString()) {
+            resPass.error = getString(R.string.the_verified_password_is_not_valid)
+            return
+        }
+        next.enable()
+    }
 
 }
