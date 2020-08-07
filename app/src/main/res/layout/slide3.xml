@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/screenStyle">
+
+    <include
+        layout="@layout/content_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="15dp"
+        android:text="Предложите свои услуги"
+        android:textColor="@color/black"
+        android:textSize="17sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/round_top"
+        android:orientation="vertical">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_margin="30dp"
+            android:background="@color/white"
+            android:gravity="top"
+            android:hint="Опишите Ваши суперспособности в исполнении
+подобных заказов"
+            android:textSize="13sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="#FFB400"
+            android:fontFamily="@font/roboto_medium"
+            android:paddingStart="30dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="30dp"
+            android:paddingBottom="10dp"
+            android:text="Общая сумма комиссии за выполнение заявки
+составляет 300 грн и будет списана только после
+завершения работ"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25sp"
+        android:layout_marginBottom="20sp"
+        android:background="@drawable/rounded_green"
+        android:fontFamily="@font/roboto_medium"
+        android:text="отправить"
+        android:textSize="15sp"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+</LinearLayout>

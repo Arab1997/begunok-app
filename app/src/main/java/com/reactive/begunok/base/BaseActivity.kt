@@ -7,10 +7,20 @@ import androidx.appcompat.app.AppCompatActivity
 
 abstract class BaseActivity(@LayoutRes private val layoutId: Int) : AppCompatActivity() {
 
+    private lateinit var updateManager: UpdateManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layoutId)
+
         onActivityCreated()
+
+        initUpdateManager()
+    }
+
+    private fun initUpdateManager() {
+        updateManager = UpdateManager(this).apply {
+            checkUpdate()
+        }
     }
 
     abstract fun onActivityCreated()
@@ -23,9 +33,15 @@ abstract class BaseActivity(@LayoutRes private val layoutId: Int) : AppCompatAct
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        updateManager.onResume()
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         fragmentsActivityResults(requestCode, resultCode, data)
+        updateManager.onActivityResult(requestCode, resultCode)
     }
 
     private fun fragmentsActivityResults(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -33,4 +49,5 @@ abstract class BaseActivity(@LayoutRes private val layoutId: Int) : AppCompatAct
             fragment.onActivityResult(requestCode, resultCode, data)
         }
     }
+
 }

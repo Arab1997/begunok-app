@@ -4,9 +4,8 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
+import com.reactive.begunok.ui.screens.auth.SignFragment
 import com.reactive.begunok.ui.screens.main.BlankScreen
-import com.reactive.begunok.ui.screens.main.sign.RegistrationScreen
-import com.reactive.begunok.ui.screens.main.sign.SignFragment
 import kotlinx.android.synthetic.main.screen_bottom_nav.*
 
 class BottomNavScreen : BaseFragment(R.layout.screen_bottom_nav) {

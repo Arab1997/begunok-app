@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="accent">@color/red</color>
-
+    <color name="primary">#E8E3E3</color>
+    <color name="primaryDark">@color/primary</color>
+    <color name="accent">@color/yellow</color>
+    <color name="divider">#707070</color>
     <color name="black">#212121</color>
     <color name="white">#FFFFFF</color>
-    <color name="yellow">#FFB306</color>
+    <color name="yellow">#FEB700</color>
     <color name="red">#F32A1F</color>
     <color name="hint">#899196</color>
 
-
-<color name="back_grey">#6D6A6B</color>
+    <color name="back_grey">#6D6A6B</color>
     <color name="light_back">#F5F1F1</color>
 
 </resources>

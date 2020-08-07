@@ -10,4 +10,6 @@
     <string name="maximum_password_length_120">Максимальная длина пароля 120</string>
     <string name="invalid_email_adress">Неверный адрес электронной почты</string>
 
+    <string name="add_photo">(Необязательно)</string>
+
 </resources>
