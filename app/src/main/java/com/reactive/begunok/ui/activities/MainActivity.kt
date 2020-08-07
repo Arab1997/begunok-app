@@ -7,6 +7,7 @@ import com.reactive.begunok.base.BaseViewModel
 import com.reactive.begunok.base.initialFragment
 import com.reactive.begunok.ui.screens.BottomNavScreen
 import com.reactive.begunok.ui.screens.auth.AuthScreen
+import com.reactive.begunok.ui.screens.auth.RegistrationScreen
 import com.reactive.begunok.ui.screens.splash.SplashScreen
 import com.reactive.begunok.utils.extensions.showGone
 import com.reactive.begunok.utils.preferences.SharedManager
@@ -31,7 +32,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 //        startFragment()
     }
 
-    private fun debug() = initialFragment(AuthScreen())
+    private fun debug() = initialFragment(RegistrationScreen())
 
     private fun startFragment() {
         initialFragment(
