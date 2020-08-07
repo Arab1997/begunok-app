@@ -8,6 +8,7 @@ class AuthScreen : BaseFragment(R.layout.screen_auth) {
 
     override fun initialize() {
         reg.setOnClickListener { addFragment(SignFragment()) }
+        enter.setOnClickListener { addFragment(SignFragment()) }
 
     }
 

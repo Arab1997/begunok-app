@@ -4,14 +4,14 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.reactive.begunok.base.BaseFragment
 import com.reactive.begunok.ui.screens.auth.LoginScreen
-import com.reactive.begunok.ui.screens.auth.RegistrationScreen
+import com.reactive.begunok.ui.screens.auth.Registration1Screen
 
 class SignPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getItem(position: Int): BaseFragment {
         if (position == 0) {
             return LoginScreen()
         }
-        return RegistrationScreen()
+        return Registration1Screen()
     }
 
     override fun getCount(): Int {

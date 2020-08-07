@@ -26,6 +26,7 @@
     </com.google.android.material.tabs.TabLayout>
 
     <ImageView
+        android:id="@+id/back"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginStart="20dp"
@@ -75,5 +76,18 @@
                 tools:ignore="ContentDescription" />
 
         </LinearLayout>
+
     </RelativeLayout>
+    <Button
+        android:id="@+id/next"
+        android:layout_width="145dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="37dp"
+        android:background="@drawable/rounded_yellow"
+        android:gravity="center"
+        android:text="далее"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="17sp" />
 </LinearLayout>

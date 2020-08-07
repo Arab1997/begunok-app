@@ -10,7 +10,7 @@ import com.reactive.begunok.utils.validators.TextValidator
 import kotlinx.android.synthetic.main.screen_registration.*
 
 
-class RegistrationScreen : BaseFragment(R.layout.screen_registration) {
+class Registration1Screen : BaseFragment(R.layout.screen_registration) {
 
     override fun initialize() {
         initViews()
@@ -21,6 +21,7 @@ class RegistrationScreen : BaseFragment(R.layout.screen_registration) {
 
         next.setOnClickListener {
             it.blockClickable()
+            addFragment(Registration2Screen())
         }
 
         name.addTextChangedListener(object : TextWatcherInterface {
