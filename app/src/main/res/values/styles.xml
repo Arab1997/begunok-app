@@ -20,6 +20,10 @@
         <item name="android:background">@color/white</item>
     </style>
 
+    <style name="darkStyle" parent="screenStyle">
+        <item name="android:background">@drawable/darkback</item>
+    </style>
+
     <style name="BottomSheet" parent="@style/Theme.MaterialComponents.Light.BottomSheetDialog">
         <item name="android:background">@drawable/bottom_sheet_white_rounded</item>
         <item name="android:elevation">0dp</item>

@@ -1,12 +1,13 @@
 package com.reactive.begunok.ui.activities
 
 import android.view.KeyEvent
-import com.reactive.begunok.ui.screens.splash.SplashScreen
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseActivity
 import com.reactive.begunok.base.BaseViewModel
 import com.reactive.begunok.base.initialFragment
 import com.reactive.begunok.ui.screens.BottomNavScreen
+import com.reactive.begunok.ui.screens.auth.AuthScreen
+import com.reactive.begunok.ui.screens.splash.SplashScreen
 import com.reactive.begunok.utils.extensions.showGone
 import com.reactive.begunok.utils.preferences.SharedManager
 import kotlinx.android.synthetic.main.activity_main.*
@@ -30,11 +31,13 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 //        startFragment()
     }
 
-    private fun debug() = initialFragment(BottomNavScreen())
+    private fun debug() = initialFragment(AuthScreen())
 
     private fun startFragment() {
         initialFragment(
-            if (sharedManager.token.isEmpty()) SplashScreen()
+            if (sharedManager.token.isEmpty()) SplashScreen().apply {
+                setListener { initialFragment(AuthScreen(), true) }
+            }
             else BottomNavScreen(), true
         )
     }

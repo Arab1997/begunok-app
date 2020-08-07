@@ -4,4 +4,6 @@
     <string name="check_connection">Проверьте подключение к интернету. И попробуй еще раз</string>
     <string name="slow_internet">Скорость интернета низкая. пожалуйста, подождите</string>
     <string name="smth_wrong">Что-то пошло не так. Пожалуйста, попробуйте еще раз</string>
+    <string name="add_photo">(Необязательно)</string>
+
 </resources>
