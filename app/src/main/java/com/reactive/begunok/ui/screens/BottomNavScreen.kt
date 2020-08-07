@@ -5,12 +5,14 @@ import androidx.fragment.app.Fragment
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
 import com.reactive.begunok.ui.screens.main.BlankScreen
+import com.reactive.begunok.ui.screens.main.sign.RegistrationScreen
+import com.reactive.begunok.ui.screens.main.sign.SignFragment
 import kotlinx.android.synthetic.main.screen_bottom_nav.*
 
 class BottomNavScreen : BaseFragment(R.layout.screen_bottom_nav) {
 
     private var bottomFragments = arrayListOf<Fragment>(
-        BlankScreen(),
+        SignFragment(),
         BlankScreen(),
         BlankScreen(),
         BlankScreen(),
@@ -45,6 +47,7 @@ class BottomNavScreen : BaseFragment(R.layout.screen_bottom_nav) {
                 }
                 else -> false
             }
+//        bottomNav.background(bottomFragments.get(item.itemId).))
         }
 
         selectFragment(0)

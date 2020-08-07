@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/screenStyle"
+    android:background="@drawable/back_black"
+    android:paddingLeft="30dp"
+    android:paddingTop="?actionBarSize"
+    android:paddingRight="30dp">
+
+    <ImageView
+        android:layout_width="163dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="36dp"
+        android:src="@drawable/begunok" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/hint" />
+
+    <TextView
+        style="@style/whiteTxtStyle"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="48dp"
+        android:text="Адрес эл. почты"
+        android:textSize="15sp" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="9dp"
+        android:background="@drawable/rounded_edite_text_grey"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="15dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="15sp" />
+
+
+    <TextView
+        style="@style/whiteTxtStyle"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="30dp"
+        android:text="Пароль"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passw"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="9dp"
+            android:background="@drawable/rounded_edite_text_dark_grey"
+            android:inputType="textPassword"
+            android:paddingLeft="15dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="15sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/enter"
+        android:layout_width="145dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="63dp"
+        android:background="@drawable/rounded_yellow"
+        android:text="войти"
+
+        android:textColor="@color/black"
+        android:textSize="17sp" />
+
+    <LinearLayout
+        android:id="@+id/failed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginRight="7dp"
+            android:src="@drawable/ic_quest" />
+
+        <TextView
+            style="@style/whiteTxtStyle"
+            android:text="Не получилось войти?" />
+    </LinearLayout>
+
+</LinearLayout>
