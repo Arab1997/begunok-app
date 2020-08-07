@@ -32,7 +32,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 //        startFragment()
     }
 
-    private fun debug() = initialFragment(RegistrationScreen())
+    private fun debug() = initialFragment(AuthScreen())
 
     private fun startFragment() {
         initialFragment(

@@ -1,14 +1,13 @@
 package com.reactive.begunok.ui.screens.auth
 
+import android.util.Patterns
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.util.Patterns
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
 import com.reactive.begunok.utils.common.TextObservable
 import com.reactive.begunok.utils.extensions.blockClickable
-import kotlinx.android.synthetic.main.screen_registration.*
 import kotlinx.android.synthetic.main.screen_registration.*
 
 
@@ -38,30 +37,29 @@ class RegistrationScreen : BaseFragment(R.layout.screen_registration) {
             }
             var emailAdress: String? = null
             emailAdress = email.text.toString()
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, countries)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        countryCode.adapter = adapter
-
-        countryCode.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            }
-
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-            }
-
-        }
-
-            if (!(emailAdress.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailAdress).matches())) {
+            if ((emailAdress.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailAdress).matches())) {
                 email.error = getString(R.string.the_verified_password_is_not_valid)
                 return@setOnClickListener
             }
 
+            val adapter =
+                ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, countries)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            countryCode.adapter = adapter
 
+            countryCode.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                }
+
+            }
 
             it.blockClickable()
         }

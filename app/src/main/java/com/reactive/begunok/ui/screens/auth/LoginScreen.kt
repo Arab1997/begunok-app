@@ -29,17 +29,16 @@ class LoginScreen : BaseFragment(R.layout.screen_login) {
 
             var emailAdress: String? = null
             emailAdress = email.text.toString()
-
             if (!(emailAdress.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailAdress).matches())) {
                 email.error = getString(R.string.the_verified_password_is_not_valid)
                 return@setOnClickListener
             }
 
-
-
             it.blockClickable()
+            addFragment(FinishLoginScreen())
+
         }
-        failed.setOnClickListener {  }
+        failed.setOnClickListener { inDevelopment(requireContext()) }
 
 
 

@@ -52,7 +52,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="9dp"
             android:background="@drawable/rounded_edite_text_white"
-            android:inputType="textPassword"
+            android:inputType="textEmailAddress"
             android:paddingLeft="15dp"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
@@ -76,7 +76,8 @@
             android:layout_width="55dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="15dp" />
+            android:layout_marginLeft="15dp"
+            />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phone"
