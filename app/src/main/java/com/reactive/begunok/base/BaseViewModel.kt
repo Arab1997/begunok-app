@@ -6,10 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.reactive.begunok.R
-import com.reactive.begunok.network.ApiInterface
-import com.reactive.begunok.network.ErrorResp
-import com.reactive.begunok.network.LoginRequest
-import com.reactive.begunok.network.RetrofitClient
+import com.reactive.begunok.network.*
 import com.reactive.begunok.utils.Constants
 import com.reactive.begunok.utils.extensions.loge
 import com.reactive.begunok.utils.extensions.logi
@@ -26,7 +23,7 @@ import org.koin.core.qualifier.named
 import retrofit2.HttpException
 
 open class BaseViewModel(
-    private val gson: Gson,
+    gson: Gson,
     private val context: Context,
     private val sharedManager: SharedManager
 ) : ViewModel(), KoinComponent {
@@ -42,7 +39,7 @@ open class BaseViewModel(
     val error: MutableLiveData<ErrorResp> by inject(named("errorLive"))
 
     private val api = RetrofitClient
-        .getRetrofit(Constants.BASE_URL, getToken(), context, gson)
+        .getRetrofit(Constants.BASE_URL, sharedManager.token, context, gson)
         .create(ApiInterface::class.java)
 
     private val compositeDisposable = CompositeDisposable()
@@ -91,19 +88,36 @@ open class BaseViewModel(
     fun fetchData() {
 
         if (sharedManager.token.isNotEmpty()) {
-
             logi("Current token : " + sharedManager.token)
-
+            getUser()
         }
     }
 
-    private fun getToken() = "Bearer ${sharedManager.token}"
-
-     fun login(phone: String, password: String) = compositeDisposable.add(
-        api.login(LoginRequest(phone, password)).observeAndSubscribe()
+    fun getUser() = compositeDisposable.add(
+        api.getProfile().observeAndSubscribe()
             .subscribe({
-                sharedManager.token = it.access_token
+                sharedManager.user = it
                 data.value = it
+            }, {
+                parseError(it)
+            })
+    )
+
+    fun login(userName: String, email: String, password: String) = compositeDisposable.add(
+        api.login(LoginRequest(userName, email, password)).observeAndSubscribe()
+            .subscribe({
+                sharedManager.token = it.token
+                getUser()
+            }, {
+                parseError(it)
+            })
+    )
+
+    fun register(userName: String, email: String, password: String) = compositeDisposable.add(
+        api.register(RegisterRequest(userName, email, password, password)).observeAndSubscribe()
+            .subscribe({
+                sharedManager.token = it.key
+                getUser()
             }, {
                 parseError(it)
             })

@@ -39,7 +39,7 @@ android {
     buildTypes {
         debug {
             manifestPlaceholders = [enableCrashReporting: "false"]
-            buildConfigField 'String', 'BASE_URL', '"https://xxx.xxx/"'
+            buildConfigField 'String', 'BASE_URL', '"https://begun-ok.com/api/v1/"'
 //            signingConfig signingConfigs.debug
             minifyEnabled false
             shrinkResources false
@@ -47,7 +47,7 @@ android {
         }
         release {
             manifestPlaceholders = [enableCrashReporting: "true"]
-            buildConfigField 'String', 'BASE_URL', '"https://xxx.xxx/"'
+            buildConfigField 'String', 'BASE_URL', '"https://begun-ok.com/api/v1/"'
             minifyEnabled false
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
