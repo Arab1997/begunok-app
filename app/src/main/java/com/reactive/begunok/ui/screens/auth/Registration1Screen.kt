@@ -7,10 +7,10 @@ import com.reactive.begunok.utils.extensions.blockClickable
 import com.reactive.begunok.utils.extensions.disable
 import com.reactive.begunok.utils.extensions.enable
 import com.reactive.begunok.utils.validators.TextValidator
-import kotlinx.android.synthetic.main.screen_registration.*
+import kotlinx.android.synthetic.main.screen_reg1.*
 
 
-class Registration1Screen : BaseFragment(R.layout.screen_registration) {
+class Registration1Screen : BaseFragment(R.layout.screen_reg1) {
 
     override fun initialize() {
         initViews()

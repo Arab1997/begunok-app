@@ -8,17 +8,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
 import com.reactive.begunok.network.models.Category
+import com.reactive.begunok.ui.adapters.CategoryRoundedAdapter
 import com.reactive.begunok.ui.slides.Slide5
 import com.reactive.begunok.utils.common.ViewHolder
 import kotlinx.android.synthetic.main.content_toolbar.*
 import kotlinx.android.synthetic.main.item_category_rounded.view.*
-import kotlinx.android.synthetic.main.slide5.*
+import kotlinx.android.synthetic.main.screen_category_rounded.*
 
-class Slide5Fragment : BaseFragment(R.layout.slide5) {
+class CategoryRoundedScreen : BaseFragment(R.layout.screen_category_rounded) {
+
+
+    private lateinit var adapter:CategoryRoundedAdapter
 
     companion object {
-        fun newInstance(show: Boolean, header: String): Slide5 {
-            return Slide5().apply {
+        fun newInstance(show: Boolean, header: String): CategoryRoundedScreen {
+            return CategoryRoundedScreen().apply {
                 arguments = Bundle().apply {
                     putBoolean("show", show)
                     putString("header", header)
@@ -29,7 +33,6 @@ class Slide5Fragment : BaseFragment(R.layout.slide5) {
 
     private var show: Boolean = false
     private var header: String = ""
-
 
     override fun initialize() {
         close.setOnClickListener { finishFragment() }
@@ -43,6 +46,9 @@ class Slide5Fragment : BaseFragment(R.layout.slide5) {
 
             title.text = "Создать заявку"
 
+            //adapter=CategoryRoundedAdapter()
+            recycler.adapter=adapter
+
         }
 
     }
@@ -54,23 +60,4 @@ class Slide5Fragment : BaseFragment(R.layout.slide5) {
         header = ""
     }
 
-    class Adapter(private val data: ArrayList<Category>, private val layout: Int) :
-        RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(layout, parent, false)
-        )
-
-        override fun getItemCount(): Int = data.size
-
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-            holder.itemView.apply {
-                data[position].apply {
-                    title?.text = name.capitalize()
-                    image?.setImageResource(icon)
-                }
-            }
-        }
-
-    }
 }

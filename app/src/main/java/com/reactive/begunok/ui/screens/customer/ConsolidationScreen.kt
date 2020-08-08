@@ -4,7 +4,7 @@ import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
 import kotlinx.android.synthetic.main.content_toolbar.*
 
-class Slide2Fragment : BaseFragment(R.layout.slide2) {
+class ConsolidationScreen : BaseFragment(R.layout.screen_consolidation) {
 
     override fun initialize() {
         close.setOnClickListener { finishFragment() }

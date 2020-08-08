@@ -13,5 +13,6 @@
     <string name="invalid_email_adress">Неверный адрес электронной почты</string>
 
     <string name="add_photo">(Необязательно)</string>
+    <string name="card_number_error">ошибка номера карты</string>
 
 </resources>

@@ -22,5 +22,5 @@
         android:background="@drawable/slide13"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_slide13" />
+        tools:listitem="@layout/item_my_orders" />
 </LinearLayout>

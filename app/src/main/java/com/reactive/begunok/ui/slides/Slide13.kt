@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.reactive.begunok.R
 import com.reactive.begunok.network.models.Orders
 import com.reactive.begunok.utils.common.ViewHolder
-import kotlinx.android.synthetic.main.item_slide13.view.*
+import kotlinx.android.synthetic.main.item_my_orders.view.*
 
-class Slide13 : BaseSlide(R.layout.slide13) {
+class Slide13 : BaseSlide(R.layout.screen_my_orders) {
 
     override fun viewCreated() {
     }
@@ -17,7 +17,7 @@ class Slide13 : BaseSlide(R.layout.slide13) {
     class Adapter(private val data: ArrayList<Orders>) :
         RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_slide13, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_my_orders, parent, false)
         )
 
         override fun getItemCount(): Int = data.size

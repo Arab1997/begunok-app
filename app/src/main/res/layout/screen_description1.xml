@@ -41,6 +41,7 @@
             android:textSize="15sp" />
 
         <EditText
+            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginStart="20dp"
@@ -48,6 +49,7 @@
             android:background="@drawable/rounded_white"
             android:drawableEnd="@drawable/ic_digital_controller"
             android:hint="pr.lorem@ipsum.com"
+            android:inputType="textEmailAddress"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:textSize="14sp"
@@ -65,6 +67,7 @@
             android:textSize="15sp" />
 
         <EditText
+            android:id="@+id/phone"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginStart="20dp"
@@ -72,12 +75,14 @@
             android:background="@drawable/rounded_white"
             android:drawableEnd="@drawable/ic_digital_controller"
             android:hint="+38 093 00 65 43"
+            android:inputType="phone"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:textSize="14sp"
             android:translationZ="4dp" />
 
         <Button
+            android:id="@+id/create"
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"

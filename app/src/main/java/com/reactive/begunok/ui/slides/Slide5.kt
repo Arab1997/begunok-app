@@ -10,9 +10,9 @@ import com.reactive.begunok.network.models.Category
 import com.reactive.begunok.utils.common.ViewHolder
 import kotlinx.android.synthetic.main.content_toolbar.*
 import kotlinx.android.synthetic.main.item_category_rounded.view.*
-import kotlinx.android.synthetic.main.slide5.*
+import kotlinx.android.synthetic.main.screen_category_rounded.*
 
-class Slide5 : BaseSlide(R.layout.slide5) {
+class Slide5 : BaseSlide(R.layout.screen_category_rounded) {
 
     companion object {
         fun newInstance(show: Boolean, header: String): Slide5 {

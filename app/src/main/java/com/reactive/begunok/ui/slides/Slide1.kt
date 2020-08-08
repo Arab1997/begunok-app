@@ -10,7 +10,7 @@ import com.reactive.begunok.utils.common.ViewHolder
 import kotlinx.android.synthetic.main.item_category.view.*
 import kotlinx.android.synthetic.main.item_category_child.view.*
 
-class Slide1 : BaseSlide(R.layout.slide1) {
+class Slide1 : BaseSlide(R.layout.screen_category) {
 
     override fun viewCreated() {
 
