@@ -11,7 +11,7 @@ class AddPhotoScreen : BaseFragment(R.layout.screen_add_photo) {
     override fun initialize() {
         close.setOnClickListener { finishFragment() }
         title.text = "Создать Заявка"
-        proceed.setOnClickListener { inDevelopment(requireContext()) }
+        proceed.setOnClickListener { addFragment(Description1Screen()) }
 
     }
 }

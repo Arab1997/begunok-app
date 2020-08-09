@@ -137,6 +137,7 @@
             android:textSize="18sp" />
 
         <Button
+            android:id="@+id/proceed"
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
