@@ -52,4 +52,11 @@
         </attr>
 
     </declare-styleable>
+    <declare-styleable name="RoundImageView">
+        <attr name="top_left" format="dimension" />
+        <attr name="top_right" format="dimension" />
+        <attr name="bottom_right" format="dimension" />
+        <attr name="bottom_left" format="dimension" />
+    </declare-styleable>
+
 </resources>

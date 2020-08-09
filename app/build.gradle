@@ -21,6 +21,7 @@ android {
         preDexLibraries = false
         javaMaxHeapSize "4g"
     }
+    dataBinding { enabled = true }
     /*signingConfigs {
         debug {
             storeFile file("/Volumes/HDD/keys/new-reactive/new")
@@ -139,7 +140,8 @@ dependencies {
     // Expandable layout
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
 
-    //country code
-  
+    implementation 'com.github.siyamed:android-shape-imageview:0.9.+@aar'
 
+    // todo enable databinding //    dataBinding { enabled = true }
+    implementation 'gun0912.ted:tedimagepicker:1.1.3'
 }

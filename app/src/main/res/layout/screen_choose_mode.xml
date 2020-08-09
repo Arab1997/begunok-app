@@ -5,6 +5,7 @@
     android:gravity="center">
 
     <FrameLayout
+        android:id="@+id/customer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center">
@@ -29,7 +30,7 @@
     </FrameLayout>
 
     <TextView
-        android:id="@+id/customer"
+        android:id="@+id/customer1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -41,6 +42,7 @@
         android:textSize="22sp" />
 
     <FrameLayout
+        android:id="@+id/executor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -66,7 +68,7 @@
     </FrameLayout>
 
     <TextView
-        android:id="@+id/executor"
+        android:id="@+id/executor1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

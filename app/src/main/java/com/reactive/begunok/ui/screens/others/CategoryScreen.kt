@@ -1,12 +1,9 @@
-package com.reactive.begunok.ui.screens.customer
+package com.reactive.begunok.ui.screens.others
 
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
-import com.reactive.begunok.network.models.Category
-import com.reactive.begunok.network.models.ChildCategory
 import com.reactive.begunok.ui.adapters.CategoryAdapter
 import kotlinx.android.synthetic.main.content_toolbar.*
-import kotlinx.android.synthetic.main.screen_category.*
 
 class CategoryScreen : BaseFragment(R.layout.screen_category) {
 

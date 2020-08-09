@@ -6,12 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.reactive.begunok.utils.common.ViewHolder
 import com.reactive.begunok.utils.extensions.inflate
 
+abstract class  BaseAdapter<T>(@LayoutRes val layoutID: Int) : RecyclerView.Adapter<ViewHolder>() {
 
-abstract class BaseAdapter(@LayoutRes val layoutID: Int) : RecyclerView.Adapter<ViewHolder>() {
+    protected var items = arrayListOf<T>()
 
-    protected var items = arrayListOf<Any>()
-
-    open fun setData(data: ArrayList<Any>) {
+    open fun setData(data: ArrayList<T>) {
         items = data
         notifyDataSetChanged()
     }
@@ -27,6 +26,6 @@ abstract class BaseAdapter(@LayoutRes val layoutID: Int) : RecyclerView.Adapter<
         }
     }
 
-    abstract fun bindViewHolder(holder: ViewHolder, data: Any)
+    abstract fun bindViewHolder(holder: ViewHolder, data: T)
 
 }

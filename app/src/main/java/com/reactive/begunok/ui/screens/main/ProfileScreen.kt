@@ -1,18 +1,14 @@
-package com.reactive.begunok.ui.screens.customer
+package com.reactive.begunok.ui.screens.main
 
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
 import com.reactive.begunok.utils.common.TextWatcherInterface
 import com.reactive.begunok.utils.validators.TextValidator
-import kotlinx.android.synthetic.main.content_toolbar.*
 import kotlinx.android.synthetic.main.screen_profile.*
 
 class ProfileScreen : BaseFragment(R.layout.screen_profile) {
 
     override fun initialize() {
-        close.setOnClickListener { finishFragment() }
-
-        image.setImageResource(R.drawable.dislike)
 
         initViews()
     }

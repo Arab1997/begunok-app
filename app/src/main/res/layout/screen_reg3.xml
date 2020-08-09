@@ -1,29 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/screenStyle"
-    android:background="@drawable/slide15back">
-
-    <com.google.android.material.tabs.TabLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabIndicatorColor="@color/black"
-        app:tabIndicatorHeight="1dp"
-        app:tabMode="fixed"
-        app:tabTextColor="@color/black">
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="войти" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="зарегистрироваться" />
-
-    </com.google.android.material.tabs.TabLayout>
+    android:background="@drawable/grey_back">
 
     <ImageView
         android:id="@+id/back"
@@ -69,6 +48,7 @@
                 android:background="@color/white" />
 
             <ImageView
+                android:id="@+id/addImage"
                 android:layout_width="110dp"
                 android:layout_height="90dp"
                 android:layout_gravity="end"
@@ -78,6 +58,7 @@
         </LinearLayout>
 
     </RelativeLayout>
+
     <Button
         android:id="@+id/next"
         android:layout_width="145dp"

@@ -4,22 +4,25 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
-import com.reactive.begunok.ui.screens.main.BlankScreen
+import com.reactive.begunok.ui.activities.MainActivity
+import com.reactive.begunok.ui.screens.main.*
 import kotlinx.android.synthetic.main.screen_bottom_nav.*
 
 class BottomNavScreen : BaseFragment(R.layout.screen_bottom_nav) {
 
     private var bottomFragments = arrayListOf<Fragment>(
-        BlankScreen(),
-        BlankScreen(),
-        BlankScreen(),
-        BlankScreen(),
-        BlankScreen()
+        HomeScreen(),
+        BalanceScreen(),
+        ProfileScreen(),
+        NotificationsScreen(),
+        StartScreen()
     )
 
     override fun initialize() {
 
-        setHasOptionsMenu(true)
+        bottomNav.menu.getItem(0).title = getString(
+            if (MainActivity.customer) R.string.my_orders else R.string.my_job
+        )
 
         bottomNav.setOnNavigationItemSelectedListener { item: MenuItem ->
             return@setOnNavigationItemSelectedListener when (item.itemId) {
@@ -27,25 +30,24 @@ class BottomNavScreen : BaseFragment(R.layout.screen_bottom_nav) {
                     selectFragment(0)
                     true
                 }
-                R.id.path -> {
+                R.id.balance -> {
                     selectFragment(1)
                     true
                 }
-                R.id.me -> {
+                R.id.profile -> {
                     selectFragment(2)
                     true
                 }
-                R.id.breakthrough -> {
+                R.id.notifications -> {
                     selectFragment(3)
                     true
                 }
-                R.id.events -> {
+                R.id.seach -> {
                     selectFragment(4)
                     true
                 }
                 else -> false
             }
-//        bottomNav.background(bottomFragments.get(item.itemId).))
         }
 
         selectFragment(0)

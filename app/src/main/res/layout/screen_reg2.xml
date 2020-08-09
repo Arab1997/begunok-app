@@ -1,36 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:fitsSystemWindows="true"
     style="@style/screenStyle">
 
     <LinearLayout
-        android:background="@drawable/slide14back1"
         android:layout_width="match_parent"
-        android:layout_marginBottom="-20dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/slide14back1"
         android:orientation="vertical">
-
-        <com.google.android.material.tabs.TabLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabIndicatorColor="@color/black"
-            app:tabIndicatorHeight="1dp"
-            app:tabMode="fixed"
-            app:tabTextColor="@color/black">
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="войти" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="зарегистрироваться" />
-
-        </com.google.android.material.tabs.TabLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -84,7 +61,7 @@
 для физлиц- страница паспорта с последней актуальной
 фотографией, ФИО и страницей прописки Исполнителя."
             android:textColor="@color/black"
-            android:textSize="12sp" />
+            android:textSize="10sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -98,16 +75,20 @@
                 android:layout_marginTop="20dp">
 
                 <ImageView
+                    android:id="@+id/img1"
                     android:layout_width="0dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
-                    android:src="@drawable/slide14item" />
+                    android:src="@drawable/slide14item"
+                    tools:ignore="ContentDescription" />
 
                 <ImageView
+                    android:id="@+id/img2"
                     android:layout_width="0dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
-                    android:src="@drawable/slide14item" />
+                    android:src="@drawable/slide14item"
+                    tools:ignore="ContentDescription" />
 
             </LinearLayout>
 
@@ -117,27 +98,32 @@
                 android:layout_marginTop="30dp">
 
                 <ImageView
+                    android:id="@+id/img3"
                     android:layout_width="0dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
-                    android:src="@drawable/slide14item" />
+                    android:src="@drawable/slide14item"
+                    tools:ignore="ContentDescription" />
 
                 <ImageView
+                    android:id="@+id/img4"
                     android:layout_width="0dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
-                    android:src="@drawable/slide14item" />
+                    android:src="@drawable/slide14item"
+                    tools:ignore="ContentDescription" />
 
             </LinearLayout>
         </LinearLayout>
+
         <ImageView
             android:id="@+id/next"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:src="@drawable/ic_baseline_chevron_right_24"
-            android:tint="@color/black"
-            tools:ignore="ContentDescription"
+            android:layout_width="28dp"
+            android:layout_height="34dp"
             android:layout_gravity="end"
-            android:layout_marginEnd="30dp"/>
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="30dp"
+            android:src="@drawable/ic_next"
+            tools:ignore="ContentDescription" />
     </LinearLayout>
-</RelativeLayout>
+</androidx.core.widget.NestedScrollView>

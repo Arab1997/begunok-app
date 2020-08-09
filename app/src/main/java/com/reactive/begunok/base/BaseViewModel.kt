@@ -34,6 +34,9 @@ open class BaseViewModel(
     @LayoutRes
     var navLayoutId: Int = 0
 
+    @LayoutRes
+    var authLayoutId: Int = 0
+
     val data: MutableLiveData<Any> by inject()
     val shared: MutableLiveData<Any> by inject(named("sharedLive"))
     val error: MutableLiveData<ErrorResp> by inject(named("errorLive"))

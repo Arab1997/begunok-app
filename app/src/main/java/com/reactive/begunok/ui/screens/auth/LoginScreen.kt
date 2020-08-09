@@ -36,7 +36,7 @@ class LoginScreen : BaseFragment(R.layout.screen_login) {
             }
         })
 
-        failed.setOnClickListener { inDevelopment(requireContext()) }
+        forgot.setOnClickListener { inDevelopment(requireContext()) }
     }
 
     private fun check() {
@@ -44,7 +44,7 @@ class LoginScreen : BaseFragment(R.layout.screen_login) {
 
         val emailAddress = email.text.toString()
         if (emailAddress.isEmpty() || !TextValidator.isEmail(emailAddress)) {
-            email.error = getString(R.string.the_verified_password_is_not_valid)
+            email.error = getString(R.string.invalid_email_adress)
             return
         }
         if (passw.text.toString().length < 6) {

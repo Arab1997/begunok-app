@@ -1,19 +1,20 @@
-package com.reactive.begunok.ui.screens.customer
+package com.reactive.begunok.ui.screens.create_order
 
 import android.os.Bundle
 import android.view.View
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
+import com.reactive.begunok.ui.activities.MainActivity
 import com.reactive.begunok.ui.adapters.CategoryRoundedAdapter
 import kotlinx.android.synthetic.main.content_toolbar.*
 import kotlinx.android.synthetic.main.screen_category_rounded.*
 
-class CategoryRoundedScreen : BaseFragment(R.layout.screen_category_rounded) {
+class ChooseCategoryScreen : BaseFragment(R.layout.screen_category_rounded) {
     private lateinit var adapter: CategoryRoundedAdapter
 
     companion object {
-        fun newInstance(show: Boolean, header: String): CategoryRoundedScreen {
-            return CategoryRoundedScreen().apply {
+        fun newInstance(show: Boolean, header: String): ChooseCategoryScreen {
+            return ChooseCategoryScreen().apply {
                 arguments = Bundle().apply {
                     putBoolean("show", show)
                     putString("header", header)
@@ -37,8 +38,12 @@ class CategoryRoundedScreen : BaseFragment(R.layout.screen_category_rounded) {
             title.text = "Создать заявку"
         }
 
-//        adapter = CategoryRoundedAdapter()
-//        recycler.adapter = adapter
+        adapter = CategoryRoundedAdapter {
+
+        }.apply {
+            setData(MainActivity.data)
+        }
+        recycler.adapter = adapter
     }
 
     override fun onDestroyView() {
@@ -46,6 +51,4 @@ class CategoryRoundedScreen : BaseFragment(R.layout.screen_category_rounded) {
         show = false
         header = ""
     }
-
-
 }

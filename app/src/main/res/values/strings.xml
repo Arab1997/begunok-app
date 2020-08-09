@@ -14,5 +14,7 @@
 
     <string name="add_photo">(Необязательно)</string>
     <string name="card_number_error">ошибка номера карты</string>
+    <string name="my_job">Мои работы</string>
+    <string name="my_orders">Мои заказы</string>
 
 </resources>

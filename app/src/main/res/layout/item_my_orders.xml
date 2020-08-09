@@ -13,7 +13,6 @@
     android:paddingEnd="25dp"
     android:paddingBottom="15dp">
 
-
     <ImageView
         android:id="@+id/image"
         android:layout_width="55dp"

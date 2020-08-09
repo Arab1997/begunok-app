@@ -7,7 +7,6 @@ import com.reactive.begunok.base.BaseViewModel
 import com.reactive.begunok.base.initialFragment
 import com.reactive.begunok.ui.screens.BottomNavScreen
 import com.reactive.begunok.ui.screens.auth.AuthScreen
-import com.reactive.begunok.ui.screens.customer.ChooseAddressScreen
 import com.reactive.begunok.ui.screens.splash.SplashScreen
 import com.reactive.begunok.utils.extensions.showGone
 import com.reactive.begunok.utils.preferences.SharedManager
@@ -20,9 +19,15 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
     val viewModel by viewModel<BaseViewModel>()
     val sharedManager: SharedManager by inject()
 
+    companion object {
+        var customer: Boolean = false
+        val data = arrayListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, "")
+    }
+
     override fun onActivityCreated() {
         viewModel.apply {
             parentLayoutId = R.id.fragmentContainer
+            authLayoutId = R.id.registerContainer
             navLayoutId = R.id.navContainer
 
             fetchData()
@@ -31,7 +36,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 //        startFragment()
     }
 
-    private fun debug() = initialFragment(ChooseAddressScreen())
+    private fun debug() = initialFragment(BottomNavScreen())
 
     private fun startFragment() {
         initialFragment(

@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.screen_reg1.*
 class Registration1Screen : BaseFragment(R.layout.screen_reg1) {
 
     override fun initialize() {
+
         initViews()
     }
 
@@ -21,7 +22,7 @@ class Registration1Screen : BaseFragment(R.layout.screen_reg1) {
 
         next.setOnClickListener {
             it.blockClickable()
-            addFragment(Registration2Screen())
+            addFragment(Registration2Screen(), id = viewModel.authLayoutId)
         }
 
         name.addTextChangedListener(object : TextWatcherInterface {
@@ -49,20 +50,18 @@ class Registration1Screen : BaseFragment(R.layout.screen_reg1) {
                 check()
             }
         })
-
-
     }
 
     private fun check() {
         next.disable()
 
-        if (name.text.toString().length < 6) {
+        if (name.text.toString().isEmpty()) {
             name.error = getString(R.string.field_is_empty)
             return
         }
         val emailAddress = email.text.toString()
         if (emailAddress.isEmpty() || !TextValidator.isEmail(emailAddress)) {
-            email.error = getString(R.string.the_verified_password_is_not_valid)
+            email.error = getString(R.string.invalid_email_adress)
             return
         }
         if (phone.rawText.length < 10) {
