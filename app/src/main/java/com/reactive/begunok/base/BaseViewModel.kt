@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.reactive.begunok.R
 import com.reactive.begunok.network.*
+import com.reactive.begunok.network.models.CategoryData
 import com.reactive.begunok.utils.Constants
 import com.reactive.begunok.utils.extensions.loge
 import com.reactive.begunok.utils.extensions.logi
@@ -40,12 +41,15 @@ open class BaseViewModel(
     val data: MutableLiveData<Any> by inject()
     val shared: MutableLiveData<Any> by inject(named("sharedLive"))
     val error: MutableLiveData<ErrorResp> by inject(named("errorLive"))
+    val categories: MutableLiveData<ArrayList<CategoryData>> by inject(named("categories"))
+    val subCategories: MutableLiveData<ArrayList<CategoryData>> by inject(named("categories"))
+    val jobTypes: MutableLiveData<ArrayList<CategoryData>> by inject(named("categories"))
 
+    private val compositeDisposable = CompositeDisposable()
     private val api = RetrofitClient
         .getRetrofit(Constants.BASE_URL, sharedManager.token, context, gson)
         .create(ApiInterface::class.java)
 
-    private val compositeDisposable = CompositeDisposable()
 
     private fun parseError(e: Throwable?) {
         var message = context.resources.getString(R.string.smth_wrong)
@@ -92,7 +96,9 @@ open class BaseViewModel(
 
         if (sharedManager.token.isNotEmpty()) {
             logi("Current token : " + sharedManager.token)
-            getUser()
+
+//            getUser()
+            getCategories()
         }
     }
 
@@ -130,6 +136,33 @@ open class BaseViewModel(
         api.logout().observeAndSubscribe()
             .subscribe({
                 sharedManager.deleteAll()
+            }, {
+                parseError(it)
+            })
+    )
+
+    fun getCategories() = compositeDisposable.add(
+        api.getCategories().observeAndSubscribe()
+            .subscribe({
+                categories.value = ArrayList(it)
+            }, {
+                parseError(it)
+            })
+    )
+
+    fun getSubCategories(catId: Int) = compositeDisposable.add(
+        api.getSubCategories(catId).observeAndSubscribe()
+            .subscribe({
+                subCategories.value = ArrayList(it)
+            }, {
+                parseError(it)
+            })
+    )
+
+    fun getJobTypes(subCatId: Int) = compositeDisposable.add(
+        api.getJobTypes(subCatId).observeAndSubscribe()
+            .subscribe({
+                jobTypes.value = ArrayList(it)
             }, {
                 parseError(it)
             })

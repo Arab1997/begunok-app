@@ -1,10 +1,12 @@
 package com.reactive.begunok.ui.activities
 
 import android.view.KeyEvent
+import android.widget.EditText
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseActivity
 import com.reactive.begunok.base.BaseViewModel
 import com.reactive.begunok.base.initialFragment
+import com.reactive.begunok.network.User
 import com.reactive.begunok.ui.screens.BottomNavScreen
 import com.reactive.begunok.ui.screens.auth.AuthScreen
 import com.reactive.begunok.ui.screens.splash.SplashScreen
@@ -25,6 +27,11 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
     }
 
     override fun onActivityCreated() {
+
+        sharedManager.token =
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6IjExMTEiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNjAzNTM4OTE2LCJhdXRob3JpdGllcyI6WyJVU0VSIl0sImp0aSI6Ijk5NjUyMGZkLWYwNzAtNGVjZS1hOTFiLTQ2YWUyMDc3ZGNiNCIsImNsaWVudF9pZCI6ImFuZHJvaWQifQ.IgXD-sMOsnjxiSDsnEDxSHsl1oDWymeATe-QWiv5xQo" // todo
+        sharedManager.user = User(12, "MukhammadRasul", "1231230998", "asldjk@asdjk.ad", true)
+
         viewModel.apply {
             parentLayoutId = R.id.fragmentContainer
             authLayoutId = R.id.registerContainer
@@ -32,6 +39,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 
             fetchData()
         }
+
         debug()
 //        startFragment()
     }
@@ -59,5 +67,12 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
             }
         }
         return super.dispatchKeyEvent(event)
+    }
+}
+
+fun EditText.checkField(error: String) {
+    if (this.text.toString().isEmpty()) {
+        this.error = error
+        return
     }
 }

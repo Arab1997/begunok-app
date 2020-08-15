@@ -2,9 +2,10 @@ package com.reactive.begunok.network
 
 import android.content.Context
 import com.google.gson.Gson
-import com.readystatesoftware.chuck.ChuckInterceptor
 import com.reactive.begunok.BuildConfig
 import com.reactive.begunok.utils.network.UnsafeOkHttpClient
+import com.readystatesoftware.chuck.ChuckInterceptor
+import okhttp3.Credentials
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -36,6 +37,7 @@ object RetrofitClient {
                 Timber.tag("TTT").i(message)
             }
         }).apply { level = HttpLoggingInterceptor.Level.BODY }
+        builder.addInterceptor(BasicAuthInterceptor("android", "Yy5jruBmmWTjDDj6"))
         builder.addInterceptor(Interceptor { chain: Interceptor.Chain ->
             val request = chain.request()
                 .newBuilder()
@@ -49,5 +51,15 @@ object RetrofitClient {
             builder.addInterceptor(ChuckInterceptor(context))
         }
         return builder.build()
+    }
+
+    class BasicAuthInterceptor(username: String, password: String) : Interceptor {
+        private var credentials: String = Credentials.basic(username, password)
+
+        override fun intercept(chain: Interceptor.Chain): okhttp3.Response {
+            var request = chain.request()
+            request = request.newBuilder().header("Authorization", credentials).build()
+            return chain.proceed(request)
+        }
     }
 }

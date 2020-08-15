@@ -9,13 +9,13 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.reactive.bekunok"
+        applicationId "com.reactive.begunok"
         minSdkVersion 22
         targetSdkVersion 29
         versionCode 1
         versionName "0.0.1"
         multiDexEnabled true
-        archivesBaseName = "bekunok-$versionName"
+        archivesBaseName = "begunok-$versionName"
     }
     dexOptions {
         preDexLibraries = false
@@ -40,7 +40,7 @@ android {
     buildTypes {
         debug {
             manifestPlaceholders = [enableCrashReporting: "false"]
-            buildConfigField 'String', 'BASE_URL', '"https://begun-ok.com/api/v1/"'
+            buildConfigField 'String', 'BASE_URL', '"http://85.214.167.4:8000/"'
 //            signingConfig signingConfigs.debug
             minifyEnabled false
             shrinkResources false
@@ -48,7 +48,7 @@ android {
         }
         release {
             manifestPlaceholders = [enableCrashReporting: "true"]
-            buildConfigField 'String', 'BASE_URL', '"https://begun-ok.com/api/v1/"'
+            buildConfigField 'String', 'BASE_URL', '"http://85.214.167.4:8000/"'
             minifyEnabled false
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -82,6 +82,7 @@ dependencies {
      */
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     implementation 'androidx.core:core-ktx:1.3.1'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation "androidx.fragment:fragment-ktx:1.2.5"
@@ -144,4 +145,7 @@ dependencies {
 
     // todo enable databinding //    dataBinding { enabled = true }
     implementation 'gun0912.ted:tedimagepicker:1.1.3'
+
+    implementation 'com.github.stack07142:DiscreteSeekBar:1.0.1'
+
 }

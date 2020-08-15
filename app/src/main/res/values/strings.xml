@@ -9,6 +9,7 @@
     <string name="phone_is_not_valid">Номер телефона недействителен</string>
     <string name="the_verified_password_is_not_valid">Подтвержденный пароль недействителен</string>
     <string name="minimum_password_length_6">Минимальная длина пароля 6</string>
+    <string name="minimum_text_length">Минимальная длина %s</string>
     <string name="maximum_password_length_120">Максимальная длина пароля 120</string>
     <string name="invalid_email_adress">Неверный адрес электронной почты</string>
 

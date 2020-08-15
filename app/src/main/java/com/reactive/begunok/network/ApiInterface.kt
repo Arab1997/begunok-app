@@ -1,17 +1,19 @@
 package com.reactive.begunok.network
 
+import com.reactive.begunok.network.models.CategoryData
 import io.reactivex.Single
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface ApiInterface {
 
     @POST("authenticate/rest-auth/login")
     fun login(@Body body: LoginRequest): Single<Token>
 
-    @POST("authenticate/rest-auth/registration")
+    @POST("api/v1/user")
     fun register(@Body body: RegisterRequest): Single<TokenRegister>
 
     @POST("authenticate/rest-auth/logout")
@@ -19,6 +21,16 @@ interface ApiInterface {
 
     @GET("authenticate/customer_profiles")
     fun getProfile(): Single<User>
+
+    @GET("api/v1/category")
+    fun getCategories(): Single<List<CategoryData>>
+
+    @GET("api/v1/sub-category")
+    fun getSubCategories(@Query("categoryId") categoryId: Int): Single<List<CategoryData>>
+
+    @GET("api/v1/job-type")
+    fun getJobTypes(@Query("subCatId") categoryId: Int): Single<List<CategoryData>>
+
 }
 
 data class ErrorResp(val message: String, val errors: Any? = null)
@@ -37,16 +49,16 @@ data class LoginRequest(
 )
 
 data class RegisterRequest(
-    val username: String,
+    val name: String,
     val email: String,
-    val password1: String,
-    val password2: String
+    val password: String,
+    val phone: String
 )
 
 data class User(
-    val user: Int,
+    val id: Int,
+    val name: String,
     val phone: String,
-    val address: String,
-    val profile: String,
+    val email: String,
     val is_contractor: Boolean
 )
