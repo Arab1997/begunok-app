@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
 import com.reactive.begunok.network.models.CreateOrderModel
+import com.reactive.begunok.ui.adapters.ImgAdapter
 import com.reactive.begunok.utils.common.TextWatcherInterface
 import com.reactive.begunok.utils.extensions.blockClickable
 import com.reactive.begunok.utils.extensions.disable
@@ -12,10 +13,11 @@ import com.reactive.begunok.utils.extensions.toast
 import com.reactive.begunok.utils.validators.TextValidator
 import kotlinx.android.synthetic.main.content_detail.*
 import kotlinx.android.synthetic.main.content_toolbar.*
-import kotlinx.android.synthetic.main.screen_order_desc.*
+import kotlinx.android.synthetic.main.screen_order_confirm.*
 
-class OrderDescScreen : BaseFragment(R.layout.screen_order_desc) {
+class ConfirmScreen : BaseFragment(R.layout.screen_order_confirm) {
 
+    private lateinit var adapter: ImgAdapter
     override fun initialize() {
 
         initViews()
@@ -26,10 +28,6 @@ class OrderDescScreen : BaseFragment(R.layout.screen_order_desc) {
     private fun initClicks() {
 
         close.setOnClickListener { finishFragment() }
-
-        img1.setOnClickListener { addFragment(ImgScreen.newInstance(img1.drawable)) }
-        img2.setOnClickListener { addFragment(ImgScreen.newInstance(img2.drawable)) }
-        img3.setOnClickListener { addFragment(ImgScreen.newInstance(img3.drawable)) }
 
         create.setOnClickListener {
             it.blockClickable()
@@ -49,12 +47,18 @@ class OrderDescScreen : BaseFragment(R.layout.screen_order_desc) {
 
         title.text = "Создать заявку"
 
+        adapter = ImgAdapter {
+            addFragment(ImgScreen.newInstance(it))
+        }
+        recycler.adapter = adapter
+
         CreateOrderModel.let {
             job.text = it.jobType!!.name
             desc.text = it.task
             date.text = it.date
             address.text = it.address
             price.text = "${it.price} грн"
+            adapter.setData(it.photos)
         }
 
         email.setText(sharedManager.user.email)

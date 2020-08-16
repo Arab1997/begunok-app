@@ -27,16 +27,16 @@ class CategoryScreen : BaseFragment(R.layout.screen_category_rounded) {
         }
         recycler.adapter = adapter
 
-        swipeLayout.setOnRefreshListener {
-            showProgress(true)
-            viewModel.getCategories()
-        }
+        swipeLayout.setOnRefreshListener { viewModel.getCategories() }
     }
 
     override fun observe() {
         viewModel.categories.observe(viewLifecycleOwner, Observer {
-            showProgress(false)
+            swipeLayout?.isRefreshing = false
             adapter.setData(it)
+        })
+        viewModel.error.observe(viewLifecycleOwner, Observer {
+            swipeLayout?.isRefreshing = false
         })
     }
 }

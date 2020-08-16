@@ -2,11 +2,11 @@ package com.reactive.begunok.ui.screens.create_order
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.widget.SeekBar
 import androidx.core.widget.addTextChangedListener
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
 import com.reactive.begunok.network.models.CreateOrderModel
-import com.reactive.begunok.ui.activities.checkField
 import com.reactive.begunok.utils.extensions.disable
 import com.reactive.begunok.utils.extensions.enable
 import kotlinx.android.synthetic.main.content_toolbar.*
@@ -17,7 +17,7 @@ import java.util.*
 class AddAddressScreen : BaseFragment(R.layout.screen_add_address) {
 
     private val calendar = Calendar.getInstance()
-    private var cost = 0
+    private var cost = 100
 
     @SuppressLint("SimpleDateFormat")
     private val sdf = SimpleDateFormat("dd.MM.yy")
@@ -36,6 +36,23 @@ class AddAddressScreen : BaseFragment(R.layout.screen_add_address) {
         task.addTextChangedListener { check() }
         city.addTextChangedListener { check() }
         address.addTextChangedListener { check() }
+
+        price.text = "$cost грн"
+        date.setText(sdf.format(calendar.time))
+
+        seekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                cost = seekBar!!.progress + 100
+                price.text = "$cost грн"
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+            }
+
+        })
 
         date.setOnClickListener {
             DatePickerDialog(
@@ -68,24 +85,36 @@ class AddAddressScreen : BaseFragment(R.layout.screen_add_address) {
             addFragment(AddPhotoScreen())
         }
 
-        check()
+        next.disable()
     }
 
     private fun check() {
         next.disable()
 
-        task.checkField(getString(R.string.field_is_empty))
+        if (task.text.toString().isEmpty()) {
+            task.error = getString(R.string.field_is_empty)
+            return
+        }
 
         if (task.text.toString().length < 20) {
             task.error = getString(R.string.minimum_text_length, 20.toString())
             return
         }
 
-        city.checkField(getString(R.string.field_is_empty))
+        if (city.text.toString().isEmpty()) {
+            city.error = getString(R.string.field_is_empty)
+            return
+        }
 
-        address.checkField(getString(R.string.field_is_empty))
+        if (address.text.toString().isEmpty()) {
+            address.error = getString(R.string.field_is_empty)
+            return
+        }
 
-        date.checkField(getString(R.string.field_is_empty))
+        if (date.text.toString().isEmpty()) {
+            date.error = getString(R.string.field_is_empty)
+            return
+        }
 
         next.enable()
     }

@@ -1,7 +1,13 @@
 package com.reactive.begunok.ui.activities
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.ImageDecoder
+import android.net.Uri
+import android.os.Build
+import android.os.Environment
 import android.view.KeyEvent
-import android.widget.EditText
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseActivity
 import com.reactive.begunok.base.BaseViewModel
@@ -9,12 +15,16 @@ import com.reactive.begunok.base.initialFragment
 import com.reactive.begunok.network.User
 import com.reactive.begunok.ui.screens.BottomNavScreen
 import com.reactive.begunok.ui.screens.auth.AuthScreen
+import com.reactive.begunok.ui.screens.create_order.AddPhotoScreen
 import com.reactive.begunok.ui.screens.splash.SplashScreen
 import com.reactive.begunok.utils.extensions.showGone
 import com.reactive.begunok.utils.preferences.SharedManager
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
 
 class MainActivity : BaseActivity(R.layout.activity_main) {
 
@@ -40,11 +50,10 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
             fetchData()
         }
 
-        debug()
-//        startFragment()
+        startFragment()
     }
 
-    private fun debug() = initialFragment(BottomNavScreen())
+    private fun debug() = initialFragment(AddPhotoScreen())
 
     private fun startFragment() {
         initialFragment(
@@ -68,11 +77,51 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
         }
         return super.dispatchKeyEvent(event)
     }
-}
 
-fun EditText.checkField(error: String) {
-    if (this.text.toString().isEmpty()) {
-        this.error = error
-        return
+    fun getFilePath(it: Uri): String {
+        //Later we will use this bitmap to create the File.
+        val selectedBitmap = getBitmap(this, it)!!
+
+        /*We can access getExternalFileDir() without asking any storage permission.*/
+        val selectedImgFile = File(
+            getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+            System.currentTimeMillis()
+                .toString() + "_selectedImg.jpg"
+        )
+
+        convertBitmapToFile(selectedImgFile, selectedBitmap)
+
+        return selectedImgFile.path
     }
+
+    private fun getBitmap(context: Context, imageUri: Uri): Bitmap? {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            ImageDecoder.decodeBitmap(
+                ImageDecoder.createSource(
+                    context.contentResolver,
+                    imageUri
+                )
+            )
+
+        } else {
+            context.contentResolver.openInputStream(imageUri)?.use { inputStream ->
+                BitmapFactory.decodeStream(inputStream)
+            }
+        }
+    }
+
+    private fun convertBitmapToFile(destinationFile: File, bitmap: Bitmap) {
+        //create a file to write bitmap data
+        destinationFile.createNewFile()
+        //Convert bitmap to byte array
+        val bos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bos)
+        val bitmapData = bos.toByteArray()
+        //write the bytes in file
+        val fos = FileOutputStream(destinationFile)
+        fos.write(bitmapData)
+        fos.flush()
+        fos.close()
+    }
+
 }

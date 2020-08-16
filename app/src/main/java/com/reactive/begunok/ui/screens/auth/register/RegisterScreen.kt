@@ -1,4 +1,4 @@
-package com.reactive.begunok.ui.screens.auth
+package com.reactive.begunok.ui.screens.auth.register
 
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment

@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.reactive.begunok.base.BaseViewModel
 import com.reactive.begunok.network.ErrorResp
+import com.reactive.begunok.network.User
 import com.reactive.begunok.network.models.CategoryData
 import com.reactive.begunok.utils.preferences.PreferenceHelper
 import com.reactive.begunok.utils.preferences.SharedManager
@@ -19,8 +20,9 @@ val viewModelModule = module {
     viewModel { BaseViewModel(get(), get(), get()) }
 
     single { provideMutableLiveData() }
-    single(named("sharedLive")) { provideMutableLiveData() }
-    single(named("errorLive")) { MutableLiveData<ErrorResp>() }
+    single(named("shared")) { provideMutableLiveData() }
+    single(named("error")) { MutableLiveData<ErrorResp>() }
+    single(named("user")) { MutableLiveData<User>() }
 
     factory(named("categories")) { MutableLiveData<ArrayList<CategoryData>>() }
 }

@@ -1,23 +1,18 @@
-package com.reactive.begunok.ui.screens.create_order
+package com.reactive.begunok.ui.screens.auth.register
 
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
-import com.reactive.begunok.network.models.CreateOrderModel
 import com.reactive.begunok.ui.adapters.AddImgAdapter
 import com.reactive.begunok.utils.KeyValue
 import gun0912.tedimagepicker.builder.TedImagePicker
-import kotlinx.android.synthetic.main.content_toolbar.*
-import kotlinx.android.synthetic.main.screen_add_photo.*
+import kotlinx.android.synthetic.main.screen_reg2.*
 
-class AddPhotoScreen : BaseFragment(R.layout.screen_add_photo) {
+class Registration2Screen : BaseFragment(R.layout.screen_reg2) {
 
     private var images = arrayListOf<KeyValue>()
     private lateinit var adapter: AddImgAdapter
 
     override fun initialize() {
-        close.setOnClickListener { finishFragment() }
-
-        title.text = "Создать заявку"
 
         images = ArrayList((1..4).toList().map { KeyValue(it.toString(), "") })
 
@@ -32,11 +27,12 @@ class AddPhotoScreen : BaseFragment(R.layout.screen_add_photo) {
 
         recycler.adapter = adapter
 
-        proceed.setOnClickListener {
+        next.setOnClickListener {
             uploadPhotos()
-            CreateOrderModel.photos = ArrayList(images.map { it.value })
-//            addFragment(ConfirmScreen())
+            addFragment(Registration3Screen(), id = viewModel.authLayoutId)
         }
+
+        back.setOnClickListener { finishFragment() }
     }
 
     private fun addImage(it: KeyValue) {

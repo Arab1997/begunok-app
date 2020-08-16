@@ -4,8 +4,8 @@ import android.os.Parcelable
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.reactive.begunok.base.BaseFragment
-import com.reactive.begunok.ui.screens.auth.LoginScreen
-import com.reactive.begunok.ui.screens.auth.RegisterScreen
+import com.reactive.begunok.ui.screens.auth.login.LoginScreen
+import com.reactive.begunok.ui.screens.auth.register.RegisterScreen
 
 class SignPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(
     fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT

@@ -2,24 +2,20 @@ package com.reactive.begunok.network
 
 import com.reactive.begunok.network.models.CategoryData
 import io.reactivex.Single
-import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ApiInterface {
 
-    @POST("authenticate/rest-auth/login")
+    @POST("api/v1/user")
+    fun register(@Body body: RegisterRequest): Single<User>
+
+    @PUT("api/v1/user/{id}")
+    fun edit(@Body body: RegisterRequest, @Path("id") id: Int): Single<User>
+
+    @POST("oauth/token")
     fun login(@Body body: LoginRequest): Single<Token>
 
-    @POST("api/v1/user")
-    fun register(@Body body: RegisterRequest): Single<TokenRegister>
-
-    @POST("authenticate/rest-auth/logout")
-    fun logout(): Single<Response<Void>>
-
-    @GET("authenticate/customer_profiles")
+    @GET("user/current")
     fun getProfile(): Single<User>
 
     @GET("api/v1/category")
@@ -35,24 +31,20 @@ interface ApiInterface {
 
 data class ErrorResp(val message: String, val errors: Any? = null)
 
-data class MessageResp(val message: String)
-
-data class SuccessResp(val success: Boolean)
-
 data class Token(val token: String)
-data class TokenRegister(val key: String)
 
 data class LoginRequest(
     val username: String,
-    val email: String,
-    val password: String
+    val password: String,
+    val grant_type: String = "password"
 )
 
 data class RegisterRequest(
-    val name: String,
     val email: String,
+    val name: String,
     val password: String,
-    val phone: String
+    val phone: String,
+    val contractor: Boolean
 )
 
 data class User(
@@ -60,5 +52,5 @@ data class User(
     val name: String,
     val phone: String,
     val email: String,
-    val is_contractor: Boolean
+    val contractor: Boolean
 )

@@ -1,7 +1,8 @@
-package com.reactive.begunok.ui.screens.auth
+package com.reactive.begunok.ui.screens.auth.register
 
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
+import com.reactive.begunok.ui.screens.auth.ChooseModeScreen
 import com.reactive.begunok.utils.extensions.blockClickable
 import com.reactive.begunok.utils.extensions.loadImage
 import gun0912.tedimagepicker.builder.TedImagePicker
@@ -20,7 +21,7 @@ class Registration3Screen : BaseFragment(R.layout.screen_reg3) {
             it.blockClickable()
             TedImagePicker.with(requireContext())
                 .start { uri ->
-                    path = uri.path!!
+                    path = mainActivity.getFilePath(uri)
                     addImage.loadImage(path)
                 }
         }

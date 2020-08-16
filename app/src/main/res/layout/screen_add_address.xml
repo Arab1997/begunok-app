@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/screenStyle"
     android:background="@drawable/grey_back"
@@ -26,7 +25,7 @@
                 android:fontFamily="@font/roboto_medium"
                 android:text="Домашний мастер"
                 android:textColor="@color/divider"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/subcategory"
@@ -35,7 +34,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="Сантехник (устранение течи)"
                 android:textColor="@color/divider"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
             <View
                 android:layout_width="match_parent"
@@ -61,9 +60,10 @@
                 android:background="@drawable/rounded_white"
                 android:fontFamily="@font/roboto_medium"
                 android:gravity="center_vertical"
-                android:maxLines="1"
+                android:inputType="text"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:translationZ="4dp"
@@ -87,9 +87,9 @@
                 android:background="@drawable/rounded_white"
                 android:fontFamily="@font/roboto_medium"
                 android:gravity="center_vertical"
-                android:maxLines="1"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:translationZ="4dp"
@@ -113,9 +113,9 @@
                 android:background="@drawable/rounded_white"
                 android:fontFamily="@font/roboto_medium"
                 android:gravity="center_vertical"
-                android:maxLines="1"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:translationZ="4dp"
@@ -159,18 +159,14 @@
                 android:textColor="@color/divider"
                 android:textSize="15sp" />
 
-            <io.github.stack07142.discreteseekbar.DiscreteSeekBar
+            <SeekBar
                 android:id="@+id/seekbar"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                app:discrete_seekbar_minValue="100"
-                app:discrete_seekbar_thumbColor="@color/yellow"
-                app:discrete_seekbar_thumbDefaultSize="16dp"
-                app:discrete_seekbar_thumbPressedSize="24dp"
-                app:discrete_seekbar_trackColor="@color/black"
-                app:discrete_seekbar_trackTouchEnable="true"
-                app:discrete_seekbar_trackWidth="1dp"
-                app:discrete_seekbar_value="0" />
+                android:layout_height="wrap_content"
+                android:max="100000"
+                android:progress="0"
+                android:progressTint="@color/black"
+                android:thumbTint="@color/yellow" />
 
             <TextView
                 android:id="@+id/price"
@@ -180,7 +176,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/roboto_bold"
-                android:text="3200 грн"
+                android:text="0 грн"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 

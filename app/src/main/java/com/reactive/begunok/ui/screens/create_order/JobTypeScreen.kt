@@ -37,7 +37,6 @@ class JobTypeScreen : BaseFragment(R.layout.screen_category_rounded) {
         recycler.adapter = adapter
 
         swipeLayout.setOnRefreshListener {
-            showProgress(true)
             viewModel.getJobTypes(CreateOrderModel.subCategory!!.id)
         }
     }
@@ -45,8 +44,11 @@ class JobTypeScreen : BaseFragment(R.layout.screen_category_rounded) {
     override fun observe() {
         viewModel.getJobTypes(CreateOrderModel.subCategory!!.id)
         viewModel.jobTypes.observe(viewLifecycleOwner, Observer {
-            showProgress(false)
+            swipeLayout?.isRefreshing = false
             adapter.setData(it)
+        })
+        viewModel.error.observe(viewLifecycleOwner, Observer {
+            swipeLayout?.isRefreshing = false
         })
     }
 }

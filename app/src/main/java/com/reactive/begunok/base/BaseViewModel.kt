@@ -39,8 +39,9 @@ open class BaseViewModel(
     var authLayoutId: Int = 0
 
     val data: MutableLiveData<Any> by inject()
-    val shared: MutableLiveData<Any> by inject(named("sharedLive"))
-    val error: MutableLiveData<ErrorResp> by inject(named("errorLive"))
+    val shared: MutableLiveData<Any> by inject(named("shared"))
+    val error: MutableLiveData<ErrorResp> by inject(named("error"))
+    val user: MutableLiveData<User> by inject(named("user"))
     val categories: MutableLiveData<ArrayList<CategoryData>> by inject(named("categories"))
     val subCategories: MutableLiveData<ArrayList<CategoryData>> by inject(named("categories"))
     val jobTypes: MutableLiveData<ArrayList<CategoryData>> by inject(named("categories"))
@@ -106,14 +107,14 @@ open class BaseViewModel(
         api.getProfile().observeAndSubscribe()
             .subscribe({
                 sharedManager.user = it
-                data.value = it
+                user.value = it
             }, {
                 parseError(it)
             })
     )
 
-    fun login(userName: String, email: String, password: String) = compositeDisposable.add(
-        api.login(LoginRequest(userName, email, password)).observeAndSubscribe()
+    fun login(email: String, password: String) = compositeDisposable.add(
+        api.login(LoginRequest(email, password)).observeAndSubscribe()
             .subscribe({
                 sharedManager.token = it.token
                 getUser()
@@ -122,24 +123,16 @@ open class BaseViewModel(
             })
     )
 
-    fun register(userName: String, email: String, password: String) = compositeDisposable.add(
-        api.register(RegisterRequest(userName, email, password, password)).observeAndSubscribe()
-            .subscribe({
-                sharedManager.token = it.key
-                getUser()
-            }, {
-                parseError(it)
-            })
-    )
-
-    private fun logOut() = compositeDisposable.add(
-        api.logout().observeAndSubscribe()
-            .subscribe({
-                sharedManager.deleteAll()
-            }, {
-                parseError(it)
-            })
-    )
+    fun register(userName: String, email: String, password: String, phone: String) =
+        compositeDisposable.add(
+            api.register(RegisterRequest(userName, email, password, phone, false))
+                .observeAndSubscribe()
+                .subscribe({
+                    login(email, password)
+                }, {
+                    parseError(it)
+                })
+        )
 
     fun getCategories() = compositeDisposable.add(
         api.getCategories().observeAndSubscribe()
