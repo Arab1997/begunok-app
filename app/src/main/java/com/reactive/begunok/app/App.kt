@@ -1,6 +1,7 @@
 package com.reactive.begunok.app
 
 import androidx.multidex.MultiDexApplication
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.reactive.begunok.BuildConfig
 import com.reactive.begunok.di.networkModule
 import com.reactive.begunok.di.sharedPrefModule
@@ -28,7 +29,7 @@ class App : MultiDexApplication() {
     }
 
     private fun initFirebase() {
-//        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(!BuildConfig.DEBUG)
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(!BuildConfig.DEBUG)
     }
 
     private fun initKoin() {

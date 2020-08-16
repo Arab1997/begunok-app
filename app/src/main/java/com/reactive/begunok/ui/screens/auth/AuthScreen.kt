@@ -7,13 +7,18 @@ import kotlinx.android.synthetic.main.screen_auth.*
 
 class AuthScreen : BaseFragment(R.layout.screen_auth) {
 
+    private lateinit var googleListener: () -> Unit
+    fun setGoogleListener(googleListener: () -> Unit) {
+        this.googleListener = googleListener
+    }
+
     override fun initialize() {
 
         login.setOnClickListener { addFragment(SignScreen()) }
 
         register.setOnClickListener { addFragment(SignScreen()) }
 
-        google.setOnClickListener { inDevelopment(requireContext()) }
+        google.setOnClickListener { googleListener.invoke() }
 
         fb.setOnClickListener { inDevelopment(requireContext()) }
     }

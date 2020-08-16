@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "231468909634",
+    "firebase_url": "https://psyched-hook-286605.firebaseio.com",
+    "project_id": "psyched-hook-286605",
+    "storage_bucket": "psyched-hook-286605.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:231468909634:android:1b5d9f5ab108240d2e99db",
+        "android_client_info": {
+          "package_name": "com.reactive.begunok"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "231468909634-k5f7oa3lmmv2tl4kluef1pvin8i00lih.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD77R2hq83PoaF2R3kdVytBz2pAdhDjVpg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "231468909634-k5f7oa3lmmv2tl4kluef1pvin8i00lih.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -15,7 +15,7 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/background_transparent"
         android:windowSoftInputMode="adjustNothing"
-        app:itemIconSize="24dp"
+        app:itemIconSize="20dp"
         app:itemIconTint="@color/nav_color"
         app:itemRippleColor="@color/accent"
         app:itemTextAppearanceActive="@style/BottomNavigationViewTextStyle"

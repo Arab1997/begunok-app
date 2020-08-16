@@ -113,6 +113,11 @@ open class BaseViewModel(
             })
     )
 
+    fun logout() {
+        sharedManager.deleteAll()
+
+    }
+
     fun login(email: String, password: String) = compositeDisposable.add(
         api.login(LoginRequest(email, password)).observeAndSubscribe()
             .subscribe({

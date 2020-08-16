@@ -19,7 +19,7 @@
         android:layout_marginTop="160dp"
         android:layout_marginEnd="25dp"
         android:scaleType="fitXY"
-        android:src="@drawable/slide11"
+        android:src="@drawable/slide2_img1"
         tools:ignore="ContentDescription" />
 
 </RelativeLayout>
