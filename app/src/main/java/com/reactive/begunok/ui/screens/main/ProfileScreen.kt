@@ -2,7 +2,7 @@ package com.reactive.begunok.ui.screens.main
 
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
-import com.reactive.begunok.ui.activities.MainActivity.Companion.authManager
+import com.reactive.begunok.ui.activities.MainActivity.Companion.googleAuthManager
 import com.reactive.begunok.utils.common.TextWatcherInterface
 import com.reactive.begunok.utils.validators.TextValidator
 import kotlinx.android.synthetic.main.screen_profile.*
@@ -19,7 +19,7 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
     private fun initClicks() {
         logout.setOnClickListener {
             viewModel.logout()
-            authManager?.logOut {
+            googleAuthManager?.logOut {
                 mainActivity.finish()
             }
         }

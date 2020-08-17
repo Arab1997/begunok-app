@@ -13,12 +13,12 @@ import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseActivity
 import com.reactive.begunok.base.BaseViewModel
 import com.reactive.begunok.base.initialFragment
-import com.reactive.begunok.network.User
 import com.reactive.begunok.ui.screens.BottomNavScreen
 import com.reactive.begunok.ui.screens.auth.AuthScreen
 import com.reactive.begunok.ui.screens.auth.ChooseModeScreen
 import com.reactive.begunok.ui.screens.create_order.AddPhotoScreen
 import com.reactive.begunok.ui.screens.splash.SplashScreen
+import com.reactive.begunok.utils.common.FBAuthManager
 import com.reactive.begunok.utils.common.GoogleAuthManager
 import com.reactive.begunok.utils.extensions.showGone
 import com.reactive.begunok.utils.preferences.SharedManager
@@ -37,14 +37,11 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
     companion object {
         var customer: Boolean = false
         val data = arrayListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, "")
-        var authManager: GoogleAuthManager? = null
+        var googleAuthManager: GoogleAuthManager? = null
+        var fbAuthManager: FBAuthManager? = null
     }
 
     override fun onActivityCreated() {
-
-//        sharedManager.token =
-//            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpIl0sInVzZXJfbmFtZSI6IjExMTEiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNjAzNTM4OTE2LCJhdXRob3JpdGllcyI6WyJVU0VSIl0sImp0aSI6Ijk5NjUyMGZkLWYwNzAtNGVjZS1hOTFiLTQ2YWUyMDc3ZGNiNCIsImNsaWVudF9pZCI6ImFuZHJvaWQifQ.IgXD-sMOsnjxiSDsnEDxSHsl1oDWymeATe-QWiv5xQo" // todo
-        sharedManager.user = User(12, "MukhammadRasul", "1231230998", "asldjk@asdjk.ad", true)
 
         viewModel.apply {
             parentLayoutId = R.id.fragmentContainer
@@ -56,18 +53,24 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 
         startFragment()
 
-        initGoogle()
+        initSocialAuth()
     }
 
-    private fun initGoogle() {
-        authManager = GoogleAuthManager(this)
+    private fun initSocialAuth() {
+        googleAuthManager = GoogleAuthManager(this)
+        fbAuthManager = FBAuthManager(this)
     }
 
     private fun debug() = initialFragment(AddPhotoScreen())
 
     private fun startFragment() {
         val authFragment = AuthScreen().apply {
-            setGoogleListener { authManager?.startRequest() }
+            setGoogleListener { googleAuthManager?.startRequest() }
+            setFBListener {
+                fbAuthManager?.login {
+                    initialFragment(ChooseModeScreen(), true)
+                }
+            }
         }
         initialFragment(
             if (sharedManager.token.isEmpty()) SplashScreen().apply {
@@ -139,9 +142,10 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        authManager?.activityResult(requestCode,data) {
+        googleAuthManager?.activityResult(requestCode, data) {
             initialFragment(ChooseModeScreen(), true)
         }
+        fbAuthManager?.onActivityResult(requestCode, resultCode, data)
     }
 
 }

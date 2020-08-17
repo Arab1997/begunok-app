@@ -12,6 +12,11 @@ class AuthScreen : BaseFragment(R.layout.screen_auth) {
         this.googleListener = googleListener
     }
 
+    private lateinit var fbListener: () -> Unit
+    fun setFBListener(fbListener: () -> Unit) {
+        this.fbListener = fbListener
+    }
+
     override fun initialize() {
 
         login.setOnClickListener { addFragment(SignScreen.newInstance(true)) }
@@ -20,7 +25,7 @@ class AuthScreen : BaseFragment(R.layout.screen_auth) {
 
         google.setOnClickListener { googleListener.invoke() }
 
-        fb.setOnClickListener { inDevelopment(requireContext()) }
+        fb.setOnClickListener { fbListener.invoke() }
     }
 
 }
