@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "231468909634-6ogqt2shtra2t7eldq07pjb4vhpn17p5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.reactive.begunok",
+            "certificate_hash": "7bbb8c3789629da28fa13b009afce7c51c2aa2ab"
+          }
+        },
+        {
           "client_id": "231468909634-k5f7oa3lmmv2tl4kluef1pvin8i00lih.apps.googleusercontent.com",
           "client_type": 3
         }

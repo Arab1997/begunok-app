@@ -9,11 +9,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.view.KeyEvent
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
-import com.reactive.begunok.BuildConfig
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseActivity
 import com.reactive.begunok.base.BaseViewModel
@@ -24,8 +19,8 @@ import com.reactive.begunok.ui.screens.auth.AuthScreen
 import com.reactive.begunok.ui.screens.auth.ChooseModeScreen
 import com.reactive.begunok.ui.screens.create_order.AddPhotoScreen
 import com.reactive.begunok.ui.screens.splash.SplashScreen
+import com.reactive.begunok.utils.common.GoogleAuthManager
 import com.reactive.begunok.utils.extensions.showGone
-import com.reactive.begunok.utils.extensions.toast
 import com.reactive.begunok.utils.preferences.SharedManager
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
@@ -42,8 +37,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
     companion object {
         var customer: Boolean = false
         val data = arrayListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, "")
-        lateinit var googleSignInClient: GoogleSignInClient
-
+        var authManager: GoogleAuthManager? = null
     }
 
     override fun onActivityCreated() {
@@ -66,21 +60,14 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
     }
 
     private fun initGoogle() {
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestEmail()
-            .requestIdToken(BuildConfig.CLIENT_ID)
-            .build()
-
-        googleSignInClient = GoogleSignIn.getClient(this, gso)
+        authManager = GoogleAuthManager(this)
     }
 
     private fun debug() = initialFragment(AddPhotoScreen())
 
     private fun startFragment() {
         val authFragment = AuthScreen().apply {
-            setGoogleListener { // todo
-                requireActivity().startActivityForResult(googleSignInClient.signInIntent, 25)
-            }
+            setGoogleListener { authManager?.startRequest() }
         }
         initialFragment(
             if (sharedManager.token.isEmpty()) SplashScreen().apply {
@@ -152,21 +139,8 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 25) googleActivityResult(data)
-    }
-
-    private fun googleActivityResult(data: Intent?) {
-        val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-        try {
-            val account = task.getResult(ApiException::class.java)
+        authManager?.activityResult(requestCode,data) {
             initialFragment(ChooseModeScreen(), true)
-        } catch (e: ApiException) {
-            val code = e.statusCode
-            e.printStackTrace()
-            when (code) {
-                7 -> toast(this, getString(R.string.check_connection))
-                10 -> toast(this, getString(R.string.smth_wrong))
-            }
         }
     }
 
