@@ -15,7 +15,12 @@ class Registration3Screen : BaseFragment(R.layout.screen_reg3) {
 
         back.setOnClickListener { finishFragment() }
 
-        next.setOnClickListener { replaceFragment(ChooseModeScreen()) }
+        next.setOnClickListener {
+            replaceFragment(
+                ChooseModeScreen(),
+                id = viewModel.parentLayoutId
+            )
+        }
 
         addImage.setOnClickListener {
             it.blockClickable()

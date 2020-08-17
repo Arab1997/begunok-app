@@ -78,14 +78,13 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 
     private fun startFragment() {
         val authFragment = AuthScreen().apply {
-            setGoogleListener {
+            setGoogleListener { // todo
                 requireActivity().startActivityForResult(googleSignInClient.signInIntent, 25)
-
             }
         }
         initialFragment(
             if (sharedManager.token.isEmpty()) SplashScreen().apply {
-                setListener { initialFragment(authFragment, true) }
+                setListener { initialFragment(authFragment, false) }
             }
             else BottomNavScreen(), true
         )

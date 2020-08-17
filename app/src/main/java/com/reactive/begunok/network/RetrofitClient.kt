@@ -4,6 +4,7 @@ import android.content.Context
 import com.google.gson.Gson
 import com.reactive.begunok.BuildConfig
 import com.reactive.begunok.utils.network.UnsafeOkHttpClient
+import com.reactive.begunok.utils.preferences.SharedManager
 import com.readystatesoftware.chuck.ChuckInterceptor
 import okhttp3.Credentials
 import okhttp3.Interceptor
@@ -18,19 +19,19 @@ object RetrofitClient {
 
     fun getRetrofit(
         baseUrl: String,
-        token: String,
+        sharedManager: SharedManager,
         context: Context,
         gson: Gson
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
-            .client(getClient(token, context))
+            .client(getClient(sharedManager, context))
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
     }
 
-    private fun getClient(token: String, context: Context): OkHttpClient {
+    private fun getClient(sharedManager: SharedManager, context: Context): OkHttpClient {
         val builder = UnsafeOkHttpClient.getUnsafeOkHttpClientBuilder()
         val interceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
             override fun log(message: String) {
@@ -43,7 +44,10 @@ object RetrofitClient {
                 .newBuilder()
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Accept", "application/json")
-            if (token.isNotEmpty()) request.addHeader("Authorization", "Bearer $token")
+            if (sharedManager.token.isNotEmpty()) request.addHeader(
+                "Authorization",
+                "Bearer ${sharedManager.token}"
+            )
             chain.proceed(request.build())
         })
         if (BuildConfig.DEBUG) {

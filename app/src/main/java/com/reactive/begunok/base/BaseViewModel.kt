@@ -24,7 +24,7 @@ import org.koin.core.qualifier.named
 import retrofit2.HttpException
 
 open class BaseViewModel(
-    gson: Gson,
+    private val gson: Gson,
     private val context: Context,
     private val sharedManager: SharedManager
 ) : ViewModel(), KoinComponent {
@@ -47,10 +47,10 @@ open class BaseViewModel(
     val jobTypes: MutableLiveData<ArrayList<CategoryData>> by inject(named("categories"))
 
     private val compositeDisposable = CompositeDisposable()
-    private val api = RetrofitClient
-        .getRetrofit(Constants.BASE_URL, sharedManager.token, context, gson)
-        .create(ApiInterface::class.java)
 
+    private val api = RetrofitClient
+        .getRetrofit(Constants.BASE_URL, sharedManager, context, gson)
+        .create(ApiInterface::class.java)
 
     private fun parseError(e: Throwable?) {
         var message = context.resources.getString(R.string.smth_wrong)
@@ -98,13 +98,13 @@ open class BaseViewModel(
         if (sharedManager.token.isNotEmpty()) {
             logi("Current token : " + sharedManager.token)
 
-//            getUser()
+            getUser()
             getCategories()
         }
     }
 
     fun getUser() = compositeDisposable.add(
-        api.getProfile().observeAndSubscribe()
+        api.getUser().observeAndSubscribe()
             .subscribe({
                 sharedManager.user = it
                 user.value = it
@@ -119,21 +119,32 @@ open class BaseViewModel(
     }
 
     fun login(email: String, password: String) = compositeDisposable.add(
-        api.login(LoginRequest(email, password)).observeAndSubscribe()
+        api.login(email, password).observeAndSubscribe()
             .subscribe({
-                sharedManager.token = it.token
-                getUser()
+                sharedManager.token = it.access_token
+                fetchData()
             }, {
                 parseError(it)
             })
     )
 
-    fun register(userName: String, email: String, password: String, phone: String) =
+    fun register(body: RegisterRequest) =
         compositeDisposable.add(
-            api.register(RegisterRequest(userName, email, password, phone, false))
+            api.register(body)
                 .observeAndSubscribe()
                 .subscribe({
-                    login(email, password)
+                    login(body.email, body.password)
+                }, {
+                    parseError(it)
+                })
+        )
+
+    fun edit(body: RegisterRequest, id: Int) =
+        compositeDisposable.add(
+            api.edit(body, id)
+                .observeAndSubscribe()
+                .subscribe({
+                    getUser()
                 }, {
                     parseError(it)
                 })

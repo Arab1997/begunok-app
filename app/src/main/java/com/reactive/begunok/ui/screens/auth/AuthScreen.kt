@@ -14,9 +14,9 @@ class AuthScreen : BaseFragment(R.layout.screen_auth) {
 
     override fun initialize() {
 
-        login.setOnClickListener { addFragment(SignScreen()) }
+        login.setOnClickListener { addFragment(SignScreen.newInstance(true)) }
 
-        register.setOnClickListener { addFragment(SignScreen()) }
+        register.setOnClickListener { addFragment(SignScreen.newInstance(false)) }
 
         google.setOnClickListener { googleListener.invoke() }
 
