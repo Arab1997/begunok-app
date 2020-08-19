@@ -112,6 +112,7 @@ dependencies {
     implementation 'com.itkacher.okhttpprofiler:okhttpprofiler:1.0.7'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
     debugImplementation 'com.readystatesoftware.chuck:library:1.1.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.5.0'
 
     // Firebase
     implementation 'com.google.firebase:firebase-core:17.5.0'
@@ -152,6 +153,6 @@ dependencies {
 
     implementation 'com.github.stack07142:DiscreteSeekBar:1.0.1'
 
-    implementation 'com.facebook.android:facebook-login:[5,6)'
+    implementation 'com.facebook.android:facebook-login:6.0.0'
 
 }

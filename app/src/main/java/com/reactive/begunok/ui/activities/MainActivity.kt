@@ -23,6 +23,11 @@ import com.reactive.begunok.utils.common.GoogleAuthManager
 import com.reactive.begunok.utils.extensions.showGone
 import com.reactive.begunok.utils.preferences.SharedManager
 import kotlinx.android.synthetic.main.activity_main.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.io.ByteArrayOutputStream
@@ -92,6 +97,14 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
             }
         }
         return super.dispatchKeyEvent(event)
+    }
+
+    fun createFileMultipart(file: File) = MultipartBody.Part.createFormData(
+        "photos", file.name, file.asRequestBody("image/*".toMediaTypeOrNull())
+    )
+
+    fun createRequestBody(name: String): RequestBody {
+        return name.toRequestBody(MultipartBody.FORM)
     }
 
     fun getFilePath(it: Uri): String {

@@ -4,5 +4,6 @@ data class CategoryData(
     val id: Int,
     val name: String,
     val icon: String,
-    val parent_id: Int
+    val iconUrl: String,
+    val parentId: Int
 )

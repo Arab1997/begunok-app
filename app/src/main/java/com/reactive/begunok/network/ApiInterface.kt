@@ -1,9 +1,14 @@
 package com.reactive.begunok.network
 
 import com.reactive.begunok.network.models.CategoryData
+import com.reactive.begunok.network.models.Order
+import com.reactive.begunok.network.models.OrderResp
 import io.reactivex.Single
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.http.*
 
+@JvmSuppressWildcards
 interface ApiInterface {
 
     @POST("oauth/token")
@@ -34,6 +39,19 @@ interface ApiInterface {
 
     @GET("api/v1/job-type")
     fun getJobTypes(@Query("subCatId") categoryId: Int): Single<List<CategoryData>>
+
+    @Multipart
+    @POST("api/v1/order")
+    fun createOrder(
+        @PartMap partMap: Map<String, Any>, @Part files: List<MultipartBody.Part>
+    ): Single<Order>
+
+    @GET("api/v1/order")
+    fun getAllOrder(): Single<OrderResp>
+
+    @GET("api/v1/order")
+    fun getUserOrders(): Single<OrderResp>
+
 
 }
 

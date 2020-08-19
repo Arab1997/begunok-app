@@ -1,29 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.reactive.begunok.utils.views.MySwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
-    style="@style/screenStyle"
-    android:background="@drawable/home">
+    android:id="@+id/swipeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@color/divider"
-        android:fontFamily="@font/roboto_bold"
-        android:gravity="center"
-        android:paddingTop="15dp"
-        android:text="Мои заказы"
-        android:textColor="@color/white"
-        android:textSize="20sp" />
+    <LinearLayout
+        android:id="@+id/main"
+        style="@style/screenStyle"
+        android:background="@drawable/home">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/bar_height"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_my_orders" />
-</LinearLayout>
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@color/divider"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+            android:paddingTop="15dp"
+            android:text="Мои заказы"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/bar_height"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_my_orders" />
+    </LinearLayout>
+</com.reactive.begunok.utils.views.MySwipeRefreshLayout>

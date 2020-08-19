@@ -8,6 +8,7 @@ import com.google.gson.Gson
 import com.reactive.begunok.R
 import com.reactive.begunok.network.*
 import com.reactive.begunok.network.models.CategoryData
+import com.reactive.begunok.network.models.Order
 import com.reactive.begunok.utils.Constants
 import com.reactive.begunok.utils.extensions.loge
 import com.reactive.begunok.utils.extensions.logi
@@ -18,13 +19,15 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import org.koin.core.qualifier.named
 import retrofit2.HttpException
 
 open class BaseViewModel(
-    private val gson: Gson,
+    gson: Gson,
     private val context: Context,
     private val sharedManager: SharedManager
 ) : ViewModel(), KoinComponent {
@@ -45,6 +48,8 @@ open class BaseViewModel(
     val categories: MutableLiveData<ArrayList<CategoryData>> by inject(named("categories"))
     val subCategories: MutableLiveData<ArrayList<CategoryData>> by inject(named("categories"))
     val jobTypes: MutableLiveData<ArrayList<CategoryData>> by inject(named("categories"))
+    val orders: MutableLiveData<ArrayList<Order>> by inject(named("orders"))
+    val userOrders: MutableLiveData<ArrayList<Order>> by inject(named("orders"))
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -99,7 +104,9 @@ open class BaseViewModel(
             logi("Current token : " + sharedManager.token)
 
             getUser()
+            getAllOrder()
             getCategories()
+            getUser()
         }
     }
 
@@ -172,6 +179,35 @@ open class BaseViewModel(
         api.getJobTypes(subCatId).observeAndSubscribe()
             .subscribe({
                 jobTypes.value = ArrayList(it)
+            }, {
+                parseError(it)
+            })
+    )
+
+    fun createOrder(partMap: Map<String, Any>, files: List<MultipartBody.Part>) =
+        compositeDisposable.add(
+            api.createOrder(partMap, files).observeAndSubscribe()
+                .subscribe({
+                    data.postValue(it)
+                    getAllOrder()
+                }, {
+                    parseError(it)
+                })
+        )
+
+    fun getAllOrder() = compositeDisposable.add(
+        api.getAllOrder().observeAndSubscribe()
+            .subscribe({
+                orders.value = ArrayList(it.content)
+            }, {
+                parseError(it)
+            })
+    )
+
+    fun getUserOrders() = compositeDisposable.add(
+        api.getUserOrders().observeAndSubscribe()
+            .subscribe({
+                userOrders.value = ArrayList(it.content)
             }, {
                 parseError(it)
             })
