@@ -17,6 +17,7 @@
         android:id="@+id/image"
         android:layout_width="55dp"
         android:layout_height="55dp"
+        android:scaleType="centerCrop"
         android:src="@drawable/ic_furn"
         tools:ignore="ContentDescription" />
 
@@ -27,7 +28,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/category"
+            android:id="@+id/categoryName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_medium"
@@ -41,7 +42,7 @@
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/subcategory"
+                android:id="@+id/subCategoryName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Электрик"
@@ -49,7 +50,7 @@
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/jobType"
+                android:id="@+id/jobTypeName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -69,9 +70,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/roboto_bold"
-                android:text="выполнено"
                 android:textColor="@color/yellow"
-                android:textSize="13sp" />
+                android:textSize="13sp"
+                tools:text="выполнено" />
 
             <TextView
                 android:id="@+id/arrangedDate"

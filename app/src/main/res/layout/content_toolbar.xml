@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -16,17 +17,41 @@
             android:layout_height="40dp"
             android:padding="10dp"
             android:src="@drawable/ic_baseline_arrow_back_ios_24"
-            android:tint="@color/black"
+            app:tint="@color/black"
             tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:fontFamily="@font/roboto_bold"
             android:text="Выбрать категорию"
             android:textColor="@color/black"
             android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/delete"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_baseline_delete_24"
+            android:visibility="gone"
+            app:tint="@color/black"
+            tools:ignore="ContentDescription"
+            tools:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/edit"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            android:src="@drawable/edit"
+            android:visibility="gone"
+            app:tint="@color/black"
+            tools:ignore="ContentDescription"
+            tools:visibility="visible" />
+
     </LinearLayout>
 
     <View

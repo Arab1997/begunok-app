@@ -16,10 +16,12 @@
             android:paddingBottom="5dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginStart="30sp"
                 android:layout_marginEnd="20sp"
+                android:scaleType="centerCrop"
                 android:src="@drawable/user" />
 
             <LinearLayout
@@ -28,22 +30,25 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_bold"
-                    android:text="Сергей Иванов"
+                    android:text="MukhammadRasul Shadiev"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/city"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:text="Харьков"
                     android:textColor="#CCCCCC"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    tools:text="Харьков" />
 
                 <TextView
+                    android:id="@+id/userId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_bold"
@@ -75,11 +80,12 @@
                     android:translationZ="4dp">
 
                     <TextView
+                        android:id="@+id/finished"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_bold"
                         android:gravity="center"
-                        android:text="120"
+                        android:text="0"
                         android:textColor="@color/black"
                         android:textSize="18sp" />
 
@@ -94,6 +100,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/reviews"
                     android:layout_width="66dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10sp"
@@ -130,11 +137,12 @@
                     android:translationZ="4dp">
 
                     <TextView
+                        android:id="@+id/inProgress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_bold"
                         android:gravity="center"
-                        android:text="120"
+                        android:text="0"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -171,7 +179,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@drawable/rounded_white"
-                android:drawableEnd="@drawable/ic_digital_controller"
+                android:clickable="false"
+                android:drawableEnd="@drawable/edit"
+                android:focusable="false"
                 android:hint="pr.lorem@ipsum.com"
                 android:inputType="textEmailAddress"
                 android:paddingStart="20dp"
@@ -195,7 +205,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@drawable/rounded_white"
-                android:drawableEnd="@drawable/ic_digital_controller"
+                android:clickable="false"
+                android:drawableEnd="@drawable/edit"
+                android:focusable="false"
                 android:hint="+38 093 00 65 43"
                 android:inputType="phone"
                 android:paddingStart="20dp"
@@ -219,8 +231,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@drawable/rounded_white"
-                android:drawableEnd="@drawable/ic_digital_controller"
-                android:hint="1234  5678  9101  1234"
+                android:clickable="false"
+                android:drawableEnd="@drawable/edit"
+                android:focusable="false"
+                android:hint="1234  5678  9101  2345"
                 android:inputType="number"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
@@ -250,6 +264,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/support"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -262,6 +277,7 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/rules"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"

@@ -3,7 +3,12 @@ package com.reactive.begunok.ui.screens.auth.login
 import androidx.lifecycle.Observer
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
-import com.reactive.begunok.ui.screens.auth.ChooseModeScreen
+import com.reactive.begunok.base.parentLayoutId
+import com.reactive.begunok.ui.activities.MainActivity
+import com.reactive.begunok.ui.adapters.EmailData
+import com.reactive.begunok.ui.screens.BottomNavScreen
+import com.reactive.begunok.ui.screens.auth.VariantsScreen
+import com.reactive.begunok.ui.screens.auth.forgot.ForgotScreen
 import com.reactive.begunok.utils.common.TextWatcherInterface
 import com.reactive.begunok.utils.extensions.blockClickable
 import com.reactive.begunok.utils.extensions.disable
@@ -19,6 +24,16 @@ class LoginScreen : BaseFragment(R.layout.screen_login) {
 
         initViews()
 
+        val mails = sharedManager.mails
+        if (mails.isNotEmpty()) {
+            email.setOnFocusChangeListener { v, hasFocus ->
+                if (hasFocus) {
+                    addFragment(VariantsScreen())
+                    hideKeyboard()
+                }
+            }
+        }
+
         next.setOnClickListener {
             it.blockClickable()
             request = true
@@ -26,18 +41,11 @@ class LoginScreen : BaseFragment(R.layout.screen_login) {
             viewModel.login(email.text.toString(), passw.text.toString())
         }
 
-        forgot.setOnClickListener {
-            inDevelopment(requireContext())
-        }
+        forgot.setOnClickListener { addFragment(ForgotScreen()) }
     }
 
     private fun initViews() {
         next.disable()
-
-        next.setOnClickListener {
-            it.blockClickable()
-            addFragment(ChooseModeScreen())
-        }
 
         email.addTextChangedListener(object : TextWatcherInterface {
             override fun textChanged(s: String) {
@@ -72,8 +80,18 @@ class LoginScreen : BaseFragment(R.layout.screen_login) {
         viewModel.user.observe(viewLifecycleOwner, Observer {
             if (request) {
                 showProgress(false)
-                addFragment(ChooseModeScreen())
+                MainActivity.client = it.contractor
+                replaceFragment(BottomNavScreen(), id = parentLayoutId())
                 request = false
+                val mails = ArrayList(sharedManager.mails)
+                mails.add(EmailData(email.text.toString(), System.currentTimeMillis()))
+                mails.distinct()
+                sharedManager.mails = mails
+            }
+        })
+        viewModel.shared.observe(viewLifecycleOwner, Observer {
+            if (it is EmailData) {
+                email.setText(it.email)
             }
         })
     }

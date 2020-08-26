@@ -16,18 +16,13 @@ import com.reactive.begunok.base.initialFragment
 import com.reactive.begunok.ui.screens.BottomNavScreen
 import com.reactive.begunok.ui.screens.auth.AuthScreen
 import com.reactive.begunok.ui.screens.auth.ChooseModeScreen
-import com.reactive.begunok.ui.screens.create_order.AddPhotoScreen
+import com.reactive.begunok.ui.screens.auth.login.LoginScreen
 import com.reactive.begunok.ui.screens.splash.SplashScreen
 import com.reactive.begunok.utils.common.FBAuthManager
 import com.reactive.begunok.utils.common.GoogleAuthManager
 import com.reactive.begunok.utils.extensions.showGone
 import com.reactive.begunok.utils.preferences.SharedManager
 import kotlinx.android.synthetic.main.activity_main.*
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.io.ByteArrayOutputStream
@@ -40,7 +35,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
     val sharedManager: SharedManager by inject()
 
     companion object {
-        var customer: Boolean = false
+        var client: Boolean = false
         val data = arrayListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, "")
         var googleAuthManager: GoogleAuthManager? = null
         var fbAuthManager: FBAuthManager? = null
@@ -50,12 +45,12 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 
         viewModel.apply {
             parentLayoutId = R.id.fragmentContainer
-            authLayoutId = R.id.registerContainer
             navLayoutId = R.id.navContainer
 
             fetchData()
         }
 
+//        debug()
         startFragment()
 
         initSocialAuth()
@@ -66,7 +61,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
         fbAuthManager = FBAuthManager(this)
     }
 
-    private fun debug() = initialFragment(AddPhotoScreen())
+    private fun debug() = initialFragment(LoginScreen())
 
     private fun startFragment() {
         val authFragment = AuthScreen().apply {
@@ -97,14 +92,6 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
             }
         }
         return super.dispatchKeyEvent(event)
-    }
-
-    fun createFileMultipart(file: File) = MultipartBody.Part.createFormData(
-        "photos", file.name, file.asRequestBody("image/*".toMediaTypeOrNull())
-    )
-
-    fun createRequestBody(name: String): RequestBody {
-        return name.toRequestBody(MultipartBody.FORM)
     }
 
     fun getFilePath(it: Uri): String {

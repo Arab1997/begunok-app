@@ -2,7 +2,8 @@ package com.reactive.begunok.ui.screens.auth
 
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
-import com.reactive.begunok.utils.extensions.inDevelopment
+import com.reactive.begunok.ui.screens.auth.login.LoginScreen
+import com.reactive.begunok.ui.screens.auth.register.Registration1Screen
 import kotlinx.android.synthetic.main.screen_auth.*
 
 class AuthScreen : BaseFragment(R.layout.screen_auth) {
@@ -19,9 +20,9 @@ class AuthScreen : BaseFragment(R.layout.screen_auth) {
 
     override fun initialize() {
 
-        login.setOnClickListener { addFragment(SignScreen.newInstance(true)) }
+        login.setOnClickListener { addFragment(LoginScreen()) }
 
-        register.setOnClickListener { addFragment(SignScreen.newInstance(false)) }
+        register.setOnClickListener { addFragment(Registration1Screen()) }
 
         google.setOnClickListener { googleListener.invoke() }
 

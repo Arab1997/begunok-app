@@ -6,9 +6,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.reactive.begunok.R
-import com.reactive.begunok.network.*
+import com.reactive.begunok.network.ApiInterface
+import com.reactive.begunok.network.ErrorResp
+import com.reactive.begunok.network.RetrofitClient
+import com.reactive.begunok.network.User
 import com.reactive.begunok.network.models.CategoryData
 import com.reactive.begunok.network.models.Order
+import com.reactive.begunok.network.models.RegisterModel
+import com.reactive.begunok.ui.adapters.EmailData
 import com.reactive.begunok.utils.Constants
 import com.reactive.begunok.utils.extensions.loge
 import com.reactive.begunok.utils.extensions.logi
@@ -19,12 +24,14 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import org.koin.core.qualifier.named
 import retrofit2.HttpException
+import java.io.File
 
 open class BaseViewModel(
     gson: Gson,
@@ -37,9 +44,6 @@ open class BaseViewModel(
 
     @LayoutRes
     var navLayoutId: Int = 0
-
-    @LayoutRes
-    var authLayoutId: Int = 0
 
     val data: MutableLiveData<Any> by inject()
     val shared: MutableLiveData<Any> by inject(named("shared"))
@@ -104,7 +108,7 @@ open class BaseViewModel(
             logi("Current token : " + sharedManager.token)
 
             getUser()
-            getAllOrder()
+            getUserOrders()
             getCategories()
             getUser()
         }
@@ -135,27 +139,39 @@ open class BaseViewModel(
             })
     )
 
-    fun register(body: RegisterRequest) =
-        compositeDisposable.add(
-            api.register(body)
-                .observeAndSubscribe()
-                .subscribe({
-                    login(body.email, body.password)
-                }, {
-                    parseError(it)
-                })
-        )
+    fun register() {
+        var avatar: MultipartBody.Part? = null
+        RegisterModel.avatarFile?.let { avatar = createFileMultipart("avatarFile", File(it)) }
 
-    fun edit(body: RegisterRequest, id: Int) =
+        var documents: List<MultipartBody.Part>? = null
+        RegisterModel.documents?.let {
+            documents = it.map { createFileMultipart("documents", File(it)) }
+        }
+
+        val partMap = hashMapOf<String, Any>()
+        RegisterModel.let {
+            partMap["email"] = it.email
+            partMap["name"] = it.name
+            partMap["password"] = it.password
+            partMap["phone"] = it.phone
+            partMap["city"] = it.city
+            partMap["contractor"] = it.contractor
+        }
+
         compositeDisposable.add(
-            api.edit(body, id)
+            api.register(partMap, avatar, documents)
                 .observeAndSubscribe()
                 .subscribe({
-                    getUser()
+                    val mails = ArrayList(sharedManager.mails)
+                    mails.add(EmailData(RegisterModel.email, System.currentTimeMillis()))
+                    mails.distinct()
+                    sharedManager.mails = mails
+                    login(RegisterModel.email, RegisterModel.password)
                 }, {
                     parseError(it)
                 })
         )
+    }
 
     fun getCategories() = compositeDisposable.add(
         api.getCategories().observeAndSubscribe()
@@ -195,8 +211,8 @@ open class BaseViewModel(
                 })
         )
 
-    fun getAllOrder() = compositeDisposable.add(
-        api.getAllOrder().observeAndSubscribe()
+    fun getAllOrder(jobType: Int? = null) = compositeDisposable.add(
+        api.getAllOrder(jobType).observeAndSubscribe()
             .subscribe({
                 orders.value = ArrayList(it.content)
             }, {
@@ -211,6 +227,34 @@ open class BaseViewModel(
             }, {
                 parseError(it)
             })
+    )
+
+    fun editOrder(id: Int) =
+        compositeDisposable.add(
+            api.editOrder(id).observeAndSubscribe()
+                .subscribe({
+                    data.postValue(it)
+                    getUserOrders()
+                    getAllOrder()
+                }, {
+                    parseError(it)
+                })
+        )
+
+    fun deleteOrder(id: Int) =
+        compositeDisposable.add(
+            api.deleteOrder(id).observeAndSubscribe()
+                .subscribe({
+                    data.postValue(it)
+                    getUserOrders()
+                    getAllOrder()
+                }, {
+                    parseError(it)
+                })
+        )
+
+    fun createFileMultipart(name: String, file: File) = MultipartBody.Part.createFormData(
+        name, file.name, file.asRequestBody("image/*".toMediaTypeOrNull())
     )
 
     override fun onCleared() {

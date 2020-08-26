@@ -5,7 +5,6 @@ import com.reactive.begunok.network.models.Order
 import com.reactive.begunok.network.models.OrderResp
 import io.reactivex.Single
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.http.*
 
 @JvmSuppressWildcards
@@ -20,10 +19,11 @@ interface ApiInterface {
     ): Single<Token>
 
     @POST("api/v1/user")
-    fun register(@Body body: RegisterRequest): Single<User>
-
-    @PUT("api/v1/user/{id}")
-    fun edit(@Body body: RegisterRequest, @Path("id") id: Int): Single<User>
+    fun register(
+        @PartMap partMap: Map<String, Any>,
+        @Part avatar: MultipartBody.Part?,
+        @Part documents: List<MultipartBody.Part>?
+    ): Single<User>
 
     @PUT("api/v1/user/change-password")
     fun resetPassword(): Single<Token>
@@ -46,8 +46,14 @@ interface ApiInterface {
         @PartMap partMap: Map<String, Any>, @Part files: List<MultipartBody.Part>
     ): Single<Order>
 
+    @PUT("api/v1/order/{id}")
+    fun editOrder(@Path("id") id: Int): Single<Order>
+
+    @DELETE("api/v1/order/{id}")
+    fun deleteOrder(@Path("id") id: Int): Single<SuccessResp>
+
     @GET("api/v1/order")
-    fun getAllOrder(): Single<OrderResp>
+    fun getAllOrder(@Query("jobType") jobType: Int? = null): Single<OrderResp>
 
     @GET("api/v1/order")
     fun getUserOrders(): Single<OrderResp>
@@ -57,20 +63,19 @@ interface ApiInterface {
 
 data class ErrorResp(val message: String, val errors: Any? = null)
 
-data class Token(val access_token: String)
+data class SuccessResp(val success: Boolean, val message: String)
 
-data class RegisterRequest(
-    val email: String,
-    val name: String,
-    val password: String,
-    val phone: String,
-    val contractor: Boolean = false
-)
+data class Token(val access_token: String)
 
 data class User(
     val id: Int,
     val name: String,
     val phone: String,
     val email: String,
+    val avatar: String?,
+    val city: String?,
+    val inProgressOrders: Int,
+    val cancelledOrders: Int,
+    val completedOrders: Int,
     val contractor: Boolean
 )

@@ -10,24 +10,29 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:padding="10sp"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="30sp">
+            android:layout_height="45dp"
+            android:src="@drawable/logo_black"
+            tools:ignore="ContentDescription" />
 
-            <ImageView
-                android:id="@+id/back"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:src="@drawable/ic_baseline_arrow_back_ios_24"
-                tools:ignore="ContentDescription" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:src="@drawable/logo"
-                tools:ignore="ContentDescription" />
-        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="21dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/black" />
 
         <TextView
             android:layout_width="match_parent"
@@ -40,16 +45,8 @@
 заказчик, нажмите стрелку ДАЛЕЕ, в правом
 нижнем углу, чтобы завершить регистрацию."
             android:textColor="@color/black"
-            android:textSize="14sp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="15dp"
-            android:background="@color/white" />
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
@@ -61,7 +58,8 @@
 для физлиц- страница паспорта с последней актуальной
 фотографией, ФИО и страницей прописки Исполнителя."
             android:textColor="@color/black"
-            android:textSize="10sp" />
+            android:textSize="10sp"
+            android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
@@ -69,20 +67,25 @@
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
             android:orientation="vertical"
+            android:splitMotionEvents="false"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"
             tools:itemCount="4"
             tools:listitem="@layout/item_add_photo" />
 
-        <ImageView
+        <Button
             android:id="@+id/next"
-            android:layout_width="28dp"
-            android:layout_height="34dp"
-            android:layout_gravity="end"
-            android:layout_marginTop="44dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="50dp"
-            android:src="@drawable/ic_next"
-            tools:ignore="ContentDescription" />
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="45sp"
+            android:background="@drawable/rounded_yellow"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+            android:text="зарегистрироваться"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
+
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

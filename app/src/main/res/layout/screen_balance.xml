@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/screenStyle">
 
@@ -14,8 +15,8 @@
             android:layout_height="50dp"
             android:padding="15dp"
             android:src="@drawable/ic_baseline_arrow_back_ios_24"
-            android:tint="@color/black"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription"
+            app:tint="@color/black" />
 
         <ImageView
             android:layout_width="230dp"

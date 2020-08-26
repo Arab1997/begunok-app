@@ -4,7 +4,9 @@ import androidx.lifecycle.Observer
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
 import com.reactive.begunok.network.models.CreateOrderModel
+import com.reactive.begunok.ui.activities.MainActivity
 import com.reactive.begunok.ui.adapters.CategoryRoundedAdapter
+import com.reactive.begunok.ui.screens.main.OrdersScreen
 import com.reactive.begunok.utils.extensions.visible
 import kotlinx.android.synthetic.main.content_toolbar.*
 import kotlinx.android.synthetic.main.screen_category_rounded.*
@@ -32,7 +34,10 @@ class JobTypeScreen : BaseFragment(R.layout.screen_category_rounded) {
 
         adapter = CategoryRoundedAdapter {
             CreateOrderModel.jobType = it
-            addFragment(AddAddressScreen())
+            addFragment(
+                if (MainActivity.client) AddAddressScreen()
+                else OrdersScreen.newInstance(it.id)
+            )
         }
         recycler.adapter = adapter
 

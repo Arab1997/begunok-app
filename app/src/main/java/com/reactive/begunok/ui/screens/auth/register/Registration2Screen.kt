@@ -2,6 +2,7 @@ package com.reactive.begunok.ui.screens.auth.register
 
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
+import com.reactive.begunok.network.models.RegisterModel
 import com.reactive.begunok.ui.adapters.AddImgAdapter
 import com.reactive.begunok.utils.KeyValue
 import gun0912.tedimagepicker.builder.TedImagePicker
@@ -16,9 +17,7 @@ class Registration2Screen : BaseFragment(R.layout.screen_reg2) {
 
         images = ArrayList((1..4).toList().map { KeyValue(it.toString(), "") })
 
-        adapter = AddImgAdapter(false, {
-            removePreviousCallbacks({ addImage(it) })
-        }, {
+        adapter = AddImgAdapter(false, { addImage(it) }, {
             for (i in 0 until images.size) {
                 if (images[i].key == it.key) images[i] = KeyValue(it.key, "")
             }
@@ -28,8 +27,9 @@ class Registration2Screen : BaseFragment(R.layout.screen_reg2) {
         recycler.adapter = adapter
 
         next.setOnClickListener {
-            uploadPhotos()
-            addFragment(Registration3Screen(), id = viewModel.authLayoutId)
+            RegisterModel.documents = images.filter { it.value.isNotEmpty() }.map { it.value }
+
+            addFragment(Registration3Screen())
         }
 
         back.setOnClickListener { finishFragment() }
@@ -40,16 +40,9 @@ class Registration2Screen : BaseFragment(R.layout.screen_reg2) {
             .start { uri ->
                 val path = mainActivity.getFilePath(uri)
                 for (i in 0 until images.size) {
-                    if (images[i].key == it.key) {
-                        images[i] = KeyValue(it.key, path)
-                    }
+                    if (images[i].key == it.key) images[i] = KeyValue(it.key, path)
                 }
                 mainActivity.runOnUiThread { adapter.setData(images) }
             }
-    }
-
-    private fun uploadPhotos() {
-        val imgList = images.filter { it.value.isNotEmpty() }
-        // todo load images
     }
 }

@@ -40,5 +40,5 @@ val sharedPrefModule = module {
 
     factory { PreferenceHelper.customPrefs(get(), "Qweep") }
 
-    factory { SharedManager(get(), get(), get()) }
+    factory { SharedManager(get(), get()) }
 }

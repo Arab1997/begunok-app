@@ -3,17 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/screenStyle"
-    android:background="@drawable/back_black"
+    android:background="@drawable/grey_back"
     android:paddingLeft="30dp"
     android:paddingTop="?actionBarSize"
     android:paddingRight="30dp">
 
     <ImageView
-        android:layout_width="163dp"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_gravity="center"
-        android:layout_marginTop="36dp"
-        android:src="@drawable/begunok"
+        android:src="@drawable/logo_black"
         tools:ignore="ContentDescription" />
 
     <View
@@ -23,34 +22,40 @@
         android:background="@color/hint" />
 
     <TextView
-        style="@style/whiteTxtStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="48dp"
         android:text="Адрес эл. почты"
-        android:textSize="15sp" />
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="9dp"
-        android:background="@drawable/rounded_edite_text_grey"
+        android:background="@drawable/rounded_edit_text_white"
+        android:importantForAutofill="no"
         android:inputType="textEmailAddress"
         android:maxLines="1"
         android:paddingStart="15dp"
         android:paddingEnd="15sp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         android:textSize="15sp" />
 
 
     <TextView
-        style="@style/whiteTxtStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="30dp"
         android:text="Пароль"
-        android:textColor="@color/white"
-        android:textSize="15sp" />
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -62,27 +67,30 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="9dp"
-            android:background="@drawable/rounded_edite_text_dark_grey"
+            android:background="@drawable/rounded_edit_text_white"
+            android:importantForAutofill="no"
             android:inputType="textPassword"
             android:maxLines="1"
             android:paddingStart="15dp"
             android:paddingEnd="15sp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:textSize="15sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/next"
-        android:layout_width="145dp"
+        android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginTop="63dp"
         android:background="@drawable/rounded_yellow"
         android:gravity="center"
         android:text="войти"
+        android:textAllCaps="false"
         android:textColor="@color/black"
-        android:textSize="17sp" />
+        android:textSize="17sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:id="@+id/forgot"
@@ -100,8 +108,12 @@
             tools:ignore="ContentDescription" />
 
         <TextView
-            style="@style/whiteTxtStyle"
-            android:text="Не получилось войти?" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Не получилось войти?"
+            android:textColor="@color/black"
+            android:textSize="1sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </LinearLayout>

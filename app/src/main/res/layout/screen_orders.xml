@@ -9,7 +9,7 @@
     <LinearLayout
         android:id="@+id/main"
         style="@style/screenStyle"
-        android:background="@drawable/home">
+        android:background="@drawable/back_home">
 
         <TextView
             android:id="@+id/title"

@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.screen_bottom_nav.*
 class BottomNavScreen : BaseFragment(R.layout.screen_bottom_nav) {
 
     private var bottomFragments = arrayListOf<Fragment>(
-        HomeScreen(),
+        OrdersScreen(),
         BalanceScreen(),
         ProfileScreen(),
         NotificationsScreen(),
@@ -21,7 +21,7 @@ class BottomNavScreen : BaseFragment(R.layout.screen_bottom_nav) {
     override fun initialize() {
 
         bottomNav.menu.getItem(0).title = getString(
-            if (MainActivity.customer) R.string.my_orders else R.string.my_job
+            if (MainActivity.client) R.string.my_orders else R.string.my_job
         )
 
         bottomNav.setOnNavigationItemSelectedListener { item: MenuItem ->

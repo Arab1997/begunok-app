@@ -7,17 +7,25 @@ import androidx.core.widget.addTextChangedListener
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
 import com.reactive.begunok.network.models.CreateOrderModel
+import com.reactive.begunok.ui.adapters.CitiesAdapter
+import com.reactive.begunok.utils.Constants
+import com.reactive.begunok.utils.common.RxEditText
 import com.reactive.begunok.utils.extensions.disable
 import com.reactive.begunok.utils.extensions.enable
+import com.reactive.begunok.utils.extensions.gone
+import com.reactive.begunok.utils.extensions.visible
+import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.content_toolbar.*
 import kotlinx.android.synthetic.main.screen_add_address.*
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 class AddAddressScreen : BaseFragment(R.layout.screen_add_address) {
 
     private val calendar = Calendar.getInstance()
     private var cost = 100
+    private lateinit var adapter: CitiesAdapter
 
     @SuppressLint("SimpleDateFormat")
     private val sdf = SimpleDateFormat("dd.MM.yy")
@@ -86,6 +94,40 @@ class AddAddressScreen : BaseFragment(R.layout.screen_add_address) {
         }
 
         next.disable()
+
+        initSearch()
+    }
+
+    private fun initSearch() {
+
+        adapter = CitiesAdapter {
+            city.setText(it)
+            recycler.gone()
+        }
+        recycler.adapter = adapter
+
+        RxEditText.getTextWatcherObservable(city).apply {
+            debounce(300, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe { text ->
+                    if (text.length >= 2) {
+                        ArrayList(Constants.cities.filter {
+                            it.toLowerCase().contains(text.toLowerCase())
+                        }).let {
+                            if (it.isNotEmpty()) {
+                                adapter.setData(it)
+                                recycler.visible()
+                            }
+                        }
+                    } else if (text.isEmpty()) {
+                        hideKeyboard()
+                        recycler.gone()
+                        adapter.setData(arrayListOf())
+                        showProgress(false)
+                    }
+                }
+        }
     }
 
     private fun check() {

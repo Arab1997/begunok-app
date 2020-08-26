@@ -35,7 +35,7 @@ class AddPhotoScreen : BaseFragment(R.layout.screen_add_photo) {
         proceed.setOnClickListener {
             uploadPhotos()
             CreateOrderModel.photos = ArrayList(images.map { it.value }.filter { it.isNotEmpty() })
-            addFragment(ConfirmScreen())
+            addFragment(OrderInfoScreen())
         }
     }
 

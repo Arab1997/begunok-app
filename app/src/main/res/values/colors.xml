@@ -8,7 +8,6 @@
     <color name="red">#F32A1F</color>
     <color name="hint">#899196</color>
 
-    <color name="back_grey">#6D6A6B</color>
-    <color name="light_back">#F5F1F1</color>
+    <color name="grey">#6D6A6B</color>
 
 </resources>
