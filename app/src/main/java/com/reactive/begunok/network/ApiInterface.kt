@@ -1,8 +1,6 @@
 package com.reactive.begunok.network
 
-import com.reactive.begunok.network.models.CategoryData
-import com.reactive.begunok.network.models.Order
-import com.reactive.begunok.network.models.OrderResp
+import com.reactive.begunok.network.models.*
 import io.reactivex.Single
 import okhttp3.MultipartBody
 import retrofit2.http.*
@@ -18,6 +16,7 @@ interface ApiInterface {
         @Field("grant_type") grant_type: String = "password"
     ): Single<Token>
 
+    @Multipart
     @POST("api/v1/user")
     fun register(
         @PartMap partMap: Map<String, Any>,
@@ -57,6 +56,12 @@ interface ApiInterface {
 
     @GET("api/v1/order")
     fun getUserOrders(): Single<OrderResp>
+
+    @POST("api/v1/order-request")
+    fun requestForOrder(@Body request: RequestForOrder): Single<OrderRequests>
+
+    @GET("api/v1/order-request/{id}")
+    fun getOrderRequests(@Path("id") id: Int): Single<List<OrderRequests>>
 
 
 }

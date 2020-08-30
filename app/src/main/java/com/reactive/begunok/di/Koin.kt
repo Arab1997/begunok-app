@@ -7,18 +7,18 @@ import com.reactive.begunok.network.ErrorResp
 import com.reactive.begunok.network.User
 import com.reactive.begunok.network.models.CategoryData
 import com.reactive.begunok.network.models.Order
+import com.reactive.begunok.network.models.OrderRequests
 import com.reactive.begunok.utils.preferences.PreferenceHelper
 import com.reactive.begunok.utils.preferences.SharedManager
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
-
 val viewModelModule = module {
 
     fun provideMutableLiveData() = MutableLiveData<Any>()
 
-    viewModel { BaseViewModel(get(), get(), get()) }
+    viewModel { BaseViewModel(get(), get()) }
 
     single { provideMutableLiveData() }
     single(named("shared")) { provideMutableLiveData() }
@@ -27,6 +27,7 @@ val viewModelModule = module {
 
     factory(named("categories")) { MutableLiveData<ArrayList<CategoryData>>() }
     factory(named("orders")) { MutableLiveData<ArrayList<Order>>() }
+    factory(named("orderRequests")) { MutableLiveData<ArrayList<OrderRequests>>() }
 }
 
 val networkModule = module {

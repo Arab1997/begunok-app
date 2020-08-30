@@ -65,7 +65,7 @@ class AddAddressScreen : BaseFragment(R.layout.screen_add_address) {
         date.setOnClickListener {
             DatePickerDialog(
                 requireContext(),
-                DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                { _, year, monthOfYear, dayOfMonth ->
                     val cal = Calendar.getInstance().apply {
                         set(Calendar.YEAR, year)
                         set(Calendar.MONTH, monthOfYear)

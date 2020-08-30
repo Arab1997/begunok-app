@@ -1,7 +1,6 @@
 package com.reactive.begunok.network
 
 import android.content.Context
-import com.google.gson.Gson
 import com.reactive.begunok.BuildConfig
 import com.reactive.begunok.utils.network.UnsafeOkHttpClient
 import com.reactive.begunok.utils.preferences.SharedManager
@@ -13,7 +12,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import timber.log.Timber
 
 object RetrofitClient {
@@ -21,15 +19,13 @@ object RetrofitClient {
     fun getRetrofit(
         baseUrl: String,
         sharedManager: SharedManager,
-        context: Context,
-        gson: Gson
+        context: Context
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(getClient(sharedManager, context))
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .addConverterFactory(ScalarsConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 

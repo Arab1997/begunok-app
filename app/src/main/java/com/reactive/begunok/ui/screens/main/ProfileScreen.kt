@@ -4,10 +4,12 @@ import android.annotation.SuppressLint
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
 import com.reactive.begunok.ui.activities.MainActivity.Companion.googleAuthManager
+import com.reactive.begunok.utils.Constants
 import com.reactive.begunok.utils.common.TextWatcherInterface
 import com.reactive.begunok.utils.extensions.inDevelopment
 import com.reactive.begunok.utils.extensions.loadImage
 import com.reactive.begunok.utils.validators.TextValidator
+import kotlinx.android.synthetic.main.content_profile.*
 import kotlinx.android.synthetic.main.screen_profile.*
 
 class ProfileScreen : BaseFragment(R.layout.screen_profile) {
@@ -40,6 +42,14 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
         support.setOnClickListener { inDevelopment(requireContext()) }
         rules.setOnClickListener { inDevelopment(requireContext()) }
 
+        finishedLayout.setOnClickListener {
+            addFragment(OrdersScreen.newInstance(Constants.DONE))
+        }
+
+        inProgressLayout.setOnClickListener {
+            addFragment(OrdersScreen.newInstance(Constants.ALL_EXCEPT_DONE))
+        }
+
         logout.setOnClickListener {
             viewModel.logout()
             googleAuthManager?.logOut { mainActivity.finish() }
@@ -62,7 +72,6 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
                 check()
             }
         })
-
     }
 
     private fun check() {

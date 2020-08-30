@@ -5,6 +5,7 @@ import com.reactive.begunok.base.BaseFragment
 import com.reactive.begunok.network.models.RegisterModel
 import com.reactive.begunok.ui.adapters.AddImgAdapter
 import com.reactive.begunok.utils.KeyValue
+import com.reactive.begunok.utils.extensions.loge
 import gun0912.tedimagepicker.builder.TedImagePicker
 import kotlinx.android.synthetic.main.screen_reg2.*
 
@@ -27,8 +28,8 @@ class Registration2Screen : BaseFragment(R.layout.screen_reg2) {
         recycler.adapter = adapter
 
         next.setOnClickListener {
-            RegisterModel.documents = images.filter { it.value.isNotEmpty() }.map { it.value }
-
+            RegisterModel.documents = images.map { it.value }.filter { it.isNotEmpty() }
+            loge(RegisterModel.documents!!)
             addFragment(Registration3Screen())
         }
 

@@ -9,8 +9,12 @@ import com.reactive.begunok.network.models.CreateOrderModel
 import com.reactive.begunok.network.models.Order
 import com.reactive.begunok.ui.adapters.ImgAdapter
 import com.reactive.begunok.ui.adapters.RequestsAdapter
+import com.reactive.begunok.ui.screens.get_order.CancelOrderScreen
+import com.reactive.begunok.ui.screens.get_order.ExecutorDetailScreen
+import com.reactive.begunok.ui.screens.get_order.RequestOrderScreen
 import com.reactive.begunok.utils.common.TextWatcherInterface
 import com.reactive.begunok.utils.extensions.*
+import com.reactive.begunok.utils.setOrderStatus
 import com.reactive.begunok.utils.validators.TextValidator
 import kotlinx.android.synthetic.main.content_detail.*
 import kotlinx.android.synthetic.main.content_toolbar.*
@@ -72,8 +76,8 @@ class OrderInfoScreen : BaseFragment(R.layout.screen_order_info) {
             viewModel.deleteOrder(order!!.id)
         }
 
-        getOrder.setOnClickListener { inDevelopment(requireContext()) }
-        cancel.setOnClickListener { inDevelopment(requireContext()) }
+        getOrder.setOnClickListener { addFragment(RequestOrderScreen.newInstance(order!!.id)) }
+        cancel.setOnClickListener { inDevelopment(requireContext()) } // todo
 
     }
 
@@ -93,7 +97,7 @@ class OrderInfoScreen : BaseFragment(R.layout.screen_order_info) {
 
         title.text = "Заявка"
 
-        order?.let {
+        order!!.let {
             job.text = it.jobType.name
             desc.text = it.task
             date.text = it.date
@@ -106,15 +110,22 @@ class OrderInfoScreen : BaseFragment(R.layout.screen_order_info) {
 
         requestLayout.visible()
 
-        requestsAdapter = RequestsAdapter {
-
-        }
+        requestsAdapter =
+            RequestsAdapter(sharedManager.user.id == order!!.user.id) { order, select ->
+                when (select) {
+                    null -> addFragment(ExecutorDetailScreen.newInstance(order.user, order.message))
+                    true -> {
+// todo select executor
+                    }
+                    false -> {
+                        addFragment(CancelOrderScreen.newInstance(order.id))
+                    }
+                }
+// todo update order view
+            }
         requests.adapter = requestsAdapter
 
-        /*
-        emptyImg.showGone()
-        emptyText.showGone()
-        */
+        orderStatus.setOrderStatus(order!!.status)
 
         if (order!!.user.id == sharedManager.user.id) {
             editOrderView()
@@ -139,7 +150,7 @@ class OrderInfoScreen : BaseFragment(R.layout.screen_order_info) {
     private fun requestOrderView() {
         orderInfoLayout.gone()
         statusTitle.gone()
-        status.gone()
+        orderStatus.gone()
         payment.visible()
         getOrder.visible()
         cancel.gone() // todo
@@ -237,5 +248,20 @@ class OrderInfoScreen : BaseFragment(R.layout.screen_order_info) {
                 finishFragment()
             }
         })
+
+        viewModel.orderRequests.observe(viewLifecycleOwner, Observer {
+            emptyImg.showGone(it.isEmpty())
+            emptyText.showGone(it.isEmpty())
+            requestsAdapter.setData(it)
+
+            if (it.any { it.user.id == sharedManager.user.id }) {
+                cancel.visible()
+            }
+        })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        order = null
     }
 }

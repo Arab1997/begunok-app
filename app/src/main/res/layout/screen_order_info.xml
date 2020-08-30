@@ -132,7 +132,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/status"
+                android:id="@+id/orderStatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="35dp"
@@ -164,6 +164,7 @@
                     android:layout_marginTop="15sp"
                     android:orientation="vertical"
                     android:paddingBottom="15sp"
+                    android:splitMotionEvents="false"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:itemCount="3"
                     tools:listitem="@layout/item_order_request" />

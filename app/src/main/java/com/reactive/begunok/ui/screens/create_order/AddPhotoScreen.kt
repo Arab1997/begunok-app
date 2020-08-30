@@ -33,7 +33,6 @@ class AddPhotoScreen : BaseFragment(R.layout.screen_add_photo) {
         recycler.adapter = adapter
 
         proceed.setOnClickListener {
-            uploadPhotos()
             CreateOrderModel.photos = ArrayList(images.map { it.value }.filter { it.isNotEmpty() })
             addFragment(OrderInfoScreen())
         }
@@ -52,8 +51,4 @@ class AddPhotoScreen : BaseFragment(R.layout.screen_add_photo) {
             }
     }
 
-    private fun uploadPhotos() {
-        val imgList = images.filter { it.value.isNotEmpty() }
-        // todo load images
-    }
 }

@@ -1,173 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    style="@style/screenStyle">
+    style="@style/screenStyle"
+    android:background="@drawable/grey_back">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:background="@color/divider"
-            android:gravity="center_vertical"
-            android:paddingBottom="5dp">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/img"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginStart="30sp"
-                android:layout_marginEnd="20sp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/user" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="90dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_bold"
-                    android:text="MukhammadRasul Shadiev"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/city"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:textColor="#CCCCCC"
-                    android:textSize="15sp"
-                    tools:text="Харьков" />
-
-                <TextView
-                    android:id="@+id/userId"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_bold"
-                    android:text="ID: 9875323"
-                    android:textColor="@color/white"
-                    android:textSize="15sp" />
-            </LinearLayout>
-        </LinearLayout>
+        <include layout="@layout/content_profile" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20sp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                tools:ignore="DisableBaselineAlignment">
-
-                <LinearLayout
-                    android:layout_width="110dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/rounded_white"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:translationZ="4dp">
-
-                    <TextView
-                        android:id="@+id/finished"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_bold"
-                        android:gravity="center"
-                        android:text="0"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="выполнено"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/reviews"
-                    android:layout_width="66dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10sp"
-                    android:layout_marginEnd="10sp"
-                    android:layout_weight="1.4"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/image"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:src="@drawable/like"
-                        tools:ignore="ContentDescription" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/roboto_bold"
-                        android:gravity="center"
-                        android:text="отзывы"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="110dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/rounded_white"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:translationZ="4dp">
-
-                    <TextView
-                        android:id="@+id/inProgress"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_bold"
-                        android:gravity="center"
-                        android:text="0"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="в работе"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
-
-                </LinearLayout>
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/divider" />
+            android:padding="20dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/roboto_medium"
                 android:text="Адрес эл. почты"
@@ -255,7 +107,7 @@
                     android:fontFamily="@font/roboto_medium"
                     android:text="Включить уведомления"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="15sp" />
 
                 <Switch
                     android:layout_width="wrap_content"
@@ -274,7 +126,7 @@
                 android:gravity="center_vertical"
                 android:text="Написать нам"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/rules"
@@ -287,7 +139,7 @@
                 android:gravity="center_vertical"
                 android:text="Правила сервиса"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/logout"
@@ -299,7 +151,7 @@
                 android:gravity="center_vertical"
                 android:text="Выйти"
                 android:textColor="@color/red"
-                android:textSize="14sp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
     </LinearLayout>

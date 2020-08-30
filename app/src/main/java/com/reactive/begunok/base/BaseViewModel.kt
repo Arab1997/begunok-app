@@ -4,15 +4,12 @@ import android.content.Context
 import androidx.annotation.LayoutRes
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.gson.Gson
 import com.reactive.begunok.R
 import com.reactive.begunok.network.ApiInterface
 import com.reactive.begunok.network.ErrorResp
 import com.reactive.begunok.network.RetrofitClient
 import com.reactive.begunok.network.User
-import com.reactive.begunok.network.models.CategoryData
-import com.reactive.begunok.network.models.Order
-import com.reactive.begunok.network.models.RegisterModel
+import com.reactive.begunok.network.models.*
 import com.reactive.begunok.ui.adapters.EmailData
 import com.reactive.begunok.utils.Constants
 import com.reactive.begunok.utils.extensions.loge
@@ -34,7 +31,6 @@ import retrofit2.HttpException
 import java.io.File
 
 open class BaseViewModel(
-    gson: Gson,
     private val context: Context,
     private val sharedManager: SharedManager
 ) : ViewModel(), KoinComponent {
@@ -54,11 +50,12 @@ open class BaseViewModel(
     val jobTypes: MutableLiveData<ArrayList<CategoryData>> by inject(named("categories"))
     val orders: MutableLiveData<ArrayList<Order>> by inject(named("orders"))
     val userOrders: MutableLiveData<ArrayList<Order>> by inject(named("orders"))
+    val orderRequests: MutableLiveData<ArrayList<OrderRequests>> by inject(named("orderRequests"))
 
     private val compositeDisposable = CompositeDisposable()
 
     private val api = RetrofitClient
-        .getRetrofit(Constants.BASE_URL, sharedManager, context, gson)
+        .getRetrofit(Constants.BASE_URL, sharedManager, context)
         .create(ApiInterface::class.java)
 
     private fun parseError(e: Throwable?) {
@@ -141,21 +138,25 @@ open class BaseViewModel(
 
     fun register() {
         var avatar: MultipartBody.Part? = null
-        RegisterModel.avatarFile?.let { avatar = createFileMultipart("avatarFile", File(it)) }
-
+        RegisterModel.avatarFile?.let {
+            avatar = createFileMultipart("avatarFile", File(it))
+        }
         var documents: List<MultipartBody.Part>? = null
         RegisterModel.documents?.let {
-            documents = it.map { createFileMultipart("documents", File(it)) }
+            documents = it.map {
+                createFileMultipart("documents", File(it))
+            }
         }
-
         val partMap = hashMapOf<String, Any>()
+        var emailToLogin: String
         RegisterModel.let {
+            emailToLogin = it.email
             partMap["email"] = it.email
             partMap["name"] = it.name
             partMap["password"] = it.password
             partMap["phone"] = it.phone
             partMap["city"] = it.city
-            partMap["contractor"] = it.contractor
+            partMap["contractor"] = if (it.contractor) 1 else 0
         }
 
         compositeDisposable.add(
@@ -163,10 +164,10 @@ open class BaseViewModel(
                 .observeAndSubscribe()
                 .subscribe({
                     val mails = ArrayList(sharedManager.mails)
-                    mails.add(EmailData(RegisterModel.email, System.currentTimeMillis()))
+                    mails.add(EmailData(emailToLogin, System.currentTimeMillis()))
                     mails.distinct()
                     sharedManager.mails = mails
-                    login(RegisterModel.email, RegisterModel.password)
+                    login(emailToLogin, RegisterModel.password)
                 }, {
                     parseError(it)
                 })
@@ -248,6 +249,27 @@ open class BaseViewModel(
                     data.postValue(it)
                     getUserOrders()
                     getAllOrder()
+                }, {
+                    parseError(it)
+                })
+        )
+
+    fun requestForOrder(id: Int, msg: String) =
+        compositeDisposable.add(
+            api.requestForOrder(RequestForOrder(msg, id)).observeAndSubscribe()
+                .subscribe({
+                    data.postValue(it)
+                    getOrderRequests(id)
+                }, {
+                    parseError(it)
+                })
+        )
+
+    fun getOrderRequests(id: Int) =
+        compositeDisposable.add(
+            api.getOrderRequests(id).observeAndSubscribe()
+                .subscribe({
+                    orderRequests.postValue(ArrayList(it))
                 }, {
                     parseError(it)
                 })

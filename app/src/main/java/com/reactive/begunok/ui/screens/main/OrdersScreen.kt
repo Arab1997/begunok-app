@@ -6,6 +6,7 @@ import com.reactive.begunok.base.BaseFragment
 import com.reactive.begunok.ui.activities.MainActivity
 import com.reactive.begunok.ui.adapters.OrdersAdapter
 import com.reactive.begunok.ui.screens.create_order.OrderInfoScreen
+import com.reactive.begunok.utils.Constants
 import kotlinx.android.synthetic.main.screen_orders.*
 
 class OrdersScreen : BaseFragment(R.layout.screen_orders) {
@@ -16,19 +17,35 @@ class OrdersScreen : BaseFragment(R.layout.screen_orders) {
                 setData(jobType)
             }
         }
+
+        fun newInstance(status: String): OrdersScreen {
+            return OrdersScreen().apply {
+                setData(status)
+            }
+        }
+
     }
 
     private fun setData(jobType: Int) {
         this.jobType = jobType
-        viewModel.getAllOrder()
+    }
+
+    private fun setData(status: String) {
+        this.status = status
     }
 
     private var jobType: Int? = null
+    private var status: String? = null
     private lateinit var adapter: OrdersAdapter
+
     override fun initialize() {
+
+        if (status != null) viewModel.getUserOrders()
+        if (jobType != null) viewModel.getAllOrder()
 
         title.text = when {
             jobType != null -> "Все заказы"
+            status != null -> "Мои заказы"
             MainActivity.client -> "Мои заказы"
             else -> "Мои заявки"
         }
@@ -42,6 +59,7 @@ class OrdersScreen : BaseFragment(R.layout.screen_orders) {
         swipeLayout.setOnRefreshListener {
             when {
                 jobType != null -> viewModel.getAllOrder(jobType)
+                status != null -> viewModel.getUserOrders()
                 MainActivity.client -> viewModel.getUserOrders()
                 else -> viewModel.getAllOrder(null)
             }
@@ -53,12 +71,36 @@ class OrdersScreen : BaseFragment(R.layout.screen_orders) {
 
             userOrders.observe(viewLifecycleOwner, Observer {
                 swipeLayout?.isRefreshing = false
-                if (MainActivity.client && jobType == null) adapter.setData(it)
+                if (MainActivity.client && jobType == null) {
+                    when (status) {
+                        null -> adapter.setData(it)
+                        Constants.DONE -> {
+                            val filtered = ArrayList(it.filter { it.status == Constants.DONE })
+                            adapter.setData(filtered)
+                        }
+                        Constants.ALL_EXCEPT_DONE -> {
+                            val filtered = ArrayList(it.filter { it.status != Constants.DONE })
+                            adapter.setData(filtered)
+                        }
+                    }
+                }
             })
 
             orders.observe(viewLifecycleOwner, Observer {
                 swipeLayout?.isRefreshing = false
-                if (!MainActivity.client || jobType != null) adapter.setData(it)
+                if (!MainActivity.client || jobType != null) {
+                    when (status) {
+                        null -> adapter.setData(it)
+                        Constants.DONE -> {
+                            val filtered = ArrayList(it.filter { it.status == Constants.DONE })
+                            adapter.setData(filtered)
+                        }
+                        Constants.ALL_EXCEPT_DONE -> {
+                            val filtered = ArrayList(it.filter { it.status != Constants.DONE })
+                            adapter.setData(filtered)
+                        }
+                    }
+                }
             })
         }
     }

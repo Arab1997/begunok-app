@@ -18,7 +18,7 @@ class Registration3Screen : BaseFragment(R.layout.screen_reg3) {
 
         next.setOnClickListener {
 
-            RegisterModel.avatarFile = path
+            if (path.isNotEmpty()) RegisterModel.avatarFile = path
 
             addFragment(ChooseModeScreen())
         }

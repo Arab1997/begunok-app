@@ -26,11 +26,9 @@ class LoginScreen : BaseFragment(R.layout.screen_login) {
 
         val mails = sharedManager.mails
         if (mails.isNotEmpty()) {
-            email.setOnFocusChangeListener { v, hasFocus ->
-                if (hasFocus) {
-                    addFragment(VariantsScreen())
-                    hideKeyboard()
-                }
+            email.setOnClickListener {
+                hideKeyboard()
+                addFragment(VariantsScreen())
             }
         }
 

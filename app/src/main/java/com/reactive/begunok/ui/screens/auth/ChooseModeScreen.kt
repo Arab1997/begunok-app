@@ -9,6 +9,7 @@ import com.reactive.begunok.ui.screens.BottomNavScreen
 import com.reactive.begunok.utils.extensions.blockClickable
 import kotlinx.android.synthetic.main.screen_choose_mode.*
 
+
 class ChooseModeScreen : BaseFragment(R.layout.screen_choose_mode) {
 
     private var request = false
@@ -34,6 +35,7 @@ class ChooseModeScreen : BaseFragment(R.layout.screen_choose_mode) {
         }
 
         request = true
+        showProgress(true)
         viewModel.register()
         MainActivity.client = customer
 

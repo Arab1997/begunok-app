@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="12sp"
     android:paddingStart="14dp"
-    android:paddingTop="12sp"
-    android:paddingEnd="14dp"
-    android:paddingBottom="12sp">
+    android:paddingEnd="14dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img"
         android:layout_width="65dp"
         android:layout_height="65dp"
         android:src="@drawable/logo"
@@ -17,11 +18,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_medium"
@@ -29,22 +31,57 @@
             android:textColor="@color/black"
             android:textSize="15sp" />
 
+        <!--todo add to next version-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="отзывов 1245"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <LinearLayout
+            android:id="@+id/selectLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                tools:text="@tools:sample/lorem/random" />
+
+            <TextView
+                android:id="@+id/select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="выбрать"
+                android:textColor="@color/green"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:text="отзывов 1245"
+            android:layout_marginTop="15dp"
+            android:drawablePadding="10dp"
+            android:text="Сменить специалиста"
             android:textColor="@color/black"
-            android:textSize="12sp" />
+            android:textSize="15sp"
+            android:visibility="gone"
+            app:drawableStartCompat="@drawable/ic_delete_executor"
+            tools:visibility="visible" />
 
         <View
             android:layout_width="match_parent"
