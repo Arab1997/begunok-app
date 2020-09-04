@@ -4,7 +4,6 @@ import androidx.lifecycle.Observer
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
 import com.reactive.begunok.base.parentLayoutId
-import com.reactive.begunok.ui.activities.MainActivity
 import com.reactive.begunok.ui.adapters.EmailData
 import com.reactive.begunok.ui.screens.BottomNavScreen
 import com.reactive.begunok.ui.screens.auth.VariantsScreen
@@ -56,7 +55,7 @@ class LoginScreen : BaseFragment(R.layout.screen_login) {
             }
         })
 
-        forgot.setOnClickListener { inDevelopment(requireContext()) }
+        forgot.setOnClickListener { inDevelopment(requireContext()) } // todo
     }
 
     private fun check() {
@@ -78,7 +77,6 @@ class LoginScreen : BaseFragment(R.layout.screen_login) {
         viewModel.user.observe(viewLifecycleOwner, Observer {
             if (request) {
                 showProgress(false)
-                MainActivity.client = it.contractor
                 replaceFragment(BottomNavScreen(), id = parentLayoutId())
                 request = false
                 val mails = ArrayList(sharedManager.mails)

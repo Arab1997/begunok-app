@@ -76,8 +76,12 @@ class OrderInfoScreen : BaseFragment(R.layout.screen_order_info) {
             viewModel.deleteOrder(order!!.id)
         }
 
-        getOrder.setOnClickListener { addFragment(RequestOrderScreen.newInstance(order!!.id)) }
-        cancel.setOnClickListener { inDevelopment(requireContext()) } // todo
+        getOrder.setOnClickListener {
+            addFragment(RequestOrderScreen.newInstance(order!!.id))
+        }
+        cancel.setOnClickListener {
+            addFragment(CancelOrderScreen.newInstance(order!!.id, false))
+        }
 
     }
 
@@ -110,28 +114,26 @@ class OrderInfoScreen : BaseFragment(R.layout.screen_order_info) {
 
         requestLayout.visible()
 
-        requestsAdapter =
-            RequestsAdapter(sharedManager.user.id == order!!.user.id) { order, select ->
-                when (select) {
-                    null -> addFragment(ExecutorDetailScreen.newInstance(order.user, order.message))
-                    true -> {
-// todo select executor
-                    }
-                    false -> {
-                        addFragment(CancelOrderScreen.newInstance(order.id))
-                    }
+        val isClient = order!!.user.id == sharedManager.user?.id
+        requestsAdapter = RequestsAdapter(isClient) { order, select ->
+            when (select) {
+                null -> addFragment(ExecutorDetailScreen.newInstance(order.user, order.message))
+                true -> {
+                    // todo select executor
                 }
-// todo update order view
+                false -> {
+                    addFragment(CancelOrderScreen.newInstance(order.id, true))
+                }
             }
+// todo update order view
+        }
         requests.adapter = requestsAdapter
 
         orderStatus.setOrderStatus(order!!.status)
 
-        if (order!!.user.id == sharedManager.user.id) {
-            editOrderView()
-        } else {
-            requestOrderView()
-        }
+        if (isClient) editOrderView()
+        else requestOrderView()
+
     }
 
     private fun editOrderView() {
@@ -153,7 +155,7 @@ class OrderInfoScreen : BaseFragment(R.layout.screen_order_info) {
         orderStatus.gone()
         payment.visible()
         getOrder.visible()
-        cancel.gone() // todo
+        cancel.gone()
     }
 
     @SuppressLint("SetTextI18n")
@@ -170,8 +172,8 @@ class OrderInfoScreen : BaseFragment(R.layout.screen_order_info) {
             adapter.setData(it.photos)
         }
 
-        email.setText(sharedManager.user.email)
-        phone.setText(sharedManager.user.phone)
+        email.setText(sharedManager.user?.email)
+        phone.setText(sharedManager.user?.phone)
 
         email.addTextChangedListener(object : TextWatcherInterface {
             override fun textChanged(s: String) {
@@ -254,7 +256,7 @@ class OrderInfoScreen : BaseFragment(R.layout.screen_order_info) {
             emptyText.showGone(it.isEmpty())
             requestsAdapter.setData(it)
 
-            if (it.any { it.user.id == sharedManager.user.id }) {
+            if (it.any { it.user.id == sharedManager.user?.id }) {
                 cancel.visible()
             }
         })

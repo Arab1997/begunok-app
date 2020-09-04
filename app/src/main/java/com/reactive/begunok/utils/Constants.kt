@@ -3,6 +3,7 @@ package com.reactive.begunok.utils
 import android.widget.TextView
 import com.reactive.begunok.BuildConfig
 import com.reactive.begunok.R
+import com.reactive.begunok.ui.adapters.CancelData
 import com.reactive.begunok.utils.extensions.invisible
 import com.reactive.begunok.utils.extensions.setTextColorRes
 
@@ -99,6 +100,20 @@ object Constants {
         "Изюм",
         "Белгород-Днестровский"
     )
+
+    val cancelOrderAsClient = arrayListOf(
+        CancelData("Заявка уже не актуальна"),
+        CancelData("Исполнитель попросил отменить заявку, чтобы не платить комиссию команде Begunok"),
+        CancelData("Другая причина")
+    )
+
+    val cancelOrderAsExecutor = arrayListOf(
+        CancelData("Заявка уже не актуальна"),
+        CancelData("Не могу связаться с заказчиком"),
+        CancelData("Заявка выполнена другим исполнителем"),
+        CancelData("Не могу выполнить это задание")
+    )
+
 }
 
 fun TextView.setOrderStatus(status: String) {

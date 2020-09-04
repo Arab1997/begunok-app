@@ -37,7 +37,7 @@ class ExecutorDetailScreen : BaseFragment(R.layout.screen_executor_details) {
 
         desc.text = message
 
-        reviews.setOnClickListener { inDevelopment(requireContext()) }
+        reviews.setOnClickListener { inDevelopment(requireContext()) } // todo
 
         back.setOnClickListener { finishFragment() }
 

@@ -4,7 +4,6 @@ import androidx.lifecycle.Observer
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
 import com.reactive.begunok.base.parentLayoutId
-import com.reactive.begunok.ui.activities.MainActivity
 import com.reactive.begunok.ui.screens.BottomNavScreen
 import com.reactive.begunok.utils.common.TextWatcherInterface
 import com.reactive.begunok.utils.extensions.blockClickable
@@ -65,7 +64,6 @@ class ForgotPasswordScreen : BaseFragment(R.layout.screen_forgot_password) {
         viewModel.user.observe(viewLifecycleOwner, Observer {
             if (request) {
                 showProgress(false)
-                MainActivity.client = it.contractor
                 replaceFragment(BottomNavScreen(), id = parentLayoutId())
                 request = false
             }

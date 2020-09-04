@@ -8,7 +8,7 @@ object RegisterModel {
     var city: String = ""
     var avatarFile: String? = null
     var documents: List<String>? = null
-    var contractor: Boolean = false
+    var client: Boolean = false
 
     fun clear() {
         email = ""
@@ -18,6 +18,6 @@ object RegisterModel {
         city = ""
         avatarFile = null
         documents = null
-        contractor = false
+        client = false
     }
 }

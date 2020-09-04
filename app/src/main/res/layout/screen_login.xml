@@ -112,7 +112,7 @@
             android:layout_height="wrap_content"
             android:text="Не получилось войти?"
             android:textColor="@color/black"
-            android:textSize="1sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
     </LinearLayout>
 

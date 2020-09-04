@@ -25,7 +25,7 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
 
     @SuppressLint("SetTextI18n")
     private fun setData() {
-        sharedManager.user.let {
+        sharedManager.user?.let {
             userId.text = "ID: ${it.id}"
             name.text = it.name
             email.setText(it.email)
@@ -38,9 +38,9 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
     }
 
     private fun initClicks() {
-        reviews.setOnClickListener { inDevelopment(requireContext()) }
-        support.setOnClickListener { inDevelopment(requireContext()) }
-        rules.setOnClickListener { inDevelopment(requireContext()) }
+        reviews.setOnClickListener { inDevelopment(requireContext()) } // todo
+        support.setOnClickListener { inDevelopment(requireContext()) } // todo
+        rules.setOnClickListener { inDevelopment(requireContext()) } // todo
 
         finishedLayout.setOnClickListener {
             addFragment(OrdersScreen.newInstance(Constants.DONE))
@@ -53,6 +53,7 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
         logout.setOnClickListener {
             viewModel.logout()
             googleAuthManager?.logOut { mainActivity.finish() }
+            mainActivity.finish()
         }
     }
 

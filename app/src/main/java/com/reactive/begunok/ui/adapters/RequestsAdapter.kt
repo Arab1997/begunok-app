@@ -5,6 +5,7 @@ import com.reactive.begunok.base.BaseAdapter
 import com.reactive.begunok.network.models.OrderRequests
 import com.reactive.begunok.utils.common.ViewHolder
 import com.reactive.begunok.utils.extensions.loadImage
+import com.reactive.begunok.utils.extensions.showGone
 import kotlinx.android.synthetic.main.item_order_request.view.*
 
 class RequestsAdapter(
@@ -22,12 +23,13 @@ class RequestsAdapter(
                 name.text = user.name
                 desc.text = message
 
+                select.showGone(client)
+//                delete.showGone(client) // todo show when executor attached
+
                 if (client) {
                     setOnClickListener { selectListener.invoke(this, null) }
                     select.setOnClickListener { selectListener.invoke(this, true) }
                     delete.setOnClickListener { selectListener.invoke(this, false) }
-
-                    // todo delete executor
 //                    delete.visible()
 //                    selectLayout.gone()
                 }

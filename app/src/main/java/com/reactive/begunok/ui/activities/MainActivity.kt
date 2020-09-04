@@ -13,7 +13,6 @@ import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseActivity
 import com.reactive.begunok.base.BaseViewModel
 import com.reactive.begunok.base.initialFragment
-import com.reactive.begunok.network.models.RegisterModel
 import com.reactive.begunok.ui.screens.BottomNavScreen
 import com.reactive.begunok.ui.screens.auth.AuthScreen
 import com.reactive.begunok.ui.screens.auth.ChooseModeScreen
@@ -57,20 +56,6 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
         initSocialAuth()
     }
 
-    private fun register() {
-        RegisterModel.apply {
-            email = "aa@${System.currentTimeMillis()}.aa"
-            name = "${System.currentTimeMillis()}"
-            password = "psw"
-            phone = "${System.currentTimeMillis()}"
-            city = "asjldk"
-            avatarFile = null
-            documents = null
-            contractor = false
-        }
-        viewModel.register()
-    }
-
     private fun initSocialAuth() {
         googleAuthManager = GoogleAuthManager(this)
         fbAuthManager = FBAuthManager(this)
@@ -78,7 +63,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 
     private fun debug() = initialFragment(LoginScreen())
 
-    private fun startFragment() {
+    fun startFragment() {
         val authFragment = AuthScreen().apply {
             setGoogleListener { googleAuthManager?.startRequest() }
             setFBListener {

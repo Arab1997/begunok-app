@@ -63,6 +63,9 @@ interface ApiInterface {
     @GET("api/v1/order-request/{id}")
     fun getOrderRequests(@Path("id") id: Int): Single<List<OrderRequests>>
 
+    @PUT("api/v1/order-request/cancel/{id}")
+    fun cancelOrderRequest(@Path("id") id: Int, @Body body: CancelRequest): Single<OrderRequests>
+
 
 }
 
@@ -82,5 +85,5 @@ data class User(
     val inProgressOrders: Int,
     val cancelledOrders: Int,
     val completedOrders: Int,
-    val contractor: Boolean
+    val is_constructor: Boolean
 )

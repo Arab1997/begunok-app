@@ -13,3 +13,5 @@ data class RequestForOrder(
     val message: String,
     val orderId: Int
 )
+
+data class CancelRequest(val message: String)

@@ -22,7 +22,7 @@ class VariantsScreen : BaseFragment(R.layout.screen_variants) {
         recycler.adapter = adapter
 
         dim.setOnClickListener { finishFragment() }
-        politics.setOnClickListener { inDevelopment(requireContext()) }
-        rules.setOnClickListener { inDevelopment(requireContext()) }
+        politics.setOnClickListener { inDevelopment(requireContext()) } // todo
+        rules.setOnClickListener { inDevelopment(requireContext()) } // todo
     }
 }

@@ -10,6 +10,7 @@ import com.reactive.begunok.network.ErrorResp
 import com.reactive.begunok.network.RetrofitClient
 import com.reactive.begunok.network.User
 import com.reactive.begunok.network.models.*
+import com.reactive.begunok.ui.activities.MainActivity
 import com.reactive.begunok.ui.adapters.EmailData
 import com.reactive.begunok.utils.Constants
 import com.reactive.begunok.utils.extensions.loge
@@ -107,7 +108,6 @@ open class BaseViewModel(
             getUser()
             getUserOrders()
             getCategories()
-            getUser()
         }
     }
 
@@ -116,6 +116,7 @@ open class BaseViewModel(
             .subscribe({
                 sharedManager.user = it
                 user.value = it
+                MainActivity.client = it.is_constructor
             }, {
                 parseError(it)
             })
@@ -123,7 +124,6 @@ open class BaseViewModel(
 
     fun logout() {
         sharedManager.deleteAll()
-
     }
 
     fun login(email: String, password: String) = compositeDisposable.add(
@@ -156,7 +156,7 @@ open class BaseViewModel(
             partMap["password"] = it.password
             partMap["phone"] = it.phone
             partMap["city"] = it.city
-            partMap["contractor"] = if (it.contractor) 1 else 0
+            partMap["contractor"] = if (it.client) 1 else 0
         }
 
         compositeDisposable.add(
@@ -254,6 +254,16 @@ open class BaseViewModel(
                 })
         )
 
+    fun getOrderRequests(id: Int) =
+        compositeDisposable.add(
+            api.getOrderRequests(id).observeAndSubscribe()
+                .subscribe({
+                    orderRequests.postValue(ArrayList(it))
+                }, {
+                    parseError(it)
+                })
+        )
+
     fun requestForOrder(id: Int, msg: String) =
         compositeDisposable.add(
             api.requestForOrder(RequestForOrder(msg, id)).observeAndSubscribe()
@@ -265,11 +275,12 @@ open class BaseViewModel(
                 })
         )
 
-    fun getOrderRequests(id: Int) =
+    fun cancelOrderRequest(id: Int, msg: String) =
         compositeDisposable.add(
-            api.getOrderRequests(id).observeAndSubscribe()
+            api.cancelOrderRequest(id, CancelRequest(msg)).observeAndSubscribe()
                 .subscribe({
-                    orderRequests.postValue(ArrayList(it))
+                    data.postValue(it)
+                    getOrderRequests(id)
                 }, {
                     parseError(it)
                 })

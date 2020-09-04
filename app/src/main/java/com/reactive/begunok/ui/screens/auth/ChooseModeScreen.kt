@@ -4,7 +4,6 @@ import androidx.lifecycle.Observer
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
 import com.reactive.begunok.network.models.RegisterModel
-import com.reactive.begunok.ui.activities.MainActivity
 import com.reactive.begunok.ui.screens.BottomNavScreen
 import com.reactive.begunok.utils.extensions.blockClickable
 import kotlinx.android.synthetic.main.screen_choose_mode.*
@@ -26,19 +25,16 @@ class ChooseModeScreen : BaseFragment(R.layout.screen_choose_mode) {
         }
     }
 
-    private fun open(customer: Boolean) {
-        if (!customer) {
-            if (RegisterModel.documents == null) {
-                addFragment(AlertScreen())
-                return
-            }
+    private fun open(client: Boolean) {
+        if (!client && RegisterModel.documents == null) {
+            addFragment(AlertScreen())
+            return
         }
+        RegisterModel.client = client
 
         request = true
         showProgress(true)
         viewModel.register()
-        MainActivity.client = customer
-
     }
 
     override fun observe() {

@@ -24,7 +24,7 @@ class SharedManager(
             preferences[TOKEN] = value
         }
 
-    var user: User
+    var user: User?
         get() = gson.fromJson(preferences[USER, ""], User::class.java)
         set(value) {
             preferences[USER] = gson.toJson(value)

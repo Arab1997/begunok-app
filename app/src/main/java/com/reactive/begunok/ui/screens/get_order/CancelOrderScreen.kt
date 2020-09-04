@@ -4,8 +4,10 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
+import com.reactive.begunok.network.models.OrderRequests
 import com.reactive.begunok.ui.adapters.CancelAdapter
 import com.reactive.begunok.ui.adapters.CancelData
+import com.reactive.begunok.utils.Constants
 import com.reactive.begunok.utils.extensions.blockClickable
 import com.reactive.begunok.utils.extensions.disable
 import com.reactive.begunok.utils.extensions.enable
@@ -17,13 +19,16 @@ class CancelOrderScreen : BaseFragment(R.layout.screen_cancel_order) {
 
     companion object {
         private var orderId: Int = 0
-        fun newInstance(orderId: Int): CancelOrderScreen {
+        private var isClient: Boolean = false
+        fun newInstance(orderId: Int, isClient: Boolean): CancelOrderScreen {
             this.orderId = orderId
+            this.isClient = isClient
             return CancelOrderScreen()
         }
     }
 
-    private var request = false
+    private var cancelRequestExecutor = false
+    private var cancelRequestClient = false
     private lateinit var adapter: CancelAdapter
     private var data = arrayListOf<CancelData>()
     private var checkedMessage = ""
@@ -33,12 +38,7 @@ class CancelOrderScreen : BaseFragment(R.layout.screen_cancel_order) {
 
         close.setOnClickListener { finishFragment() }
 
-        data = arrayListOf(
-            CancelData("Заявка уже не актуальна"),
-            CancelData("Не могу связаться с заказчиком"),
-            CancelData("Заявка выполнена другим исполнителем"),
-            CancelData("Не могу выполнить это задание")
-        )
+        data = if (isClient) Constants.cancelOrderAsClient else Constants.cancelOrderAsExecutor
 
         checkedMessage = data[0].message
         adapter = CancelAdapter {
@@ -61,16 +61,20 @@ class CancelOrderScreen : BaseFragment(R.layout.screen_cancel_order) {
         cancel.setOnClickListener {
             it.blockClickable()
             showProgress(true)
-            request = true
-            // todo delete executor
-
+            if (isClient) {
+                cancelRequestClient = true
+                // todo delete executor
+            } else {
+                cancelRequestExecutor = true
+                viewModel.cancelOrderRequest(orderId, message.text.toString())
+            }
         }
     }
 
     override fun observe() {
         viewModel.data.observe(viewLifecycleOwner, Observer {
-            if (request /*&& it is */) {
-                request = false
+            if (cancelRequestExecutor && it is OrderRequests) {
+                cancelRequestExecutor = false
                 showProgress(false)
                 toast(requireContext(), "Заявка успешо отменено")
                 finishFragment()

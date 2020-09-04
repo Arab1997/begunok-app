@@ -40,8 +40,7 @@ class OrdersScreen : BaseFragment(R.layout.screen_orders) {
 
     override fun initialize() {
 
-        if (status != null) viewModel.getUserOrders()
-        if (jobType != null) viewModel.getAllOrder()
+        if (jobType != null || status != null) fetchData()
 
         title.text = when {
             jobType != null -> "Все заказы"
@@ -57,12 +56,16 @@ class OrdersScreen : BaseFragment(R.layout.screen_orders) {
         recycler.adapter = adapter
 
         swipeLayout.setOnRefreshListener {
-            when {
-                jobType != null -> viewModel.getAllOrder(jobType)
-                status != null -> viewModel.getUserOrders()
-                MainActivity.client -> viewModel.getUserOrders()
-                else -> viewModel.getAllOrder(null)
-            }
+            fetchData()
+        }
+    }
+
+    private fun fetchData() {
+        when {
+            jobType != null -> viewModel.getAllOrder(jobType)
+            status != null -> viewModel.getUserOrders()
+            MainActivity.client -> viewModel.getUserOrders()
+            else -> viewModel.getAllOrder(null)
         }
     }
 
@@ -71,7 +74,7 @@ class OrdersScreen : BaseFragment(R.layout.screen_orders) {
 
             userOrders.observe(viewLifecycleOwner, Observer {
                 swipeLayout?.isRefreshing = false
-                if (MainActivity.client && jobType == null) {
+                if (jobType == null) {
                     when (status) {
                         null -> adapter.setData(it)
                         Constants.DONE -> {
@@ -88,18 +91,8 @@ class OrdersScreen : BaseFragment(R.layout.screen_orders) {
 
             orders.observe(viewLifecycleOwner, Observer {
                 swipeLayout?.isRefreshing = false
-                if (!MainActivity.client || jobType != null) {
-                    when (status) {
-                        null -> adapter.setData(it)
-                        Constants.DONE -> {
-                            val filtered = ArrayList(it.filter { it.status == Constants.DONE })
-                            adapter.setData(filtered)
-                        }
-                        Constants.ALL_EXCEPT_DONE -> {
-                            val filtered = ArrayList(it.filter { it.status != Constants.DONE })
-                            adapter.setData(filtered)
-                        }
-                    }
+                if (!MainActivity.client && jobType != null) {
+                    adapter.setData(it)
                 }
             })
         }
