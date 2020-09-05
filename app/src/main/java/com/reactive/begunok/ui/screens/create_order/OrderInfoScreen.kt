@@ -36,7 +36,7 @@ class OrderInfoScreen : BaseFragment(R.layout.screen_order_info) {
     private var createRequest = false
     private var deleteRequest = false
     private lateinit var adapter: ImgAdapter
-    private lateinit var requestsAdapter: RequestsAdapter
+    private var requestsAdapter: RequestsAdapter? = null
 
     override fun initialize() {
 
@@ -96,8 +96,11 @@ class OrderInfoScreen : BaseFragment(R.layout.screen_order_info) {
         else initCreateOrderView()
     }
 
+    private var isClient = false
+
     @SuppressLint("SetTextI18n")
     private fun initOrderInfoView() {
+        create.gone()
 
         title.text = "Заявка"
 
@@ -110,11 +113,11 @@ class OrderInfoScreen : BaseFragment(R.layout.screen_order_info) {
 
             email.setText(it.email)
             phone.setText(it.phone)
+            isClient = it.user.id == sharedManager.user?.id
         }
 
         requestLayout.visible()
 
-        val isClient = order!!.user.id == sharedManager.user?.id
         requestsAdapter = RequestsAdapter(isClient) { order, select ->
             when (select) {
                 null -> addFragment(ExecutorDetailScreen.newInstance(order.user, order.message))
@@ -214,7 +217,7 @@ class OrderInfoScreen : BaseFragment(R.layout.screen_order_info) {
             partMap["city"] = it.city
             partMap["address"] = it.address
             partMap["date"] = it.date
-            partMap["price"] = it.price
+            partMap["price"] = it.price.toString()
             partMap["email"] = it.email
             partMap["phone"] = it.phone
         }
@@ -227,6 +230,9 @@ class OrderInfoScreen : BaseFragment(R.layout.screen_order_info) {
     }
 
     override fun observe() {
+
+        order?.let { viewModel.getOrderRequests(it.id) }
+
         viewModel.data.observe(viewLifecycleOwner, Observer {
             if (it is Order) {
                 showProgress(false)
@@ -251,13 +257,17 @@ class OrderInfoScreen : BaseFragment(R.layout.screen_order_info) {
             }
         })
 
-        viewModel.orderRequests.observe(viewLifecycleOwner, Observer {
-            emptyImg.showGone(it.isEmpty())
-            emptyText.showGone(it.isEmpty())
-            requestsAdapter.setData(it)
+        viewModel.requests.observe(viewLifecycleOwner, Observer {
+            emptyImg.showGone(!isClient && it.isEmpty())
+            emptyText.showGone(!isClient && it.isEmpty())
+            requestsAdapter?.setData(it)
 
             if (it.any { it.user.id == sharedManager.user?.id }) {
                 cancel.visible()
+                getOrder.gone()
+            } else {
+                cancel.gone()
+                getOrder.gone()
             }
         })
     }

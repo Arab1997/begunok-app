@@ -54,8 +54,8 @@ interface ApiInterface {
     @GET("api/v1/order")
     fun getAllOrder(@Query("jobType") jobType: Int? = null): Single<OrderResp>
 
-    @GET("api/v1/order")
-    fun getUserOrders(): Single<OrderResp>
+    @GET("api/v1/order/my")
+    fun getUserOrders(): Single<List<Order>>
 
     @POST("api/v1/order-request")
     fun requestForOrder(@Body request: RequestForOrder): Single<OrderRequests>
@@ -63,9 +63,16 @@ interface ApiInterface {
     @GET("api/v1/order-request/{id}")
     fun getOrderRequests(@Path("id") id: Int): Single<List<OrderRequests>>
 
-    @PUT("api/v1/order-request/cancel/{id}")
-    fun cancelOrderRequest(@Path("id") id: Int, @Body body: CancelRequest): Single<OrderRequests>
+    @GET("api/v1/order-request/")
+    fun getUserRequests(): Single<List<OrderRequests>>
 
+    @PUT("api/v1/order-request/cancel/")
+    fun cancelOrderRequest(
+        @Query("orderId") id: Int, @Body body: CancelRequest
+    ): Single<OrderRequests>
+
+    @POST("api/v1/executor")
+    fun selectExecutor(@Body request: RequestForOrder): Single<OrderRequests>
 
 }
 

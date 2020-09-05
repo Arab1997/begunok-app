@@ -22,6 +22,8 @@ class RequestOrderScreen : BaseFragment(R.layout.screen_request_order) {
     private var request = false
     override fun initialize() {
 
+        windowAdjustResize()
+
         title.text = "Заявка"
 
         send.visible()

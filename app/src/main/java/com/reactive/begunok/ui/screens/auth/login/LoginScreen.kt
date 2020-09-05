@@ -33,6 +33,7 @@ class LoginScreen : BaseFragment(R.layout.screen_login) {
 
         next.setOnClickListener {
             it.blockClickable()
+            hideKeyboard()
             request = true
             showProgress(true)
             viewModel.login(email.text.toString(), passw.text.toString())

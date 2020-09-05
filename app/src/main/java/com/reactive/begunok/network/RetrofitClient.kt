@@ -43,8 +43,7 @@ object RetrofitClient {
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Accept", "application/json")
             if (sharedManager.token.isNotEmpty()) request.addHeader(
-                "Authorization",
-                "Bearer ${sharedManager.token}"
+                "Authorization", "Bearer ${sharedManager.token}"
             )
             chain.proceed(request.build())
         })

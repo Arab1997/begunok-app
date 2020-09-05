@@ -46,7 +46,7 @@ class CancelOrderScreen : BaseFragment(R.layout.screen_cancel_order) {
             data[it].checked = true
             adapter.setData(data)
             checkedMessage = data[it].message
-        }
+        }.apply { setData(data) }
         recycler.adapter = adapter
 
         cancel.disable()
@@ -66,7 +66,10 @@ class CancelOrderScreen : BaseFragment(R.layout.screen_cancel_order) {
                 // todo delete executor
             } else {
                 cancelRequestExecutor = true
-                viewModel.cancelOrderRequest(orderId, message.text.toString())
+                viewModel.cancelOrderRequest(
+                    orderId,
+                    checkedMessage + "\n" + message.text.toString()
+                )
             }
         }
     }

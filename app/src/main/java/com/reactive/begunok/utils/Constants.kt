@@ -19,6 +19,8 @@ object Constants {
     const val DONE = "DONE"
     const val CANCELLED = "CANCELLED"
 
+    const val WAITING = "WAITING"
+
     const val ALL_EXCEPT_DONE = "ALL_EXCEPT_DONE"
 
     val orderStatuses = arrayListOf(

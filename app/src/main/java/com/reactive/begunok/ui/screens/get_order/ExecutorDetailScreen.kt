@@ -29,8 +29,10 @@ class ExecutorDetailScreen : BaseFragment(R.layout.screen_executor_details) {
         user?.let {
             userId.text = "ID: ${it.id}"
             name.text = it.name
+
             inProgress.text = it.inProgressOrders.toString()
             finished.text = it.completedOrders.toString()
+
             it.avatar?.let { img.loadImage(it) }
             it.city?.let { city.text = it }
         }
@@ -47,13 +49,13 @@ class ExecutorDetailScreen : BaseFragment(R.layout.screen_executor_details) {
             request = true
         }
 
-        finished.text = "О исполнителе"
-        inProgress.text = "Отзывов 0" // todo
+        finishedText.text = "О исполнителе"
+        inProgressText.text = "Отзывов 0" // todo
 
         back.visible()
         reviewsText.gone()
-        inProgressText.gone()
-        finishedText.gone()
+        inProgress.gone()
+        finished.gone()
     }
 
     override fun observe() {

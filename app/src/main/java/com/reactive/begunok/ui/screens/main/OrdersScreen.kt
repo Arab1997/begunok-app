@@ -65,7 +65,6 @@ class OrdersScreen : BaseFragment(R.layout.screen_orders) {
             jobType != null -> viewModel.getAllOrder(jobType)
             status != null -> viewModel.getUserOrders()
             MainActivity.client -> viewModel.getUserOrders()
-            else -> viewModel.getAllOrder(null)
         }
     }
 
@@ -74,7 +73,7 @@ class OrdersScreen : BaseFragment(R.layout.screen_orders) {
 
             userOrders.observe(viewLifecycleOwner, Observer {
                 swipeLayout?.isRefreshing = false
-                if (jobType == null) {
+                if (MainActivity.client && jobType == null) {
                     when (status) {
                         null -> adapter.setData(it)
                         Constants.DONE -> {
@@ -88,6 +87,21 @@ class OrdersScreen : BaseFragment(R.layout.screen_orders) {
                     }
                 }
             })
+            userRequests.observe(viewLifecycleOwner, Observer {
+                if (!MainActivity.client && jobType == null) {
+                    /*when (status) {
+                        null -> adapter.setData(it)
+                        Constants.DONE -> {
+                            val filtered = ArrayList(it.filter { it.status == Constants.DONE })
+                            adapter.setData(filtered)
+                        }
+                        Constants.ALL_EXCEPT_DONE -> {
+                            val filtered = ArrayList(it.filter { it.status != Constants.DONE })
+                            adapter.setData(filtered)
+                        }
+                    }*/
+                }
+            })
 
             orders.observe(viewLifecycleOwner, Observer {
                 swipeLayout?.isRefreshing = false
@@ -95,6 +109,8 @@ class OrdersScreen : BaseFragment(R.layout.screen_orders) {
                     adapter.setData(it)
                 }
             })
+
+
         }
     }
 }

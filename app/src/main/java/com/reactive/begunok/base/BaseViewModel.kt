@@ -14,7 +14,6 @@ import com.reactive.begunok.ui.activities.MainActivity
 import com.reactive.begunok.ui.adapters.EmailData
 import com.reactive.begunok.utils.Constants
 import com.reactive.begunok.utils.extensions.loge
-import com.reactive.begunok.utils.extensions.logi
 import com.reactive.begunok.utils.extensions.toast
 import com.reactive.begunok.utils.network.Errors
 import com.reactive.begunok.utils.preferences.SharedManager
@@ -51,7 +50,8 @@ open class BaseViewModel(
     val jobTypes: MutableLiveData<ArrayList<CategoryData>> by inject(named("categories"))
     val orders: MutableLiveData<ArrayList<Order>> by inject(named("orders"))
     val userOrders: MutableLiveData<ArrayList<Order>> by inject(named("orders"))
-    val orderRequests: MutableLiveData<ArrayList<OrderRequests>> by inject(named("orderRequests"))
+    val requests: MutableLiveData<ArrayList<OrderRequests>> by inject(named("orderRequests"))
+    val userRequests: MutableLiveData<ArrayList<OrderRequests>> by inject(named("orderRequests"))
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -103,10 +103,9 @@ open class BaseViewModel(
     fun fetchData() {
 
         if (sharedManager.token.isNotEmpty()) {
-            logi("Current token : " + sharedManager.token)
+            loge("Current token : " + sharedManager.token)
 
             getUser()
-            getUserOrders()
             getCategories()
         }
     }
@@ -117,6 +116,9 @@ open class BaseViewModel(
                 sharedManager.user = it
                 user.value = it
                 MainActivity.client = it.is_constructor
+
+                if (it.is_constructor) getUserOrders() else getUserRequests()
+
             }, {
                 parseError(it)
             })
@@ -206,7 +208,7 @@ open class BaseViewModel(
             api.createOrder(partMap, files).observeAndSubscribe()
                 .subscribe({
                     data.postValue(it)
-                    getAllOrder()
+                    getUserOrders()
                 }, {
                     parseError(it)
                 })
@@ -224,7 +226,7 @@ open class BaseViewModel(
     fun getUserOrders() = compositeDisposable.add(
         api.getUserOrders().observeAndSubscribe()
             .subscribe({
-                userOrders.value = ArrayList(it.content)
+                userOrders.value = ArrayList(it)
             }, {
                 parseError(it)
             })
@@ -236,7 +238,6 @@ open class BaseViewModel(
                 .subscribe({
                     data.postValue(it)
                     getUserOrders()
-                    getAllOrder()
                 }, {
                     parseError(it)
                 })
@@ -248,7 +249,6 @@ open class BaseViewModel(
                 .subscribe({
                     data.postValue(it)
                     getUserOrders()
-                    getAllOrder()
                 }, {
                     parseError(it)
                 })
@@ -258,7 +258,17 @@ open class BaseViewModel(
         compositeDisposable.add(
             api.getOrderRequests(id).observeAndSubscribe()
                 .subscribe({
-                    orderRequests.postValue(ArrayList(it))
+                    requests.postValue(ArrayList(it))
+                }, {
+                    parseError(it)
+                })
+        )
+
+    fun getUserRequests() =
+        compositeDisposable.add(
+            api.getUserRequests().observeAndSubscribe()
+                .subscribe({
+                    userRequests.postValue(ArrayList(it))
                 }, {
                     parseError(it)
                 })

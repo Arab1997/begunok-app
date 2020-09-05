@@ -23,7 +23,7 @@ android {
         javaMaxHeapSize "4g"
     }
     dataBinding { enabled = true }
-    signingConfigs {
+    /*signingConfigs {
         debug {
             storeFile file("/Volumes/HDD/keys/new-begunok/begunok")
             storePassword "iTErPITIOnTe"
@@ -37,25 +37,23 @@ android {
             keyAlias "iTErPITIOnTe"
             keyPassword "iTErPITIOnTe"
         }
-    }
+    }*/
     buildTypes {
         debug {
-            manifestPlaceholders = [enableCrashReporting: "false"]
             buildConfigField 'String', 'BASE_URL', '"http://85.214.167.4:8000/"'
             buildConfigField 'String', 'CLIENT_ID', '"231468909634-k5f7oa3lmmv2tl4kluef1pvin8i00lih.apps.googleusercontent.com"'
-            signingConfig signingConfigs.debug
+//            signingConfig signingConfigs.debug
             minifyEnabled false
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         release {
-            manifestPlaceholders = [enableCrashReporting: "true"]
             buildConfigField 'String', 'BASE_URL', '"http://85.214.167.4:8000/"'
             buildConfigField 'String', 'CLIENT_ID', '"231468909634-k5f7oa3lmmv2tl4kluef1pvin8i00lih.apps.googleusercontent.com"'
             minifyEnabled false
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+//            signingConfig signingConfigs.release
         }
     }
     kotlinOptions {
