@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
 import com.reactive.begunok.ui.activities.MainActivity.Companion.googleAuthManager
+import com.reactive.begunok.ui.screens.performers.RatePerformerScreen
 import com.reactive.begunok.utils.Constants
 import com.reactive.begunok.utils.extensions.inDevelopment
 import com.reactive.begunok.utils.extensions.loadImage
@@ -34,7 +35,7 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
     }
 
     private fun initClicks() {
-        reviews.setOnClickListener { inDevelopment(requireContext()) } // todo
+        reviews.setOnClickListener { addFragment(RatePerformerScreen()) } // todo
         support.setOnClickListener { inDevelopment(requireContext()) } // todo
         rules.setOnClickListener { inDevelopment(requireContext()) } // todo
 
