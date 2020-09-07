@@ -4,14 +4,22 @@ import android.annotation.SuppressLint
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
 import com.reactive.begunok.ui.activities.MainActivity.Companion.googleAuthManager
+import com.reactive.begunok.ui.screens.performers.EditCardPerformerScreen
+import com.reactive.begunok.ui.screens.performers.EditEmailPerformerScreen
+import com.reactive.begunok.ui.screens.performers.EditPhonePerformerScreen
 import com.reactive.begunok.ui.screens.performers.RatePerformerScreen
 import com.reactive.begunok.utils.Constants
+import com.reactive.begunok.utils.common.FBAuthManager
+import com.reactive.begunok.utils.common.GoogleAuthManager
 import com.reactive.begunok.utils.extensions.inDevelopment
 import com.reactive.begunok.utils.extensions.loadImage
 import kotlinx.android.synthetic.main.content_profile.*
 import kotlinx.android.synthetic.main.screen_profile.*
 
 class ProfileScreen : BaseFragment(R.layout.screen_profile) {
+    companion object {
+        val data = arrayListOf(1, 2, 3, "")
+    }
 
     override fun initialize() {
 
@@ -36,6 +44,9 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
 
     private fun initClicks() {
         reviews.setOnClickListener { addFragment(RatePerformerScreen()) } // todo
+        email.setOnClickListener { addFragment(EditEmailPerformerScreen()) }
+        phone.setOnClickListener { addFragment(EditPhonePerformerScreen()) }
+        card.setOnClickListener { addFragment(EditCardPerformerScreen()) }
         support.setOnClickListener { inDevelopment(requireContext()) } // todo
         rules.setOnClickListener { inDevelopment(requireContext()) } // todo
 

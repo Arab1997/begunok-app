@@ -154,4 +154,8 @@ dependencies {
 
     implementation 'com.facebook.android:facebook-login:6.0.0'
 
+    // Page Indicator View
+    implementation 'com.romandanylyk:pageindicatorview:1.0.3'
+    implementation 'io.github.ivanespitiac:imageslider:1.0.3'
+
 }
