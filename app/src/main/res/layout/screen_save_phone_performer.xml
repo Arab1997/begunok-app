@@ -53,24 +53,27 @@
                 android:paddingEnd="20dp"
                 android:textSize="14sp"
                 android:translationZ="4dp">
-
-
                 <EditText
-                    android:id="@+id/messageCode"
+                    android:id="@+id/code"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
                     android:layout_marginLeft="60dp"
                     android:layout_marginRight="60dp"
-                    android:background="@drawable/rounded_white"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:gravity="center"
-                    android:inputType="phone"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
-                    android:text="1732"
-                    android:textSize="17sp"
-                    android:translationZ="4dp" />
+                    android:background="@drawable/rounded_edit_text_white"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:maxLines="1"
+                    android:hint="1732"
+                    android:textAlignment="center"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15sp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="15sp" />
+
             </LinearLayout>
 
             <TextView

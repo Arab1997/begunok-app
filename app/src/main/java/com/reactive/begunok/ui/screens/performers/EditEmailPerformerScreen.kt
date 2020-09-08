@@ -27,7 +27,7 @@ class EditEmailPerformerScreen : BaseFragment(R.layout.screen_edit_email_perform
     }
 
     private fun initClicks() {
-        change.setOnClickListener { addFragment(MessageEmailPerformerScreen()) }
+        change.setOnClickListener { addFragment(AlertEmailPerformerScreen()) }
         email.setOnClickListener { inDevelopment(requireContext()) } // todo
         phone.setOnClickListener { inDevelopment(requireContext()) }// todo
     }

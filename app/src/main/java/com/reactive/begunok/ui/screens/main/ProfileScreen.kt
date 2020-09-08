@@ -17,9 +17,6 @@ import kotlinx.android.synthetic.main.content_profile.*
 import kotlinx.android.synthetic.main.screen_profile.*
 
 class ProfileScreen : BaseFragment(R.layout.screen_profile) {
-    companion object {
-        val data = arrayListOf(1, 2, 3, "")
-    }
 
     override fun initialize() {
 

@@ -157,5 +157,11 @@ dependencies {
     // Page Indicator View
     implementation 'com.romandanylyk:pageindicatorview:1.0.3'
     implementation 'io.github.ivanespitiac:imageslider:1.0.3'
+    implementation 'com.github.nikhil-sachdeva:SliderViewLibrary:1.0'
+
+    implementation 'com.github.amyu:StackCardLayoutManager:1.0'
+
+    implementation 'com.daprlabs.aaron:cardstack:0.3.1-beta0'
+
 
 }
