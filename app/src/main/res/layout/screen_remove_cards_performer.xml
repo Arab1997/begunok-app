@@ -19,30 +19,22 @@
             android:layout_marginEnd="20dp"
             android:background="@color/divider" />
         <LinearLayout
-            android:layout_marginTop="100dp"
             android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             android:orientation="horizontal">
 
-
-
-                <com.example.sliderviewlibrary.SliderView
-                    android:id="@+id/sliderViewRemove"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_centerHorizontal="true" />
-
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tabDots"
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_alignBottom="@+id/main"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginBottom="20dp"
-                    app:tabBackground="@drawable/tab_selector"
-                    app:tabGravity="center"
-                    app:tabIndicatorHeight="0dp" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_card" />
 
         </LinearLayout>
 

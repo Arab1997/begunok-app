@@ -29,28 +29,19 @@
                 android:id="@+id/sliderView"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-
                 android:layout_centerHorizontal="true" />
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabDots"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:orientation="vertical"
                 android:layout_alignBottom="@+id/main"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="20dp"
                 app:tabBackground="@drawable/tab_selector"
                 app:tabGravity="center"
                 app:tabIndicatorHeight="0dp" />
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                tools:itemCount="2"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_add_cards" />
+
         </LinearLayout>
 
 
