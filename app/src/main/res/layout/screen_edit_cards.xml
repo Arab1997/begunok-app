@@ -59,49 +59,41 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:orientation="vertical">
-            <com.sembozdemir.viewpagerarrowindicator.library.ViewPagerArrowIndicator
-                android:id="@+id/viewPagerArrowIndicator"
+
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/left_nav"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/viewPager"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="200dp" />
+
+                <TextView
+                    android:id="@+id/leftNav"
+                    android:layout_width="45dp"
+                    android:layout_height="55dp"
+                    android:padding="10dp"
                     android:layout_gravity="center_vertical|left"
-                    app:drawableStartCompat="@drawable/ic_left" />
-
-                <com.example.sliderviewlibrary.SliderView
-                    android:id="@+id/sliderView"
-                    android:layout_width="310dp"
-                    android:layout_height="199dp"
-                    android:layout_alignBottom="@+id/viewPagerArrowIndicator"
-                    android:layout_centerHorizontal="true" />
+                    android:paddingRight="12dp"
+                    app:drawableEndCompat="@drawable/ic_left"
+                    tools:ignore="RtlHardcoded" />
 
                 <TextView
-                    android:id="@+id/right_nav"
-                    android:layout_width="wrap_content"
-                    android:layout_alignBottom="@+id/viewPagerArrowIndicator"
-                    android:layout_height="wrap_content"
-                    app:drawableEndCompat="@drawable/ic_right"
+                    android:id="@+id/rightNav"
+                    android:layout_width="45dp"
+                    android:padding="10dp"
+                    android:layout_height="55dp"
                     android:layout_gravity="center_vertical|right"
-                    android:src="@drawable/ic_right" />
+                    android:layout_marginRight="12dp"
+                    app:drawableEndCompat="@drawable/ic_right"
+                    tools:ignore="RtlHardcoded" />
 
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tabDots"
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_alignBottom="@+id/main"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginBottom="20dp"
-                    app:tabBackground="@drawable/tab_selector"
-                    app:tabGravity="center"
-                    app:tabIndicatorHeight="0dp" />
-
-            </com.sembozdemir.viewpagerarrowindicator.library.ViewPagerArrowIndicator>
-
-
+            </FrameLayout>
 
         </LinearLayout>
 
     </LinearLayout>
+
 </androidx.core.widget.NestedScrollView>

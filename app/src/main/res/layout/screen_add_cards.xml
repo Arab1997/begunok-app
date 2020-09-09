@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/screenStyle"
+    android:background="@drawable/grey_back">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/content_header" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/divider" />
+
+        <LinearLayout
+            android:id="@+id/main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:orientation="horizontal">
+
+
+            <RelativeLayout
+                android:id="@+id/rl_front"
+                android:layout_width="320dp"
+                android:layout_height="222dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:alpha="1"
+                android:background="@drawable/add_card"
+                android:visibility="visible">
+
+
+                <LinearLayout
+                    android:id="@+id/lv_card_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginEnd="31dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="74dp"
+                    android:orientation="horizontal">
+
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_marginBottom="15dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:hint=""
+                        android:lines="1"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        tools:ignore="SmallSp" />
+
+                </LinearLayout>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_alignStart="@+id/lv_card_layout"
+                    android:layout_alignEnd="@+id/lv_card_layout"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="15dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:hint=""
+                    android:lines="1"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    tools:ignore="SmallSp" />
+
+                <LinearLayout
+                    android:id="@+id/layout"
+                    android:layout_width="57dp"
+                    android:layout_height="51dp"
+                    android:layout_below="@+id/lv_card_layout"
+                    android:layout_alignEnd="@+id/lv_card_layout"
+                    android:layout_marginTop="-98dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/tv_card_month"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_gravity="start"
+                        android:fontFamily="@font/roboto_medium"
+                        android:hint="12"
+                        android:textColor="@android:color/white"
+                        android:textSize="10sp"
+                        tools:ignore="SmallSp" />
+
+                    <TextView
+                        android:id="@+id/tv_bracket"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="center"
+                        android:layout_gravity="start"
+                        android:text="/"
+                        android:textColor="@android:color/white"
+                        android:textSize="10sp"
+                        tools:ignore="SmallSp" />
+
+                    <EditText
+                        android:id="@+id/tv_card_year"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_gravity="start"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="20"
+                        android:textColor="@android:color/white"
+                        android:textSize="10sp"
+                        tools:ignore="SmallSp" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20sp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/rounded_green"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+            android:text="сохранить"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

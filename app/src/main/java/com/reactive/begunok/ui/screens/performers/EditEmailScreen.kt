@@ -5,12 +5,10 @@ import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
 import com.reactive.begunok.utils.extensions.inDevelopment
 import kotlinx.android.synthetic.main.content_header.*
-import kotlinx.android.synthetic.main.screen_edit_email_performer.*
-import kotlinx.android.synthetic.main.screen_edit_phone_performer.*
-import kotlinx.android.synthetic.main.screen_edit_phone_performer.change
-import kotlinx.android.synthetic.main.screen_edit_phone_performer.phone
+import kotlinx.android.synthetic.main.content_header.close
+import kotlinx.android.synthetic.main.screen_edit_email.*
 
-class EditPhonePerformerScreen : BaseFragment(R.layout.screen_edit_phone_performer) {
+class EditEmailScreen : BaseFragment(R.layout.screen_edit_email) {
 
     override fun initialize() {
         setData()
@@ -23,16 +21,21 @@ class EditPhonePerformerScreen : BaseFragment(R.layout.screen_edit_phone_perform
     @SuppressLint("SetTextI18n")
     private fun setData() {
         sharedManager.user?.let {
+            email.setText(it.email)
             phone.setText(it.phone)
         }
     }
 
     private fun initClicks() {
-        change.setOnClickListener { addFragment(AlertPhonePerformerScreen()) }
-        phone.setOnClickListener { inDevelopment(requireContext()) } // todo
+        change.setOnClickListener { addFragment(AlertEmailScreen()) }
+
+        email.setOnClickListener { inDevelopment(requireContext()) } // todo
+
+        phone.setOnClickListener { inDevelopment(requireContext()) }// todo
     }
 
     private fun initViews() {
-        header.text = "Изменить номер телефона"
+        header.text = "Изменить эл. почту"
     }
+
 }
