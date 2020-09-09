@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.annotation.LayoutRes
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.gson.Gson
 import com.reactive.begunok.R
 import com.reactive.begunok.network.ApiInterface
 import com.reactive.begunok.network.ErrorResp
@@ -60,44 +61,22 @@ open class BaseViewModel(
         .create(ApiInterface::class.java)
 
     private fun parseError(e: Throwable?) {
-        var message = context.resources.getString(R.string.smth_wrong)
-        if (e != null && e.localizedMessage != null) {
-            loge(e.localizedMessage)
-            if (e is HttpException) {
-                val errorBody = e.response()?.errorBody()?.string()
-                errorBody?.let {
-                    try {
-                        loge(it)
-                        val errors = it.split(":")
-                            .filter { it.contains("[") }
-                        val errorsString = if (errors.isNotEmpty()) {
-                            errors.toString()
-                                .replace("[", "")
-                                .replace(",", "\n")
-                                .replace("]", "")
-                                .replace("{", "")
-                                .replace("}", "")
-                                .replace("\"", "")
-                        } else {
-                            val resp = it.split(":")
-                            if (resp.size >= 2) resp[1].replace("{", "")
-                                .replace("}", "")
-                                .replace("\"", "")
-                            else it
-                        }
+        if (e is HttpException) toast(context, getErrorMessage(e))
+        else Errors.traceErrors(e!!, context)
+        error.postValue(ErrorResp("error", 120))
+    }
 
-                        message = if (errorsString.isEmpty())
-                            context.resources.getString(R.string.smth_wrong)
-                        else errorsString
-
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
-                }
-            } else message = Errors.traceErrors(e, context)
+    private fun getErrorMessage(t: HttpException): String {
+        val errorBody = t.response()?.errorBody()?.string()
+        return try {
+            val errorResponse = Gson().fromJson(errorBody, ErrorResp::class.java)
+            val code = errorResponse.code
+            val msg = Constants.parseError(code)
+            if (msg.isNotEmpty()) msg else Errors.traceErrors(t, context)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            context.resources.getString(R.string.smth_wrong)
         }
-        toast(context, message)
-        error.value = ErrorResp(message)
     }
 
     fun fetchData() {

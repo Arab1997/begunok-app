@@ -76,7 +76,7 @@ interface ApiInterface {
 
 }
 
-data class ErrorResp(val message: String, val errors: Any? = null)
+data class ErrorResp(val message: String, val code: Int)
 
 data class SuccessResp(val success: Boolean, val message: String)
 

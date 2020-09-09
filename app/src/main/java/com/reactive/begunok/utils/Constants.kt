@@ -116,6 +116,30 @@ object Constants {
         CancelData("Не могу выполнить это задание")
     )
 
+    private val errors = arrayListOf(
+        IntValue(100, "EMAIL_ALREADY_REGISTERED"),
+        IntValue(101, "USER_NOT_FOUND"),
+        IntValue(102, "ERROR_PASSWORD"),
+        IntValue(103, "THE_SAME_PASSWORD"),
+        IntValue(104, "ERROR_TOKEN"),
+        IntValue(105, "CATEGORY_NOT_FOUND"),
+        IntValue(106, "JOB_TYPE_NOT_FOUND"),
+        IntValue(107, "FILE_UPLOAD"),
+        IntValue(108, "ORDER_NOT_FOUND"),
+        IntValue(109, "FCM_TOKEN_NOT_FOUND"),
+        IntValue(110, "ORDER_REQ_CREATED"),
+        IntValue(111, "ORDER_REQUEST_ACCEPTED"),
+        IntValue(112, "ORDER_REQ_NOT_FOUND"),
+        IntValue(113, "EXECUTOR_INFO_ALREADY_HAS"),
+        IntValue(114, "EXECUTOR_INFO_NOT_FOUND"),
+        IntValue(115, "YOU_NOT_EXECUTOR"),
+        IntValue(116, "FILE_NOT_FOUND")
+    )
+
+    fun parseError(code: Int): String {
+        val filtered = errors.filter { it.key == code }
+        return if (filtered.isNotEmpty()) filtered.first().value else ""
+    }
 }
 
 fun TextView.setOrderStatus(status: String) {
@@ -127,5 +151,6 @@ fun TextView.setOrderStatus(status: String) {
 
 }
 
+data class IntValue(val key: Int, var value: String)
 data class KeyValue(val key: String, var value: String)
 data class KeyValueColor(val key: String, var value: String, var color: Int)
