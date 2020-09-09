@@ -2,8 +2,6 @@ package com.reactive.begunok.ui.screens.performers
 
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
-import com.reactive.begunok.utils.common.FBAuthManager
-import com.reactive.begunok.utils.common.GoogleAuthManager
 import kotlinx.android.synthetic.main.content_header.*
 import kotlinx.android.synthetic.main.screen_edit_card_performer.*
 
@@ -28,5 +26,12 @@ class EditCardPerformerScreen : BaseFragment(R.layout.screen_edit_card_performer
         images.add(R.drawable.card)
         images.add(R.drawable.card)
         sliderView.setImages(images)
+
+
+        viewPagerArrowIndicator.setArrowIndicatorRes(
+            R.drawable.ic_right,
+            R.drawable.ic_left
+        )
     }
+
 }

@@ -9,6 +9,7 @@ import com.reactive.begunok.ui.screens.performers.cards.CardViewModel
 import com.reactive.begunok.ui.screens.performers.cards.StackCardAdapter
 import com.reactive.begunok.utils.extensions.inDevelopment
 import kotlinx.android.synthetic.main.content_header.*
+import kotlinx.android.synthetic.main.item_card.*
 import kotlinx.android.synthetic.main.screen_remove_cards_performer.*
 
 class RemoveCardsScreen : BaseFragment(R.layout.screen_remove_cards_performer) {
@@ -22,7 +23,7 @@ class RemoveCardsScreen : BaseFragment(R.layout.screen_remove_cards_performer) {
 
     private fun initClicks() {
         save.setOnClickListener { inDevelopment(requireContext()) }
-       // delete.setOnClickListener { addFragment(AlertDeleteCardPerformerScreen()) }
+//        delete.setOnClickListener { addFragment(AlertDeleteCardPerformerScreen()) }
     }
 
     private fun initViews() {

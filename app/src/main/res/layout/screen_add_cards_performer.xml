@@ -23,24 +23,28 @@
         <LinearLayout
             android:id="@+id/main"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:orientation="horizontal">
-            <com.example.sliderviewlibrary.SliderView
-                android:id="@+id/sliderView"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_centerHorizontal="true" />
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabDots"
+            <com.fevziomurtekin.payview.Payview
+                android:id="@+id/payview"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_alignBottom="@+id/main"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="20dp"
-                app:tabBackground="@drawable/tab_selector"
-                app:tabGravity="center"
-                app:tabIndicatorHeight="0dp" />
+                android:layout_height="match_parent"
+                app:cardAnimationType="vertical"
+                app:cardBgColor="@android:color/holo_blue_light"
+                app:cardCvErrorText="You must enter 3-digit characters"
+                app:cardCvTextSize="14"
+                app:cardExpiredErrorText="Your card has expired. Please enter the usage date correctly."
+                app:cardFgColor="@android:color/white"
+                app:cardMonthErrorText="You must enter 2-digit characters and you'll enter to number the most digit-value is '12'"
+                app:cardMonthTextSize="13"
+                app:cardNameHelperText="Enter to card name. Max 25 characters."
+                app:cardNameTextSize="15"
+                app:cardNoTextSize="14"
+                app:cardNumberHelperText="You must enter your 16-digit card number."
+                app:cardTextColor="@color/black"
+                app:cardYearErrorText="You must enter 2-digit characters and you'll enter to number the most digit-value is '99'"
+                app:cardYearTextSize="13" />
 
         </LinearLayout>
 

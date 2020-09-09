@@ -59,23 +59,47 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:orientation="vertical">
-
-            <com.example.sliderviewlibrary.SliderView
-                android:id="@+id/sliderView"
+            <com.sembozdemir.viewpagerarrowindicator.library.ViewPagerArrowIndicator
+                android:id="@+id/viewPagerArrowIndicator"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_centerHorizontal="true" />
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/left_nav"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|left"
+                    app:drawableStartCompat="@drawable/ic_left" />
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabDots"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_alignBottom="@+id/main"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="20dp"
-                app:tabBackground="@drawable/tab_selector"
-                app:tabGravity="center"
-                app:tabIndicatorHeight="0dp" />
+                <com.example.sliderviewlibrary.SliderView
+                    android:id="@+id/sliderView"
+                    android:layout_width="310dp"
+                    android:layout_height="199dp"
+                    android:layout_alignBottom="@+id/viewPagerArrowIndicator"
+                    android:layout_centerHorizontal="true" />
+
+                <TextView
+                    android:id="@+id/right_nav"
+                    android:layout_width="wrap_content"
+                    android:layout_alignBottom="@+id/viewPagerArrowIndicator"
+                    android:layout_height="wrap_content"
+                    app:drawableEndCompat="@drawable/ic_right"
+                    android:layout_gravity="center_vertical|right"
+                    android:src="@drawable/ic_right" />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabDots"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_alignBottom="@+id/main"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="20dp"
+                    app:tabBackground="@drawable/tab_selector"
+                    app:tabGravity="center"
+                    app:tabIndicatorHeight="0dp" />
+
+            </com.sembozdemir.viewpagerarrowindicator.library.ViewPagerArrowIndicator>
+
+
 
         </LinearLayout>
 

@@ -163,5 +163,10 @@ dependencies {
 
     implementation 'com.daprlabs.aaron:cardstack:0.3.1-beta0'
 
+    implementation 'com.github.sembozdemir:ViewPagerArrowIndicator:1.0.0'
+
+    implementation 'com.github.fevziomurtekin:PayView:1.0.3'
+
+
 
 }
