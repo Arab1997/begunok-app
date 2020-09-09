@@ -7,10 +7,8 @@ import com.reactive.begunok.ui.activities.MainActivity.Companion.googleAuthManag
 import com.reactive.begunok.ui.screens.performers.EditCardPerformerScreen
 import com.reactive.begunok.ui.screens.performers.EditEmailPerformerScreen
 import com.reactive.begunok.ui.screens.performers.EditPhonePerformerScreen
-import com.reactive.begunok.ui.screens.performers.RatePerformerScreen
+import com.reactive.begunok.ui.screens.performers.RateScreen
 import com.reactive.begunok.utils.Constants
-import com.reactive.begunok.utils.common.FBAuthManager
-import com.reactive.begunok.utils.common.GoogleAuthManager
 import com.reactive.begunok.utils.extensions.inDevelopment
 import com.reactive.begunok.utils.extensions.loadImage
 import kotlinx.android.synthetic.main.content_profile.*
@@ -40,7 +38,7 @@ class ProfileScreen : BaseFragment(R.layout.screen_profile) {
     }
 
     private fun initClicks() {
-        reviews.setOnClickListener { addFragment(RatePerformerScreen()) } // todo
+        reviews.setOnClickListener { addFragment(RateScreen()) }
         email.setOnClickListener { addFragment(EditEmailPerformerScreen()) }
         phone.setOnClickListener { addFragment(EditPhonePerformerScreen()) }
         card.setOnClickListener { addFragment(EditCardPerformerScreen()) }
