@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#EAE6E6"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.reactive.begunok.ui.screens.performers.cards.CardViewModel" />
+
+        <import type="androidx.core.content.ContextCompat" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="320dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="16dp"
+        app:cardBackgroundColor="#EAE6E6"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="8dp"
+        >
+
+
+        <RelativeLayout
+            android:id="@+id/relative_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:backgroundResource="@{viewModel.background}">
+
+
+            <LinearLayout
+
+                android:id="@+id/relative_layout1"
+                android:layout_width="300dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                tools:background="@drawable/card_background">
+
+                <ImageView
+                    android:layout_width="39dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/mastercard"
+                    app:imageResource="@{viewModel.logo}"
+
+                    />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/title_text_view"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="1234 5678 9101 1213"
+                    android:textColor="#FFF"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/delete"
+                    android:layout_width="39dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/delete"
+                    />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+<!--    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view2"
+        android:layout_width="320dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginStart="46dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp">
+
+        <RelativeLayout
+            android:id="@+id/relative_layout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:backgroundResource="@{viewModel.background}"
+            tools:background="@drawable/newcard">
+
+
+            <LinearLayout
+                android:id="@+id/relative_layout3"
+                android:layout_width="300dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                tools:background="@drawable/card_background">
+
+                <ImageView
+                    android:layout_width="39dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/mastercard"
+                    app:imageResource="@{viewModel.logo}"
+
+                    />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/title_text_view"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="1234 5678 9101 1213"
+                    android:textColor="#FFF"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:layout_width="39dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/deleteblack"
+                    />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view3"
+            android:layout_width="320dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="116dp"
+            android:layout_marginStart="46dp"
+            android:layout_marginEnd="16dp"
+            app:cardElevation="8dp">
+
+            <RelativeLayout
+                android:id="@+id/relative_layout34"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                app:backgroundResource="@{viewModel.background}"
+                tools:background="@drawable/newcard">
+
+
+                <LinearLayout
+                    android:id="@+id/relative_layout4"
+                    android:layout_width="300dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    tools:background="@drawable/card_background">
+
+                    <ImageView
+                        android:layout_width="39dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/mastercard"
+                        app:imageResource="@{viewModel.logo}"
+
+                        />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/title_text_view"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:text="1234 5678 9101 1213"
+                        android:textColor="#FFF"
+                        android:textSize="18sp" />
+
+                    <ImageView
+                        android:layout_width="39dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/deleteblack"
+                        />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>-->
+
+</layout>
