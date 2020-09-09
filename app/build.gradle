@@ -159,14 +159,14 @@ dependencies {
     implementation 'io.github.ivanespitiac:imageslider:1.0.3'
     implementation 'com.github.nikhil-sachdeva:SliderViewLibrary:1.0'
 
+    //cards slider
     implementation 'com.github.amyu:StackCardLayoutManager:1.0'
 
-    implementation 'com.daprlabs.aaron:cardstack:0.3.1-beta0'
+
+    //  implementation 'com.daprlabs.aaron:cardstack:0.3.1-beta0'
 
     implementation 'com.github.sembozdemir:ViewPagerArrowIndicator:1.0.0'
-
-    implementation 'com.github.fevziomurtekin:PayView:1.0.3'
-
-
+    //add credit cards
+    implementation 'com.braintreepayments:card-form:3.1.1'
 
 }
