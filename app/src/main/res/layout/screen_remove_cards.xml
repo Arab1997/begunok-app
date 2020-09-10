@@ -22,47 +22,36 @@
         <LinearLayout
             android:id="@+id/main"
             android:layout_width="match_parent"
-            android:layout_height="491dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
-
-          <!--  <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:itemCount="1"
-                tools:listitem="@layout/item_card" />-->
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="380dp"
                 android:layout_marginTop="10sp"
                 android:layout_marginBottom="10sp"
                 android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="1"
-                tools:listitem="@layout/item_card"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                tools:listitem="@layout/item_card" />
 
-
+            <Button
+                android:id="@+id/save"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20sp"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/rounded_green"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="center"
+                android:text="сохранить"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/save"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20sp"
-            android:layout_marginBottom="40dp"
-            android:background="@drawable/rounded_green"
-            android:fontFamily="@font/roboto_bold"
-            android:gravity="center"
-            android:text="сохранить"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="15sp" />
+
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

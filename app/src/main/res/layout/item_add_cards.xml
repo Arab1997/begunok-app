@@ -18,9 +18,9 @@
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="sssssss"
+        android:layout_gravity="center_horizontal"
         android:gravity="center"
-        android:textSize="15sp"
-        android:layout_gravity="center_horizontal"/>
+        android:text="sssssss"
+        android:textSize="15sp" />
 
 </LinearLayout>

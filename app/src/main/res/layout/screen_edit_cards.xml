@@ -74,8 +74,8 @@
                     android:id="@+id/leftNav"
                     android:layout_width="45dp"
                     android:layout_height="55dp"
-                    android:padding="10dp"
                     android:layout_gravity="center_vertical|left"
+                    android:padding="10dp"
                     android:paddingRight="12dp"
                     app:drawableEndCompat="@drawable/ic_left"
                     tools:ignore="RtlHardcoded" />
@@ -83,10 +83,10 @@
                 <TextView
                     android:id="@+id/rightNav"
                     android:layout_width="45dp"
-                    android:padding="10dp"
                     android:layout_height="55dp"
                     android:layout_gravity="center_vertical|right"
                     android:layout_marginRight="12dp"
+                    android:padding="10dp"
                     app:drawableEndCompat="@drawable/ic_right"
                     tools:ignore="RtlHardcoded" />
 
