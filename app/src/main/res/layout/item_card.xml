@@ -5,9 +5,8 @@
     android:background="#EAE6E6">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
@@ -19,16 +18,12 @@
             android:foreground="?android:attr/selectableItemBackground"
             app:cardBackgroundColor="#EAE6E6"
             app:cardCornerRadius="8dp">
+
             <ImageView
                 android:id="@+id/relative_layout"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:background="@drawable/card_org">
-            </ImageView>
-
-
-
-
+                android:background="@drawable/card_org"></ImageView>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -46,8 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:background="@drawable/card_org"
-                android:orientation="horizontal">
-            </RelativeLayout>
+                android:orientation="horizontal"/>
 
         </androidx.cardview.widget.CardView>
 

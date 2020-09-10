@@ -24,9 +24,8 @@ class RemoveCardsScreen : BaseFragment(R.layout.screen_remove_cards) {
     private fun initViews() {
         header.text = "Удалить платежную карту"
 
-
         recyclerView.adapter = CardsAdapter().apply {
-            setData(arrayListOf(1, 2, 3))
+            setData(arrayListOf(1))
         }
     }
 }
