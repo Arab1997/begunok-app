@@ -1,27 +1,28 @@
 package com.reactive.begunok.ui.screens.performers
 
-import androidx.viewpager.widget.ViewPager
+import android.os.Parcelable
+import androidx.annotation.DrawableRes
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
 import com.reactive.begunok.R
 import com.reactive.begunok.base.BaseFragment
 import kotlinx.android.synthetic.main.content_header.*
 import kotlinx.android.synthetic.main.screen_edit_cards.*
 
 class EditCardsScreen : BaseFragment(R.layout.screen_edit_cards) {
-    // private var data = arrayListOf<HomeData>()
-    //  private lateinit var pagerAdapter: PathsPagerAdapter
-
-    private var data = arrayListOf<HomeData>()
+    private var data = arrayListOf<Data>()
     override fun initialize() {
         initClicks()
 
         initViews()
 
         data = arrayListOf(
-            HomeData(R.drawable.card, "card ", EditPhoneScreen()),
-            HomeData(R.drawable.card, "card", EditPhoneScreen()),
-            HomeData(R.drawable.card, "card ", EditPhoneScreen())
+            Data(R.drawable.card, "card ", EditPhoneScreen()),
+            Data(R.drawable.card, "card", EditPhoneScreen()),
+            Data(R.drawable.card, "card ", EditPhoneScreen())
         )
-        viewPager.adapter = HomePagerAdapter(data, childFragmentManager)
+        viewPager.adapter = DataPagerAdapter(data, childFragmentManager)
     }
 
     private fun initClicks() {
@@ -37,9 +38,9 @@ class EditCardsScreen : BaseFragment(R.layout.screen_edit_cards) {
     }
 }
 
-data class HomeData(@DrawableRes val icon: Int, val title: String, val item: Fragment)
+data class Data(@DrawableRes val icon: Int, val title: String, val item: Fragment)
 
-data class HomePagerAdapter(private val data: ArrayList<HomeData>, val fm: FragmentManager) :
+data class DataPagerAdapter(private val data: ArrayList<Data>, val fm: FragmentManager) :
     FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     override fun getItem(position: Int): Fragment = data[position].item
