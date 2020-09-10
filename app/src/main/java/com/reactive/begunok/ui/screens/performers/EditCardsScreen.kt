@@ -7,16 +7,21 @@ import kotlinx.android.synthetic.main.content_header.*
 import kotlinx.android.synthetic.main.screen_edit_cards.*
 
 class EditCardsScreen : BaseFragment(R.layout.screen_edit_cards) {
-    var viewPager: ViewPager? = null
+    // private var data = arrayListOf<HomeData>()
+    //  private lateinit var pagerAdapter: PathsPagerAdapter
 
-    var imageId =
-        arrayOf<Int>(R.drawable.card, R.drawable.card, R.drawable.card, R.drawable.card)
-    var imagesName = arrayOf("image1", "image2", "image3", "image4")
-
+    private var data = arrayListOf<HomeData>()
     override fun initialize() {
         initClicks()
 
         initViews()
+
+        data = arrayListOf(
+            HomeData(R.drawable.card, "card ", EditPhoneScreen()),
+            HomeData(R.drawable.card, "card", EditPhoneScreen()),
+            HomeData(R.drawable.card, "card ", EditPhoneScreen())
+        )
+        viewPager.adapter = HomePagerAdapter(data, childFragmentManager)
     }
 
     private fun initClicks() {
@@ -29,8 +34,27 @@ class EditCardsScreen : BaseFragment(R.layout.screen_edit_cards) {
 
     private fun initViews() {
         header.text = "Мои платежные карты"
-
     }
 }
 
+data class HomeData(@DrawableRes val icon: Int, val title: String, val item: Fragment)
+
+data class HomePagerAdapter(private val data: ArrayList<HomeData>, val fm: FragmentManager) :
+    FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+
+    override fun getItem(position: Int): Fragment = data[position].item
+
+    override fun getCount(): Int = data.size
+
+    override fun getPageTitle(position: Int) = data[position].title
+
+    override fun restoreState(state: Parcelable?, loader: ClassLoader?) {
+        try {
+            super.restoreState(state, loader)
+        } catch (e: Exception) {
+        }
+    }
+
+    override fun saveState(): Parcelable? = null
+}
 

@@ -24,13 +24,11 @@ class RemoveCardsScreen : BaseFragment(R.layout.screen_remove_cards) {
     private fun initViews() {
         header.text = "Удалить платежную карту"
 
-        adapter = CardsAdapter {
+        recyclerView.adapter = CardsAdapter().apply {
+            setData(arrayListOf(1, 2, 3, 4, 5, 6, 7))
         }
-        recyclerView?.adapter = adapter
 
-        CreateOrderModel.let {
-            adapter.setData(it.photos)
-        }
+
 
     }
 }

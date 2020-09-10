@@ -10,16 +10,15 @@ import kotlinx.android.synthetic.main.item_images.view.*
 import kotlinx.android.synthetic.main.item_images.view.img
 import kotlinx.android.synthetic.main.item_my_orders.view.*
 
-class CardsAdapter(private val listener: (String) -> Unit) :
-    BaseAdapter<String>(R.layout.item_add_cards) {
+class CardsAdapter: BaseAdapter<Any>(R.layout.item_card) {
 
-    override fun bindViewHolder(holder: ViewHolder, data: String) {
+    override fun bindViewHolder(holder: ViewHolder, data: Any) {
 
-        holder.itemView.apply {
+     /*   holder.itemView.apply {
             setOnClickListener { listener.invoke(data) }
             cards.loadImage(data)
 
-        }
+        }*/
     }
 
 }

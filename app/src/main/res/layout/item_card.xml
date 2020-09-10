@@ -27,9 +27,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-
                 <LinearLayout
-
                     android:id="@+id/relative_layout1"
                     android:layout_width="300dp"
                     android:layout_height="46dp"
