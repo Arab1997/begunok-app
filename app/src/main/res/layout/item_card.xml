@@ -13,55 +13,20 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/card_view"
             android:layout_width="320dp"
-            android:layout_height="200dp"
+            android:layout_height="100dp"
             android:layout_marginStart="26dp"
             android:layout_marginEnd="16dp"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardBackgroundColor="#EAE6E6"
             app:cardCornerRadius="8dp">
-
-
-            <RelativeLayout
+            <ImageView
                 android:id="@+id/relative_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_height="200dp"
+                android:background="@drawable/card_org">
+            </ImageView>
 
-                <LinearLayout
-                    android:id="@+id/relative_layout1"
-                    android:layout_width="300dp"
-                    android:layout_height="46dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal"
-                    tools:background="@drawable/card_background">
 
-                    <ImageView
-                        android:layout_width="39dp"
-                        android:layout_height="20dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="10dp"
-                        android:src="@drawable/mastercard" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:text="1234 5678 9101 1213"
-                        android:textColor="#FFF"
-                        android:textSize="18sp" />
-
-                    <ImageView
-                        android:id="@+id/delete"
-                        android:layout_width="39dp"
-                        android:layout_height="29dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="6dp"
-                        android:src="@drawable/delete_card" />
-                </LinearLayout>
-
-            </RelativeLayout>
 
 
         </androidx.cardview.widget.CardView>
@@ -69,7 +34,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/card_view2"
             android:layout_width="320dp"
-            android:layout_height="200dp"
+            android:layout_height="100dp"
             android:layout_marginStart="26dp"
             android:layout_marginEnd="16dp"
             android:foreground="?android:attr/selectableItemBackground"
@@ -79,45 +44,9 @@
             <RelativeLayout
                 android:id="@+id/relative_layout2"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="200dp"
+                android:background="@drawable/card_org"
                 android:orientation="horizontal">
-
-
-                <LinearLayout
-
-                    android:id="@+id/linear_layout2"
-                    android:layout_width="300dp"
-                    android:layout_height="46dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal"
-                    tools:background="@drawable/card_background">
-
-                    <ImageView
-                        android:layout_width="39dp"
-                        android:layout_height="20dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="10dp"
-                        android:src="@drawable/mastercard" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:text="1234 5678 9101 1213"
-                        android:textColor="#FFF"
-                        android:textSize="18sp" />
-
-                    <ImageView
-                        android:id="@+id/delete2"
-                        android:layout_width="19dp"
-                        android:layout_height="19dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="8dp"
-                        android:src="@drawable/deleteblack" />
-                </LinearLayout>
-
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
